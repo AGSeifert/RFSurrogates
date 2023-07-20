@@ -9,7 +9,7 @@ Description: This package provides functions to obtain surrogate splits
     functions from the package rpart. Surrogate variables and
     corresponding adjusted agreement values are used for surrogate minimal
     depth variable importance and to investigate variable relations.
-License: use_mit_license()
+License: MIT + file LICENSE
 Imports:
     linkcomm,
     parallel,
