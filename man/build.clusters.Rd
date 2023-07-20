@@ -23,34 +23,36 @@ This function generates variables groups of relation information that was obtain
 data("SMD_example_data")
 
 \donttest{
- # get trees and variable names
- x = SMD_example_data[,2:ncol(SMD_example_data)]
- y = SMD_example_data[,1]
- allvariables = colnames(x)# extract variables names
- nvar = length(allvariables)   # count number of variables
- set.seed(42)
- RF = ranger::ranger(
-    data = SMD_example_data,
-    dependent.variable.name = "y",
-    num.trees = 10,
-    keep.inbag = TRUE,
-    mtry = floor(nvar^(3/4)),
-    min.node.size = 1,
-    num.threads = 1)
- trees = getTreeranger(RF = RF, num.trees = 10)
- trees.lay = addLayer(trees)
- trees.surr = addSurrogates(RF = RF, trees = trees.lay, s = 10, Xdata = x, num.threads = 1)
+# get trees and variable names
+x <- SMD_example_data[, 2:ncol(SMD_example_data)]
+y <- SMD_example_data[, 1]
+allvariables <- colnames(x) # extract variables names
+nvar <- length(allvariables) # count number of variables
+set.seed(42)
+RF <- ranger::ranger(
+  data = SMD_example_data,
+  dependent.variable.name = "y",
+  num.trees = 10,
+  keep.inbag = TRUE,
+  mtry = floor(nvar^(3 / 4)),
+  min.node.size = 1,
+  num.threads = 1
+)
+trees <- getTreeranger(RF = RF, num.trees = 10)
+trees.lay <- addLayer(trees)
+trees.surr <- addSurrogates(RF = RF, trees = trees.lay, s = 10, Xdata = x, num.threads = 1)
 
- # investigate variable relations
- rel=var.relations(
-    x = data.frame(),
-    create.forest = FALSE,
-    forest = list(trees = trees.surr, allvariables = allvariables),
-    variables = allvariables,
-    candidates = allvariables,
-    t = 10,
-    num.threads = 1)
- groups = build.clusters(rel)
+# investigate variable relations
+rel <- var.relations(
+  x = data.frame(),
+  create.forest = FALSE,
+  forest = list(trees = trees.surr, allvariables = allvariables),
+  variables = allvariables,
+  candidates = allvariables,
+  t = 10,
+  num.threads = 1
+)
+groups <- build.clusters(rel)
 }
 
 }

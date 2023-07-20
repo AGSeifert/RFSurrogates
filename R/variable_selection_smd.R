@@ -29,17 +29,17 @@
 #' }
 #' \item var: vector of selected variables.
 #'
-#'\item s: list with the results of count.surrogate function:
-#'\itemize{
+#' \item s: list with the results of count.surrogate function:
+#' \itemize{
 #' \item s.a: total average number of surrogate variables.
 #' \item s.l: average number of surrogate variables in the respective layers.
-#'}
+#' }
 #' \item forest: a list containing:
 #' #'\itemize{
 #' \item trees: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.
 #' \item allvariables: all variable names of the predictor variables that are present in x.
 #' }
-#'\item ranger: ranger object.
+#' \item ranger: ranger object.
 #'
 #' }
 #' @examples
@@ -49,114 +49,122 @@
 #' \donttest{
 #' # select variables (usually more trees are needed)
 #' set.seed(42)
-#' res = var.select.smd(
-#'   x = SMD_example_data[,2:ncol(SMD_example_data)],
-#'   y = SMD_example_data[,1],s = 10, num.trees = 10, num.threads = 1)
+#' res <- var.select.smd(
+#'   x = SMD_example_data[, 2:ncol(SMD_example_data)],
+#'   y = SMD_example_data[, 1], s = 10, num.trees = 10, num.threads = 1
+#' )
 #' res$var
 #' }
-#'@references
+#' @references
 ##' \itemize{
 ##'   \item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
 ##'   \item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
 ##'   \item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
-##'   }
+##' }
 #' @export
-
-var.select.smd = function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
-                          num.threads = NULL, status = NULL, save.ranger = FALSE, create.forest = TRUE, forest = NULL,
-                          save.memory = FALSE, case.weights = NULL) {
-  if(!is.data.frame(x)){
+var.select.smd <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
+                           num.threads = NULL, status = NULL, save.ranger = FALSE, create.forest = TRUE, forest = NULL,
+                           save.memory = FALSE, case.weights = NULL) {
+  if (!is.data.frame(x)) {
     stop("x has to be a data frame")
   }
   if (create.forest) {
-  ## check data
-  if (length(y) != nrow(x)) {
-    stop("length of y and number of rows in x are different")
-  }
-
-  if (any(is.na(x))) {
-    stop("missing values are not allowed")
-  }
-
-  variables = colnames(x)    # extract variables names
-  nvar = length(variables)   # count number of variables
-
-  ## set global parameters
-  if (is.null(mtry)) {
-    mtry = floor((nvar)^(3/4))
-  }
-  if (mtry == "sqrt") {
-    mtry = floor(sqrt(nvar))
-  }
-  if (mtry == "0.5") {
-    mtry = floor(0.5*nvar)
-  }
-  if (mtry == "^3/4") {
-    mtry = floor((nvar)^(3/4))
-  }
-
-
-
-  if (is.null(s)) {
-    s = ceiling(nvar*0.01)
-  }
-
-  if (s > (nvar - 1)) {
-    s = nvar - 1
-    warning("s was set to the maximum number that is reasonable (variables-1) ")
-  }
-
-  if (type == "classification") {
-    y = as.factor(y)
-    if (length(levels(y)) > 15) {
-      stop("Too much classes defined, classification might be the wrong choice")
+    ## check data
+    if (length(y) != nrow(x)) {
+      stop("length of y and number of rows in x are different")
     }
-  }
-  if (type == "regression" && inherits(y, "factor")) {
-    stop("use factor variable for y only for classification! ")
-  }
-  data = data.frame(y, x)
-  if (type == "survival") {
-    if (is.null(status)) {
-      stop("a status variable named status has to be given for survival analysis")
+
+    if (any(is.na(x))) {
+      stop("missing values are not allowed")
     }
-    data$status = status
-    RF = ranger::ranger(data = data, dependent.variable.name = "y",num.trees = num.trees,mtry = mtry,min.node.size = min.node.size,
-                        keep.inbag = TRUE, num.threads = num.threads, status.variable.name = "status", save.memory = save.memory,
-                        case.weights = case.weights, respect.unordered.factors = "partition")
+
+    variables <- colnames(x) # extract variables names
+    nvar <- length(variables) # count number of variables
+
+    ## set global parameters
+    if (is.null(mtry)) {
+      mtry <- floor((nvar)^(3 / 4))
+    }
+    if (mtry == "sqrt") {
+      mtry <- floor(sqrt(nvar))
+    }
+    if (mtry == "0.5") {
+      mtry <- floor(0.5 * nvar)
+    }
+    if (mtry == "^3/4") {
+      mtry <- floor((nvar)^(3 / 4))
+    }
+
+    if (is.null(s)) {
+      s <- ceiling(nvar * 0.01)
+    }
+
+    if (s > (nvar - 1)) {
+      s <- nvar - 1
+      warning("s was set to the maximum number that is reasonable (variables-1) ")
+    }
+
+    if (type == "classification") {
+      y <- as.factor(y)
+      if (length(levels(y)) > 15) {
+        stop("Too much classes defined, classification might be the wrong choice")
+      }
+    }
+    if (type == "regression" && inherits(y, "factor")) {
+      stop("use factor variable for y only for classification! ")
+    }
+    data <- data.frame(y, x)
+    if (type == "survival") {
+      if (is.null(status)) {
+        stop("a status variable named status has to be given for survival analysis")
+      }
+      data$status <- status
+      RF <- ranger::ranger(
+        data = data, dependent.variable.name = "y", num.trees = num.trees, mtry = mtry, min.node.size = min.node.size,
+        keep.inbag = TRUE, num.threads = num.threads, status.variable.name = "status", save.memory = save.memory,
+        case.weights = case.weights, respect.unordered.factors = "partition"
+      )
+    }
+    if (type == "classification" | type == "regression") {
+      RF <- ranger::ranger(
+        data = data, dependent.variable.name = "y", num.trees = num.trees, mtry = mtry, min.node.size = min.node.size,
+        keep.inbag = TRUE, num.threads = num.threads, case.weights = case.weights, respect.unordered.factors = "partition"
+      )
+    }
+    trees <- getTreeranger(RF = RF, num.trees = num.trees)
+    trees.lay <- addLayer(trees)
+    rm(trees)
+    ### AddSurrogates###
+    trees.surr <- addSurrogates(RF = RF, trees = trees.lay, s = s, Xdata = x, num.threads = num.threads)
+    rm(trees.lay)
+    # count surrogates
+    s <- count.surrogates(trees.surr)
+    surrminimaldepth.s <- surrmindep(forest = list(trees = trees.surr, allvariables = variables), s.l = s$s.l)
   }
-  if (type == "classification" | type == "regression") {
-  RF = ranger::ranger(data = data,dependent.variable.name = "y",num.trees = num.trees,mtry = mtry,min.node.size = min.node.size,
-                      keep.inbag = TRUE, num.threads = num.threads, case.weights = case.weights, respect.unordered.factors = "partition")
-  }
-  trees = getTreeranger(RF = RF,num.trees = num.trees)
-  trees.lay = addLayer(trees)
-  rm(trees)
-  ###AddSurrogates###
-  trees.surr = addSurrogates(RF = RF,trees = trees.lay,s = s,Xdata = x, num.threads = num.threads)
-  rm(trees.lay)
-  # count surrogates
-  s = count.surrogates(trees.surr)
-  surrminimaldepth.s = surrmindep(forest = list(trees = trees.surr, allvariables = variables), s.l = s$s.l)
-  }
+
   if (!create.forest) {
-  if (is.null(forest)) {
-    stop("set create.forest to TRUE or analyze an existing random forest specified by parameter forest")
+    if (is.null(forest)) {
+      stop("set create.forest to TRUE or analyze an existing random forest specified by parameter forest")
+    }
+    allvariables <- forest[["allvariables"]]
+    trees <- forest[["trees"]]
+    s <- count.surrogates(trees)
+    surrminimaldepth.s <- surrmindep(forest, s.l = s$s.l)
+    trees.surr <- forest[["trees"]]
+    variables <- forest[["variables"]]
   }
-    allvariables = forest[["allvariables"]]
-    trees = forest[["trees"]]
-    s = count.surrogates(trees)
-    surrminimaldepth.s = surrmindep(forest, s.l = s$s.l)
-    trees.surr = forest[["trees"]]
-    variables = forest[["variables"]]
-  }
+
   if (save.ranger) {
-  results = list(info = surrminimaldepth.s,var = names(surrminimaldepth.s$selected[surrminimaldepth.s$selected == 1]),s = s,
-                 forest = list(trees = trees.surr, allvariables = variables), ranger = RF)
+    results <- list(
+      info = surrminimaldepth.s, var = names(surrminimaldepth.s$selected[surrminimaldepth.s$selected == 1]), s = s,
+      forest = list(trees = trees.surr, allvariables = variables), ranger = RF
+    )
+  } else {
+    results <- list(
+      info = surrminimaldepth.s, var = names(surrminimaldepth.s$selected[surrminimaldepth.s$selected == 1]), s = s,
+      forest = list(trees = trees.surr, allvariables = variables)
+    )
   }
-  else {
-    results = list(info = surrminimaldepth.s,var = names(surrminimaldepth.s$selected[surrminimaldepth.s$selected == 1]),s = s,
-                   forest = list(trees = trees.surr, allvariables = variables))
-  }
+
   return(results)
 }

@@ -40,7 +40,7 @@
 #' }
 #' \item var: vector of selected variables.
 #'
-#'\item ranger: ranger object.
+#' \item ranger: ranger object.
 #'
 #' }
 #' @examples
@@ -50,233 +50,258 @@
 #' \donttest{
 #' # select variables (usually more trees are needed)
 #' set.seed(42)
-#' res = var.select.mir(
-#'   x = SMD_example_data[,2:ncol(SMD_example_data)],
-#'   y = SMD_example_data[,1],s = 10, num.trees = 10, num.threads = 1)
+#' res <- var.select.mir(
+#'   x = SMD_example_data[, 2:ncol(SMD_example_data)],
+#'   y = SMD_example_data[, 1], s = 10, num.trees = 10, num.threads = 1
+#' )
 #' res$var
 #' }
-#'@references
+#' @references
 ##' \itemize{
 ##'   \item Nembrini, S. et al. (2018) The revival of the Gini importance? Bioinformatics, 34, 3711–3718. \url{https://academic.oup.com/bioinformatics/article/34/21/3711/4994791}
 ##'   \item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-##'   }
+##' }
 #' @export
-
-var.select.mir = function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
-                          num.threads = NULL, status = NULL, save.ranger = FALSE,
-                          save.memory = FALSE, num.permutations = 100, p.t.sel = 0.01, p.t.rel = 0.01, select.var = TRUE, select.rel = FALSE,
-                          case.weights = NULL, corr.rel = TRUE, t = 5, method.rel = "permutation", method.sel = "janitza", save.rel = TRUE) {
-  if(!is.data.frame(x)){
+var.select.mir <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
+                           num.threads = NULL, status = NULL, save.ranger = FALSE,
+                           save.memory = FALSE, num.permutations = 100, p.t.sel = 0.01, p.t.rel = 0.01, select.var = TRUE, select.rel = FALSE,
+                           case.weights = NULL, corr.rel = TRUE, t = 5, method.rel = "permutation", method.sel = "janitza", save.rel = TRUE) {
+  if (!is.data.frame(x)) {
     stop("x has to be a data frame")
   }
-    ## check data
-    if (length(y) != nrow(x)) {
-      stop("length of y and number of rows in x are different")
+  ## check data
+  if (length(y) != nrow(x)) {
+    stop("length of y and number of rows in x are different")
+  }
+
+  if (any(is.na(x))) {
+    stop("missing values are not allowed")
+  }
+
+  allvariables <- colnames(x) # extract variables names
+  nvar <- length(allvariables) # count number of variables
+  ## set global parameters
+  if (is.null(mtry)) {
+    mtry <- floor((nvar)^(3 / 4))
+  }
+  if (mtry == "sqrt") {
+    mtry <- floor(sqrt(nvar))
+  }
+  if (mtry == "0.5") {
+    mtry <- floor(0.5 * (nvar))
+  }
+  if (mtry == "^3/4") {
+    mtry <- floor((nvar)^(3 / 4))
+  }
+
+  if (is.null(s)) {
+    s <- ceiling(nvar * 0.01)
+  }
+
+  if (s > (nvar - 2)) {
+    s <- nvar - 1
+    warning("s was set to the maximum number that is reasonable (variables-1) ")
+  }
+
+  if (type == "classification") {
+    y <- as.factor(y)
+    if (length(levels(y)) > 15) {
+      stop("Too much classes defined, classification might be the wrong choice")
     }
+  }
+  if (type == "regression" && inherits(y, "factor")) {
+    stop("use factor variable for y only for classification! ")
+  }
 
-    if (any(is.na(x))) {
-      stop("missing values are not allowed")
+  data <- data.frame(y, x)
+
+  if (type == "survival") {
+    if (is.null(status)) {
+      stop("a status variable named status has to be given for survival analysis")
     }
-
-    allvariables = colnames(x)# extract variables names
-    nvar = length(allvariables)   # count number of variables
-    ## set global parameters
-    if (is.null(mtry)) {
-      mtry = floor((nvar)^(3/4))
+    data$status <- status
+    RF <- ranger::ranger(
+      data = data, dependent.variable.name = "y", num.trees = num.trees, mtry = mtry, min.node.size = min.node.size,
+      num.threads = num.threads, status.variable.name = "status", save.memory = save.memory,
+      importance = "impurity_corrected", case.weights = case.weights, respect.unordered.factors = "partition"
+    )
+    if (corr.rel) {
+      rel <- var.relations.mfi(
+        x = x, y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
+        num.threads = num.threads, status = status, case.weights = case.weights, variables = allvariables,
+        candidates = allvariables, p.t = p.t.rel, method = method.rel, select.rel = select.rel
+      )
+    } else {
+      rel <- var.relations(
+        x = x, y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
+        num.threads = num.threads, status = status, case.weights = case.weights, variables = allvariables,
+        candidates = allvariables, t = t, select.rel = select.rel
+      )
     }
-    if (mtry == "sqrt") {
-      mtry = floor(sqrt(nvar))
+  }
+  if (type == "classification" | type == "regression") {
+    RF <- ranger::ranger(
+      data = data, dependent.variable.name = "y", num.trees = num.trees, mtry = mtry, min.node.size = min.node.size,
+      num.threads = num.threads, importance = "impurity_corrected", case.weights = case.weights, respect.unordered.factors = "partition"
+    )
+
+    if (corr.rel) {
+      rel <- var.relations.mfi(
+        x = x, y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
+        num.threads = num.threads, case.weights = case.weights, variables = allvariables,
+        candidates = allvariables, p.t = p.t.rel, method = method.rel, select.rel = select.rel
+      )
+    } else {
+      rel <- var.relations(
+        x = x, y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
+        num.threads = num.threads, case.weights = case.weights, variables = allvariables,
+        candidates = allvariables, t = t, select.rel = select.rel
+      )
     }
-    if (mtry == "0.5") {
-      mtry = floor(0.5*(nvar))
-    }
-    if (mtry == "^3/4") {
-      mtry = floor((nvar)^(3/4))
-    }
+  }
 
+  adj.agree <- rel$surr.res
+  diag(adj.agree) <- 1
 
-    if (is.null(s)) {
-      s = ceiling(nvar*0.01)
-    }
-
-    if (s > (nvar - 2)) {
-      s = nvar - 1
-      warning("s was set to the maximum number that is reasonable (variables-1) ")
-    }
-
-    if (type == "classification") {
-      y = as.factor(y)
-      if (length(levels(y)) > 15) {
-        stop("Too much classes defined, classification might be the wrong choice")
-      }
-    }
-    if (type == "regression" && inherits(y, "factor")) {
-      stop("use factor variable for y only for classification! ")
-    }
-
-    data = data.frame(y, x)
-
-    if (type == "survival") {
-      if (is.null(status)) {
-        stop("a status variable named status has to be given for survival analysis")
-      }
-      data$status = status
-      RF = ranger::ranger(data = data,dependent.variable.name = "y",num.trees = num.trees,mtry = mtry,min.node.size = min.node.size,
-                          num.threads = num.threads, status.variable.name = "status", save.memory = save.memory,
-                          importance ="impurity_corrected", case.weights = case.weights, respect.unordered.factors = "partition")
-      if (corr.rel) {
-        rel = var.relations.mfi(x = x, y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
-                                 num.threads = num.threads, status = status, case.weights = case.weights, variables = allvariables,
-                                 candidates = allvariables, p.t = p.t.rel, method = method.rel,select.rel = select.rel)
-      } else {
-        rel = var.relations(x = x, y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
-                            num.threads = num.threads, status = status, case.weights = case.weights, variables = allvariables,
-                            candidates = allvariables, t = t, select.rel = select.rel)
-      }
-    }
-    if (type == "classification" | type == "regression") {
-      RF = ranger::ranger(data = data,dependent.variable.name = "y",num.trees = num.trees,mtry = mtry,min.node.size = min.node.size,
-                          num.threads = num.threads, importance ="impurity_corrected", case.weights = case.weights, respect.unordered.factors = "partition")
-
-      if (corr.rel) {
-        rel = var.relations.mfi(x = x, y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
-                                 num.threads = num.threads, case.weights = case.weights, variables = allvariables,
-                                 candidates = allvariables, p.t = p.t.rel, method = method.rel,select.rel = select.rel)
-      } else {
-        rel = var.relations(x = x, y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
-                            num.threads = num.threads, case.weights = case.weights, variables = allvariables,
-                            candidates = allvariables, t = t,select.rel = select.rel)
-      }
-
-    }
-
-
-
-adj.agree = rel$surr.res
-diag(adj.agree) = 1
-
-  mir = colSums(adj.agree * RF$variable.importance)
+  mir <- colSums(adj.agree * RF$variable.importance)
 
   if (select.var) {
     if (method.sel == "janitza") {
       if (corr.rel) {
-      ## Mirrored VIMP (# This part is taken from ranger function)
-      m1 = mir[mir< 0]
-      m2 = mir[mir == 0]
-      null.rel = c(m1, -m1, m2)
+        ## Mirrored VIMP (# This part is taken from ranger function)
+        m1 <- mir[mir < 0]
+        m2 <- mir[mir == 0]
+        null.rel <- c(m1, -m1, m2)
 
-      pval <- 1 - ranger:::numSmaller(mir, null.rel) / length(null.rel)
-      names(pval) = allvariables
-      selected = as.numeric(pval <= p.t.sel)
-      names(selected) = names(pval)
+        pval <- 1 - ranger:::numSmaller(mir, null.rel) / length(null.rel)
+        names(pval) <- allvariables
+        selected <- as.numeric(pval <= p.t.sel)
+        names(selected) <- names(pval)
 
-      if (length(m1) == 0) {
-        stop("No negative importance values found for selection of important variables. Consider the 'permutation' approach.")
-      }
-      if (length(m1) < 100) {
-        warning("Only few negative importance values found for selection of important variables, inaccurate p-values. Consider the 'permutation' approach.")
-      }
+        if (length(m1) == 0) {
+          stop("No negative importance values found for selection of important variables. Consider the 'permutation' approach.")
+        }
+        if (length(m1) < 100) {
+          warning("Only few negative importance values found for selection of important variables, inaccurate p-values. Consider the 'permutation' approach.")
+        }
       } else {
         stop("Janitza approach should only be conducted with corrected relations")
-}
+      }
     }
 
     if (method.sel == "permutation") {
-
-      if (corr.rel){
-        adj.agree_perm = rel$surr.perm
+      if (corr.rel) {
+        adj.agree_perm <- rel$surr.perm
       } else {
-      x_perm = sapply(1:ncol(x),permute.variable,x=x)
-      colnames(x_perm) = paste(allvariables,"_perm", sep = "")
-      data_perm = data.frame(y, x_perm)
-      allvariables_perm = colnames(x_perm)
+        x_perm <- sapply(1:ncol(x), permute.variable, x = x)
+        colnames(x_perm) <- paste(allvariables, "_perm", sep = "")
+        data_perm <- data.frame(y, x_perm)
+        allvariables_perm <- colnames(x_perm)
 
-      if (type == "survival") {
-        if (is.null(status)) {
-          stop("a status variables has to be given for survival analysis")
+        if (type == "survival") {
+          if (is.null(status)) {
+            stop("a status variables has to be given for survival analysis")
+          }
+
+          if (corr.rel) {
+            rel_perm <- var.relations.mfi(
+              x = data.frame(x_perm), y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
+              num.threads = num.threads, status = status, case.weights = case.weights, variables = allvariables,
+              candidates = allvariables, p.t = p.t.rel, method = method.rel, select.rel = select.rel
+            )
+          } else {
+            rel_perm <- var.relations(
+              x = data.frame(x_perm), y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
+              num.threads = num.threads, status = status, case.weights = case.weights, variables = allvariables,
+              candidates = allvariables, t = t, select.rel = select.rel
+            )
+          }
+        }
+        if (type == "classification" | type == "regression") {
+          if (corr.rel) {
+            rel_perm <- var.relations.mfi(
+              x = data.frame(x_perm), y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
+              num.threads = num.threads, case.weights = case.weights, variables = allvariables_perm,
+              candidates = allvariables_perm, p.t = p.t.rel, method = method.rel, select.rel = select.rel
+            )
+          } else {
+            rel_perm <- var.relations(
+              x = data.frame(x_perm), y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
+              num.threads = num.threads, case.weights = case.weights, variables = allvariables_perm,
+              candidates = allvariables_perm, t = t, select.rel = select.rel
+            )
+          }
         }
 
-        if (corr.rel) {
-          rel_perm = var.relations.mfi(x = data.frame(x_perm), y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
-                                   num.threads = num.threads, status = status, case.weights = case.weights, variables = allvariables,
-                                   candidates = allvariables, p.t = p.t.rel, method = method.rel, select.rel = select.rel)
-        } else {
-          rel_perm = var.relations(x = data.frame(x_perm), y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
-                              num.threads = num.threads, status = status, case.weights = case.weights, variables = allvariables,
-                              candidates = allvariables, t = t, select.rel = select.rel)
-        }
-
+        adj.agree_perm <- rel_perm$surr.res
       }
-      if (type == "classification" | type == "regression") {
 
-        if (corr.rel) {
-          rel_perm = var.relations.mfi(x = data.frame(x_perm), y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
-                                   num.threads = num.threads, case.weights = case.weights, variables = allvariables_perm,
-                                   candidates = allvariables_perm, p.t = p.t.rel, method = method.rel,select.rel = select.rel)
-        } else {
-          rel_perm = var.relations(x = data.frame(x_perm), y = y, num.trees = num.trees, type = type, s = s, mtry = mtry, min.node.size = min.node.size,
-                              num.threads = num.threads, case.weights = case.weights, variables = allvariables_perm,
-                              candidates = allvariables_perm, t = t,select.rel = select.rel)
-        }
-        }
+      diag(adj.agree_perm) <- 0
 
-      adj.agree_perm = rel_perm$surr.res
-      }
-
-      diag(adj.agree_perm) = 0
-
-      null.rel = unlist(lapply(1:num.permutations,calculate.mir.perm,
-                               adj.agree_perm = adj.agree_perm,
-                               air = RF$variable.importance,
-                               allvariables = allvariables))
-
-
+      null.rel <- unlist(lapply(1:num.permutations, calculate.mir.perm,
+        adj.agree_perm = adj.agree_perm,
+        air = RF$variable.importance,
+        allvariables = allvariables
+      ))
 
       pval <- 1 - ranger:::numSmaller(mir, null.rel) / length(null.rel)
-      names(pval) = allvariables
-      selected = as.numeric(pval <= p.t.sel)
-      names(selected) = names(pval)
+      names(pval) <- allvariables
+      selected <- as.numeric(pval <= p.t.sel)
+      names(selected) <- names(pval)
+    }
 
-      }
-if(save.rel) {
-  info = list(MIR = mir,
-              pvalue = pval,
-              selected = selected,
-              relations = rel,
-              AIR = RF$variable.importance,
-              parameters = list(s = s, type = type, mtry = mtry, p.t.sel = p.t.sel, p.t.rel = p.t.rel, method.sel = method.sel))
-} else {
-  info = list(MIR = mir,
-              pvalue = pval,
-              selected = selected,
-              AIR = RF$variable.importance,
-              parameters = list(s = s, type = type, mtry = mtry, p.t.sel = p.t.sel, p.t.rel = p.t.rel, method.sel = method.sel))
-}
-  } else {
-    if(save.rel) {
-    info = list(MIR = mir,
-                relations = rel,
-                AIR = RF$variable.importance,
-                parameters = list(s = s, type = type, mtry = mtry))
+    if (save.rel) {
+      info <- list(
+        MIR = mir,
+        pvalue = pval,
+        selected = selected,
+        relations = rel,
+        AIR = RF$variable.importance,
+        parameters = list(s = s, type = type, mtry = mtry, p.t.sel = p.t.sel, p.t.rel = p.t.rel, method.sel = method.sel)
+      )
     } else {
-      info = list(MIR = mir,
-                  AIR = RF$variable.importance,
-                  parameters = list(s = s, type = type, mtry = mtry))
+      info <- list(
+        MIR = mir,
+        pvalue = pval,
+        selected = selected,
+        AIR = RF$variable.importance,
+        parameters = list(s = s, type = type, mtry = mtry, p.t.sel = p.t.sel, p.t.rel = p.t.rel, method.sel = method.sel)
+      )
+    }
+  } else {
+    if (save.rel) {
+      info <- list(
+        MIR = mir,
+        relations = rel,
+        AIR = RF$variable.importance,
+        parameters = list(s = s, type = type, mtry = mtry)
+      )
+    } else {
+      info <- list(
+        MIR = mir,
+        AIR = RF$variable.importance,
+        parameters = list(s = s, type = type, mtry = mtry)
+      )
     }
   }
 
   if (save.ranger) {
-    results = list(info = info,
-                   var = names(info$selected[info$selected == 1]),
-                   ranger = RF)
+    results <- list(
+      info = info,
+      var = names(info$selected[info$selected == 1]),
+      ranger = RF
+    )
   } else {
     if (select.var) {
-    results = list(info = info,
-                   var = names(info$selected[info$selected == 1]))
-  } else {
-    results = list(info = info)
+      results <- list(
+        info = info,
+        var = names(info$selected[info$selected == 1])
+      )
+    } else {
+      results <- list(info = info)
+    }
   }
-  }
+
   return(results)
 }
 
@@ -285,9 +310,7 @@ if(save.rel) {
 #' This is an internal function
 #'
 #' @keywords internal
-calculate.mir.perm = function(r=1, adj.agree_perm, air, allvariables) {
-mir.perm = colSums(adj.agree_perm * sample(air,length(air)))
-return(mir.perm)
+calculate.mir.perm <- function(r = 1, adj.agree_perm, air, allvariables) {
+  mir.perm <- colSums(adj.agree_perm * sample(air, length(air)))
+  return(mir.perm)
 }
-
-

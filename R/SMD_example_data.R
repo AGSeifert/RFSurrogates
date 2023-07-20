@@ -9,7 +9,6 @@
 #' the R package WGCNA. The ten variables of each basis variable are labeled: Cp_basicvariable_number. Additional non-correlated and
 #' independent predictor variables (cgn) were simulated using the standard normal distribution to reach a total number of 200 variables.
 #'
-#'
 #' @docType data
 #' @keywords datasets
 #' @name SMD_example_data

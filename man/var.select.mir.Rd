@@ -103,9 +103,10 @@ data("SMD_example_data")
 \donttest{
 # select variables (usually more trees are needed)
 set.seed(42)
-res = var.select.mir(
-  x = SMD_example_data[,2:ncol(SMD_example_data)],
-  y = SMD_example_data[,1],s = 10, num.trees = 10, num.threads = 1)
+res <- var.select.mir(
+  x = SMD_example_data[, 2:ncol(SMD_example_data)],
+  y = SMD_example_data[, 1], s = 10, num.trees = 10, num.threads = 1
+)
 res$var
 }
 }
@@ -113,5 +114,5 @@ res$var
 \itemize{
   \item Nembrini, S. et al. (2018) The revival of the Gini importance? Bioinformatics, 34, 3711–3718. \url{https://academic.oup.com/bioinformatics/article/34/21/3711/4994791}
   \item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-  }
+}
 }

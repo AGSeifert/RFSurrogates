@@ -36,7 +36,7 @@
 #'
 #' \item ranger: ranger object
 #'
-#'}
+#' }
 #' @examples
 #' # read data
 #' data("SMD_example_data")
@@ -44,32 +44,31 @@
 #' \donttest{
 #' # select variables (usually more trees are needed)
 #' set.seed(42)
-#' res = var.select.md(
-#'   x = SMD_example_data[,2:ncol(SMD_example_data)],
-#'   y = SMD_example_data[,1], num.trees = 10, num.threads = 1)
+#' res <- var.select.md(
+#'   x = SMD_example_data[, 2:ncol(SMD_example_data)],
+#'   y = SMD_example_data[, 1], num.trees = 10, num.threads = 1
+#' )
 #' res$var
 #' }
 #'
-#'@references
+#' @references
 ##' \itemize{
 ##'   \item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
 ##'   \item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
-##'   }
+##' }
 #'
 #' @export
-
-var.select.md = function(x = NULL, y = NULL, num.trees = 500, type = "regression", mtry = NULL, min.node.size = 1, num.threads = NULL,
-                         status = NULL, save.ranger = FALSE, create.forest = TRUE, forest = NULL, save.memory = FALSE, case.weights = NULL) {
-
-  results.smd = var.select.smd(x = x, y = y ,num.trees = num.trees,type = type, mtry = mtry,min.node.size = min.node.size, num.threads = num.threads
-                               ,status = status, save.ranger = save.ranger, s = 0, create.forest = create.forest, forest = forest,
-                               save.memory = save.memory, case.weights = case.weights)
+var.select.md <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", mtry = NULL, min.node.size = 1, num.threads = NULL,
+                          status = NULL, save.ranger = FALSE, create.forest = TRUE, forest = NULL, save.memory = FALSE, case.weights = NULL) {
+  results.smd <- var.select.smd(
+    x = x, y = y, num.trees = num.trees, type = type, mtry = mtry, min.node.size = min.node.size, num.threads = num.threads,
+    status = status, save.ranger = save.ranger, s = 0, create.forest = create.forest, forest = forest,
+    save.memory = save.memory, case.weights = case.weights
+  )
   if (save.ranger) {
-    results = list(info = results.smd$info, var = results.smd$var, forest = results.smd$forest, ranger = results.smd$ranger)
-  }
-  else {
-    results = list(info = results.smd$info, var = results.smd$var, forest = results.smd$forest)
+    results <- list(info = results.smd$info, var = results.smd$var, forest = results.smd$forest, ranger = results.smd$ranger)
+  } else {
+    results <- list(info = results.smd$info, var = results.smd$var, forest = results.smd$forest)
   }
   return(results)
-
 }

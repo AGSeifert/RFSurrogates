@@ -83,20 +83,21 @@ Based on the threshold a vector is created containing the related variables.
 \examples{
 # read data
 data("SMD_example_data")
-x = SMD_example_data[,2:ncol(SMD_example_data)]
-y = SMD_example_data[,1]
+x <- SMD_example_data[, 2:ncol(SMD_example_data)]
+y <- SMD_example_data[, 1]
 \donttest{
 # calculate variable relations
 set.seed(42)
-res = var.relations(
+res <- var.relations(
   x = x,
   y = y,
   s = 10,
   num.trees = 10,
-  variables = c("X1","X7"),
+  variables = c("X1", "X7"),
   candidates = colnames(x)[1:100],
   t = 5,
-  num.threads = 1)
+  num.threads = 1
+)
 res$var
 }
 

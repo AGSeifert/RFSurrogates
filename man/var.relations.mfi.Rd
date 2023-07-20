@@ -78,8 +78,6 @@ a list containing:
 \item ranger: ranger objects.
 \item method: Method  to  compute  p-values: "janitza" or "permutation".
 \item p.t: p.value threshold for selection of related variables
-
-
 }
 }
 \description{
@@ -88,19 +86,20 @@ This function corrects the mean adjusted agreement by a permutation approach and
 \examples{
 # read data
 data("SMD_example_data")
-x = SMD_example_data[,2:ncol(SMD_example_data)]
-y = SMD_example_data[,1]
+x <- SMD_example_data[, 2:ncol(SMD_example_data)]
+y <- SMD_example_data[, 1]
 \donttest{
 # calculate variable relations
 set.seed(42)
-res = var.relations.mfi(
+res <- var.relations.mfi(
   x = x,
   y = y,
   s = 10,
   num.trees = 10,
-  variables = c("X1","X7"),
+  variables = c("X1", "X7"),
   candidates = colnames(x)[1:100],
-  num.threads = 1)
+  num.threads = 1
+)
 res$var.rel[[1]]
 }
 
