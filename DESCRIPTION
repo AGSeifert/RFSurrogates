@@ -2,8 +2,14 @@ Type: Package
 Package: RFSurrogates
 Title: Surrogate minimal depth variable importance
 Version: 0.3.1
+Authors@R: c(
+    person("Stephan", "Seifert", , "stephan.seifert@uni-hamburg.de", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-2567-5728")),
+    person("Sven", "Gundlach", role = "aut"),
+    person("Silke", "Szymczak", role = "aut")
+  )
 Author: Stephan Seifert, Sven Gundlach, Silke Szymczak
-Maintainer: Stephan Seifert <seifert@medinfo.uni-kiel.de>
+Maintainer: Stephan Seifert <stephan.seifert@uni-hamburg.de>
 Description: This package provides functions to obtain surrogate splits
     applying ranger for random forests generation and using modified
     functions from the package rpart. Surrogate variables and
