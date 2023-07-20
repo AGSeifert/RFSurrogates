@@ -93,7 +93,7 @@ var.relations.mfi = function(x = NULL, y = NULL, num.trees = 500, type = "regres
         stop("Too much classes defined, classification might be the wrong choice")
       }
     }
-    if (type == "regression" && class(y) == "factor") {
+    if (type == "regression" && inherits(y, "factor")) {
       stop("use factor variable for y only for classification! ")
     }
 
