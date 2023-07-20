@@ -23,7 +23,6 @@ Imports:
     parallel,
     randomForestSRC,
     ranger (>= 0.12.1),
-    Rcpp,
     rlist
 Suggests: 
     testthat (>= 3.0.0)
