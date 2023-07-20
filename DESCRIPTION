@@ -1,6 +1,6 @@
 Type: Package
 Package: RFSurrogates
-Title: Surrogate minimal depth variable importance
+Title: Surrogate Minimal Depth Variable Importance
 Version: 0.3.1
 Authors@R: c(
     person("Stephan", "Seifert", , "stephan.seifert@uni-hamburg.de", role = c("aut", "cre"),
