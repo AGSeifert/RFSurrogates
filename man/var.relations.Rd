@@ -88,7 +88,15 @@ y = SMD_example_data[,1]
 \donttest{
 # calculate variable relations
 set.seed(42)
-res = var.relations(x = x, y = y, s = 10, num.trees = 100, variables = c("X1","X7"), candidates = colnames(x)[1:100], t = 5)
+res = var.relations(
+  x = x,
+  y = y,
+  s = 10,
+  num.trees = 10,
+  variables = c("X1","X7"),
+  candidates = colnames(x)[1:100],
+  t = 5,
+  num.threads = 1)
 res$var
 }
 

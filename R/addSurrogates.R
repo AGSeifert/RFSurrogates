@@ -2,8 +2,6 @@
 #'
 #' This function adds surrogate variables and adjusted agreement values to a forest that was created by getTreeranger.
 #'
-#' @useDynLib RFSurrogates, .registration = TRUE, .fixes = "C_"
-#'
 #' @param RF random forest object created by ranger (with keep.inbag=TRUE).
 #' @param trees list of trees created by getTreeranger.
 #' @param s Predefined number of surrogate splits (it may happen that the actual number of surrogate splits differes in individual nodes). Default is 1 \% of no. of variables.
@@ -74,6 +72,8 @@ getSurrogate = function(surr.par, k = 1, maxsurr) {
 #'
 #' This is an internal function
 #'
+#' @useDynLib RFSurrogates, .registration = TRUE
+#'
 #' @keywords internal
 SurrTree = function(j,wt,Xdata,controls,column.names,tree,maxsurr,ncat) {
   node = tree[j,]
@@ -92,7 +92,7 @@ SurrTree = function(j,wt,Xdata,controls,column.names,tree,maxsurr,ncat) {
   }
 
 
-  surrogate.parameters = .Call(C_getSurrogates,
+  surrogate.parameters = .Call("getSurrogates",
                                ncat = as.integer(ncat),
                                wt = as.numeric(wt),
                                X = as.matrix(Xdata),
