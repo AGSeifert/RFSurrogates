@@ -15,5 +15,5 @@ Imports:
 	linkcomm,
     parallel,
     rlist
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 LinkingTo: Rcpp

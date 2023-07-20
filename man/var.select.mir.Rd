@@ -24,7 +24,7 @@ var.select.mir(
   case.weights = NULL,
   corr.rel = TRUE,
   t = 5,
-  method.rel = "janitza",
+  method.rel = "permutation",
   method.sel = "janitza",
   save.rel = TRUE
 )
