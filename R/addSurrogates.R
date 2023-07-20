@@ -2,7 +2,7 @@
 #'
 #' This function adds surrogate variables and adjusted agreement values to a forest that was created by getTreeranger.
 #'
-#' @useDynLib SurrogateMinimalDepth, .registration = TRUE, .fixes = "C_"
+#' @useDynLib RFSurrogates, .registration = TRUE, .fixes = "C_"
 #'
 #' @param RF random forest object created by ranger (with keep.inbag=TRUE).
 #' @param trees list of trees created by getTreeranger.
@@ -22,7 +22,6 @@
 #' \item adj_i: adjusted agreement of variable i
 #' }
 #' @export
-
 addSurrogates = function(RF,trees,s,Xdata,num.threads) {
 
   num.trees = length(trees)
