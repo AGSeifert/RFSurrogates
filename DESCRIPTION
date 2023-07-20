@@ -5,8 +5,8 @@ Version: 0.3.1
 Authors@R: c(
     person("Stephan", "Seifert", , "stephan.seifert@uni-hamburg.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2567-5728")),
-    person("Sven", "Gundlach", role = "aut"),
-    person("Silke", "Szymczak", role = "aut"),
+    person("Sven", "Gundlach", role = "aut",
+           comment = c(ORCID = "0000-0003-4060-2754")),
     person("Florian", "Gärber", , "florian.gaerber@uni-hamburg.de", role = "ctb",
            comment = c(ORCID = "0000-0003-3875-9736"))
   )
