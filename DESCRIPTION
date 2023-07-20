@@ -1,19 +1,24 @@
-Package: RFSurrogates
 Type: Package
-Title: Surrogate minimal depth variable importance 
+Package: RFSurrogates
+Title: Surrogate minimal depth variable importance
 Version: 0.3.1
 Author: Stephan Seifert, Sven Gundlach, Silke Szymczak
 Maintainer: Stephan Seifert <seifert@medinfo.uni-kiel.de>
-Description: This package provides functions to obtain surrogate splits applying ranger for random forests generation and using modified functions from the package rpart. Surrogate variables and corresponding adjusted agreement values are used for surrogate minimal depth variable importance and to investigate variable relations.  
+Description: This package provides functions to obtain surrogate splits
+    applying ranger for random forests generation and using modified
+    functions from the package rpart. Surrogate variables and
+    corresponding adjusted agreement values are used for surrogate minimal
+    depth variable importance and to investigate variable relations.
 License: use_mit_license()
+Imports:
+    linkcomm,
+    parallel,
+    randomForestSRC,
+    ranger (>= 0.12.1),
+    Rcpp,
+    rlist
+LinkingTo: 
+    Rcpp
 Encoding: UTF-8
 LazyData: true
-Imports:
-	ranger (>= 0.12.1),
-	Rcpp,
-	randomForestSRC,
-	linkcomm,
-    parallel,
-    rlist
 RoxygenNote: 7.2.3
-LinkingTo: Rcpp
