@@ -67,7 +67,7 @@ mean.index <- function(i, list.res, index.variables) {
   list <- list.res[which(names(list.res) == index.variables[i])]
   mean.list <- round(Reduce("+", list) / length(list), 2)
   if (length(mean.list) > 0) {
-    mean.list[index.variables[i]] <- NA
+    mean.list[i] <- NA
     return(mean.list)
   } else {
     return(rep(NA, length(index.variables)))
