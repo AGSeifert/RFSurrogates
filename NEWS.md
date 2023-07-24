@@ -3,6 +3,7 @@
 <!-- News Style-guide: https://style.tidyverse.org/news.html -->
 
 * Moved to new repository: [AGSeifert/RFSurrogates](https://github.com/AGSeifert/RFSurrogates)
+* Fixed `mean.index()` bug which caused the return value to be of incorrect length in some cases (#4).
 
 ---
 
