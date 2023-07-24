@@ -1,4 +1,5 @@
 # RFSurrogates
+
 In this R package, several functions are provided for applying approaches based on random forest. Minimal depth (MD), Surrogate minimal depth (SMD) and mutual impurity reduction (MIR), which is a corrected approach of SMD, can be applied to assess the importance of variables and to select important variables. In addition, the parameters mean adjusted agreement and mutual forest impact (MFI), a corrected approach of the previous, can be applied to investigate variable relations based on surrogate variables. 
 
 Please cite the following manuscripts if you use the package:  
