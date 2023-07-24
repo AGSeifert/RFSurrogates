@@ -45,6 +45,7 @@ meanAdjAgree <- function(trees, variables, allvariables, candidates, t, s.a, sel
   )
   colnames(results.allvar) <- candidates
   rownames(results.allvar) <- variables
+  results.allvar[outer(rownames(results.allvar), colnames(results.allvar), "==")] <- NA
 
   if (select.var) {
     # calculate threshold and select variables according to it
@@ -67,7 +68,6 @@ mean.index <- function(i, list.res, index.variables) {
   list <- list.res[which(names(list.res) == index.variables[i])]
   mean.list <- round(Reduce("+", list) / length(list), 2)
   if (length(mean.list) > 0) {
-    mean.list[i] <- NA
     return(mean.list)
   } else {
     return(rep(NA, length(index.variables)))
