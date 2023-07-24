@@ -4,6 +4,7 @@ test_that("mean.index always returns a numeric vector of length(index.variables)
       list(`1` = c(0.0, 0.5, 0.5, 0.5)),
       list(`1` = c(0.0, 0.6, 0.7, 0.8)),
       list(`5` = c(0.4, 0.0, 0.4, 0.4)),
+      list(`99` = c(0.1, 0.2, 0.1, 0.2)),
       list(`100` = c(0.9, 0.3, 0.0, 0.9)),
       list(`10000` = c(0.7, 0.8, 0.9, 0.0)),
       list(`5` = c(0.3, 0.0, 0.5, 0.6), `100` = c(0.7, 0.6, 0.0, 0.9))
