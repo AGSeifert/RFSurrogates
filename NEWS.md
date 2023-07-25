@@ -2,6 +2,10 @@
 
 <!-- News Style-guide: https://style.tidyverse.org/news.html -->
 
+# RFSurrogates 0.3.3
+
+* Fixed `meanAdjAgree()` bug which caused mean adjusted agreement pairings to be set to NA incorrectly when `variables` was a subset or differently ordered than `candidates`.
+
 # RFSurrogates 0.3.2
 
 * Moved to new repository: [AGSeifert/RFSurrogates](https://github.com/AGSeifert/RFSurrogates)
