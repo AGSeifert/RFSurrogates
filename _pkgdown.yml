@@ -1,4 +1,17 @@
-url: ~
+url: https://agseifert.github.io/RFSurrogates
 template:
   bootstrap: 5
-
+reference:
+  - title: Variable Selection
+    contents:
+    - starts_with("var.select")
+  - title: Variable Relations
+    contents:
+    - starts_with("var.relations")
+  - title: Data
+    contents:
+    - has_keyword("datasets")
+  - title: Additional functions
+    contents:
+    - -has_keyword("datasets")
+    - -starts_with("var.")
