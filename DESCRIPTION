@@ -18,6 +18,8 @@ Description: This package provides functions to obtain surrogate splits
     corresponding adjusted agreement values are used for surrogate minimal
     depth variable importance and to investigate variable relations.
 License: MIT + file LICENSE
+URL: https://agseifert.github.io/RFSurrogates/,
+    https://github.com/AGSeifert/RFSurrogates
 Imports:
     linkcomm,
     parallel,
