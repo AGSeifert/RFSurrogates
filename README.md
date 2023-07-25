@@ -15,7 +15,7 @@ install_github("AGSeifert/RFSurrogates")
 ```
 
 # Example data
-The package contains an example data set which consists of a single replicate of the simulation study 1 in publication [1]. Please refer to the paper and the documentation of the SMD_example_data for further details on the simulation scenario. The R script for the simulation is published [here](doi.org/10.25592/uhhfdm.12620).
+The package contains an example data set which consists of a single replicate of the simulation study 1 in publication [1]. Please refer to the paper and the documentation of the SMD_example_data for further details on the simulation scenario. The R script for the simulation is published here: doi.org/10.25592/uhhfdm.12620.
 
 # Usage
 First the package and the example data are loaded:
