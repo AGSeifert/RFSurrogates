@@ -143,17 +143,17 @@ var.select.smd <- function(x = NULL, y = NULL, num.trees = 500, type = "regressi
     surrminimaldepth.s <- surrmindep(forest = list(trees = trees.surr, allvariables = variables), s.l = s$s.l)
   }
 
-  if (!create.forest && is.null(forest)) {
-    stop("set create.forest to TRUE or analyze an existing random forest specified by parameter forest")
+  if (!create.forest) {
+    if (is.null(forest)) {
+      stop("set create.forest to TRUE or analyze an existing random forest specified by parameter forest")
+    }
+    allvariables <- forest[["allvariables"]]
+    trees <- forest[["trees"]]
+    s <- count.surrogates(trees)
+    surrminimaldepth.s <- surrmindep(forest, s.l = s$s.l)
+    trees.surr <- forest[["trees"]]
+    variables <- forest[["variables"]]
   }
-
-  trees <- forest[["trees"]]
-  allvariables <- forest[["allvariables"]]
-
-  s <- count.surrogates(trees)
-  surrminimaldepth.s <- surrmindep(forest, s.l = s$s.l)
-  trees.surr <- forest[["trees"]]
-  variables <- forest[["variables"]]
 
   if (save.ranger) {
     results <- list(
