@@ -2,6 +2,11 @@
 
 <!-- News Style-guide: https://style.tidyverse.org/news.html -->
 
+* `var.select.smd()`, `var.select.md()`, `var.relations()`, `var.relations.mfi()`: Made several improvements to developer experience:
+  * `create.forest` now defaults to `is.null(forest)`, so it will automatically be `TRUE` if no forest is provided, and `FALSE` otherwise.
+  * `x` is no longer required if `create.forest` is `FALSE`.
+  * (Internal) Inverted some nested guard clauses for readability.
+
 # RFSurrogates 0.3.3
 
 * Fixed `meanAdjAgree()` bug which caused mean adjusted agreement pairings to be set to NA incorrectly when `variables` was a subset or differently ordered than `candidates`.
