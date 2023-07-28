@@ -6,6 +6,24 @@
 \usage{
 getsingletree(RF, k = 1)
 }
+\arguments{
+\item{RF}{A \code{\link[ranger:ranger]{ranger::ranger}} object.}
+
+\item{k}{Tree index to convert.}
+}
+\value{
+A tree data frame for the \code{k}th tree in \code{RF}.
+Each row of the tree data frames corresponds to a node of the respective tree and the columns correspond to:
+\itemize{
+\item \code{nodeID}: ID of the respective node (important for left and right daughters in the next columns)
+\item \code{leftdaughter}: ID of the left daughter of this node
+\item \code{rightdaughter}: ID of the right daughter of this node
+\item \code{splitvariable}: ID of the split variable
+\item \code{splitpoint}: Split point of the split variable.
+For categorical variables this is a comma separated lists of values, representing the factor levels (in the original order) going to the right.
+\item \code{status}: \code{0} for terminal (\code{splitpoint} is \code{NA}) and \code{1} for non-terminal.
+}
+}
 \description{
 This is an internal function
 }
