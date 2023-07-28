@@ -167,7 +167,7 @@ var.relations.mfi <- function(x = NULL, y = NULL, num.trees = 500, type = "regre
     t = t, s$s.a, select.var = FALSE, num.threads = num.threads
   )
 
-      allvariables_perm <- colnames(x_perm)
+  allvariables_perm <- colnames(x_perm)
 
   rel_perm <- meanAdjAgree(forest_perm$trees,
     variables = allvariables_perm, allvariables = allvariables_perm, candidates = allvariables_perm,
