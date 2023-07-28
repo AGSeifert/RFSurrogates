@@ -1,4 +1,4 @@
-# RFSurrogates (development version)
+# RFSurrogates 0.3.4
 
 <!-- News Style-guide: https://style.tidyverse.org/news.html -->
 
