@@ -118,7 +118,6 @@ Subsequently, variable relations are analyzed with `var.relations()`. The parame
 ```r
 candidates <- colnames(SMD_example_data)[2:101]
 rel <- var.relations(
-  x = data.frame(), create.forest = FALSE, 
   forest = res.smd$forest, 
   variables = c("X1", "X7"), candidates = candidates, 
   t = 5)

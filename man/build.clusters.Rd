@@ -44,8 +44,6 @@ trees.surr <- addSurrogates(RF = RF, trees = trees.lay, s = 10, Xdata = x, num.t
 
 # investigate variable relations
 rel <- var.relations(
-  x = data.frame(),
-  create.forest = FALSE,
   forest = list(trees = trees.surr, allvariables = allvariables),
   variables = allvariables,
   candidates = allvariables,

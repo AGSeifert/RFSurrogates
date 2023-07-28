@@ -14,8 +14,8 @@
 #' @param s predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \% of no. of variables.
 #' @param status status variable, only applicable to survival data. Use 1 for event and 0 for censoring.
 #' @param save.ranger set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).
-#' @param create.forest set FALSE if you want to analyze an existing forest. Default is TRUE.
-#' @param forest the random forest that should be analyzed if create.forest is set to FALSE. (x and y still have to be given to obtain variable names)
+#' @param create.forest  Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.
+#' @param forest the random forest that should be analyzed
 #' @param save.memory Use memory saving (but slower) splitting mode. No effect for survival and GWAS data. Warning: This option slows down the tree growing, use only if you encounter memory problems. (This parameter is transfered to ranger)
 #' @param case.weights Weights for sampling of training observations. Observations with larger weights will be selected with higher probability in the bootstrap (or subsampled) samples for the trees.
 #'
@@ -63,13 +63,14 @@
 ##' }
 #' @export
 var.select.smd <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
-                           num.threads = NULL, status = NULL, save.ranger = FALSE, create.forest = TRUE, forest = NULL,
+                           num.threads = NULL, status = NULL, save.ranger = FALSE, create.forest = is.null(forest), forest = NULL,
                            save.memory = FALSE, case.weights = NULL) {
-  if (!is.data.frame(x)) {
-    stop("x has to be a data frame")
-  }
   if (create.forest) {
     ## check data
+    if (!is.data.frame(x)) {
+      stop("x has to be a data frame")
+    }
+
     if (length(y) != nrow(x)) {
       stop("length of y and number of rows in x are different")
     }
@@ -142,17 +143,17 @@ var.select.smd <- function(x = NULL, y = NULL, num.trees = 500, type = "regressi
     surrminimaldepth.s <- surrmindep(forest = list(trees = trees.surr, allvariables = variables), s.l = s$s.l)
   }
 
-  if (!create.forest) {
-    if (is.null(forest)) {
-      stop("set create.forest to TRUE or analyze an existing random forest specified by parameter forest")
-    }
-    allvariables <- forest[["allvariables"]]
-    trees <- forest[["trees"]]
-    s <- count.surrogates(trees)
-    surrminimaldepth.s <- surrmindep(forest, s.l = s$s.l)
-    trees.surr <- forest[["trees"]]
-    variables <- forest[["variables"]]
+  if (!create.forest && is.null(forest)) {
+    stop("set create.forest to TRUE or analyze an existing random forest specified by parameter forest")
   }
+
+  trees <- forest[["trees"]]
+  allvariables <- forest[["allvariables"]]
+
+  s <- count.surrogates(trees)
+  surrminimaldepth.s <- surrmindep(forest, s.l = s$s.l)
+  trees.surr <- forest[["trees"]]
+  variables <- forest[["variables"]]
 
   if (save.ranger) {
     results <- list(
