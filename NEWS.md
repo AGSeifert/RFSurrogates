@@ -10,6 +10,10 @@
   * Clarified default value for `num.threads` to be `parallel::detectCores()` by adding it as a default to the parameter 
   * Added assertion that `RF` is a `ranger` object.
   * Added assertion that `RF$num.trees` and `length(trees)` are equal. This is not considered a breaking change since these values should always be equal when the function is used correctly.
+* Added S3 classes to the `trees` list objects.
+  * `getTreeranger()` now returns a `RangerTrees` list.
+  * `addLayer()` and `getTreeranger(add_layer = TRUE)` add the `LayerTrees` class to the list (indicating presence of the `layer` list item). It now requires that its `trees` param inherits `RangerTrees`.
+  * `addSurrogates()` now adds the `SurrogateTrees` class. It now requires that its `trees` param inherits `RangerTrees`.
 
 # RFSurrogates 0.3.3
 

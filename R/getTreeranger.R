@@ -20,11 +20,18 @@
 #'
 #' @export
 getTreeranger <- function(RF, num.trees = RF$num.trees, add_layer = FALSE, num.threads = 1) {
-  parallel::mclapply(1:num.trees, getsingletree,
+  trees <- parallel::mclapply(1:num.trees, getsingletree,
     mc.cores = num.threads,
     RF = RF,
     add_layer = add_layer
   )
+
+  class(trees) <- "RangerTrees"
+  if (add_layer) {
+    class(trees) <- c(class(trees), "LayerTrees")
+  }
+
+  return(trees)
 }
 
 #' getsingletree

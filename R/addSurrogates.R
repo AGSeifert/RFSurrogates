@@ -26,6 +26,10 @@ addSurrogates <- function(RF, trees, s, Xdata, num.threads = parallel::detectCor
     stop("`RF` must be a ranger object.")
   }
 
+  if (!inherits(trees, "RangerTrees")) {
+    stop("`trees` must be a `getTreeranger` `RangerTrees` object.")
+  }
+
   num.trees <- RF$num.trees
 
   if (num.trees != length(trees)) {
@@ -54,6 +58,9 @@ addSurrogates <- function(RF, trees, s, Xdata, num.threads = parallel::detectCor
       ncat = ncat
     )
   )
+
+  class(trees.surr) <- c(class(trees), "SurrogateTrees")
+
   return(trees.surr)
 }
 

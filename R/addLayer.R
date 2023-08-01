@@ -19,7 +19,15 @@
 #'
 #' @export
 addLayer <- function(trees, num.threads = 1) {
-  parallel::mclapply(trees, add_layer_to_tree, mc.cores = num.threads)
+  if (!inherits(trees, "RangerTrees")) {
+    stop("`trees` must be a `getTreeranger` `RangerTrees` object.")
+  }
+
+  trees <- parallel::mclapply(trees, add_layer_to_tree, mc.cores = num.threads)
+
+  class(trees) <- c(class(trees), "LayerTrees")
+
+  return(trees)
 }
 
 #' Internal function
