@@ -1,7 +1,11 @@
 # RFSurrogates (development version)
 
-* [`addLayer`]: Refactor for-loop to lapply.
-  * Add `num.threads` param to enable parallelization using [`parallel::mclapply`]. It defaults to 1 for backward compatability.
+* `addLayer()`: Refactor for-loop to lapply.
+  * Add `num.threads` param to enable parallelization using `parallel::mclapply()`. It defaults to 1 for backward compatability.
+* `getTreeranger()`: Refactor `lapply()` to `parallel::mclapply()`.
+  * Add `num.threads` param (passed to `mc.cores` in `parallel::mclapply()`). It defaults to 1 for backward compatability.
+  * Add `add_layer` param to include the effect of `addLayer` within the same loop. Defaults to `FALSE` for backward compatability.
+  * (Internal) `getsingletree()`: Add `add_layer` param to enable adding layers within the same loop.
 
 # RFSurrogates 0.3.3
 
