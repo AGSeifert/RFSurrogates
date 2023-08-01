@@ -23,11 +23,11 @@ addLayer <- function(trees, num.threads = 1) {
     stop("`trees` must be a `getTreeranger` `RangerTrees` object.")
   }
 
-  trees <- parallel::mclapply(trees, add_layer_to_tree, mc.cores = num.threads)
+  layer.trees <- parallel::mclapply(trees, add_layer_to_tree, mc.cores = num.threads)
 
-  class(trees) <- c(class(trees), "LayerTrees")
+  class(layer.trees) <- c(class(trees), "LayerTrees")
 
-  return(trees)
+  return(layer.trees)
 }
 
 #' Internal function
