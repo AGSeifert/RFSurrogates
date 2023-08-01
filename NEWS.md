@@ -6,6 +6,10 @@
   * Add `num.threads` param (passed to `mc.cores` in `parallel::mclapply()`). It defaults to 1 for backward compatability.
   * Add `add_layer` param to include the effect of `addLayer` within the same loop. Defaults to `FALSE` for backward compatability.
   * (Internal) `getsingletree()`: Add `add_layer` param to enable adding layers within the same loop.
+* `addSurrogates()`: 
+  * Clarified default value for `num.threads` to be `parallel::detectCores()` by adding it as a default to the parameter 
+  * Added assertion that `RF` is a `ranger` object.
+  * Added assertion that `RF$num.trees` and `length(trees)` are equal. This is not considered a breaking change since these values should always be equal when the function is used correctly.
 
 # RFSurrogates 0.3.3
 
