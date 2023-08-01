@@ -14,7 +14,7 @@ var.select.md(
   num.threads = NULL,
   status = NULL,
   save.ranger = FALSE,
-  create.forest = TRUE,
+  create.forest = is.null(forest),
   forest = NULL,
   save.memory = FALSE,
   case.weights = NULL
@@ -41,9 +41,9 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{save.ranger}{Set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).}
 
-\item{create.forest}{set FALSE if you want to analyze an existing forest. Default is TRUE.}
+\item{create.forest}{Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.}
 
-\item{forest}{the random forest that should be analyzed if create.forest is set to FALSE. (x and y still have to be given to obtain variable names)}
+\item{forest}{the random forest that should be analyzed.}
 
 \item{save.memory}{Use memory saving (but slower) splitting mode. No effect for survival and GWAS data. Warning: This option slows down the tree growing, use only if you encounter memory problems. (This parameter is transfered to ranger)}
 

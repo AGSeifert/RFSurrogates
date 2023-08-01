@@ -1,5 +1,9 @@
 # RFSurrogates (development version)
 
+* `var.select.smd()`, `var.select.md()`, `var.relations()`, `var.relations.mfi()`: Made several improvements to developer experience:
+  * `create.forest` now defaults to `is.null(forest)`, so it will automatically be `TRUE` if no forest is provided, and `FALSE` otherwise.
+  * `x` is no longer required if `create.forest` is `FALSE`.
+  * (Internal) Inverted some nested guard clauses for readability.
 * `addLayer()`: Refactor for-loop to lapply.
   * Add `num.threads` param to enable parallelization using `parallel::mclapply()`. It defaults to 1 for backward compatability.
 * `getTreeranger()`: Refactor `lapply()` to `parallel::mclapply()`.

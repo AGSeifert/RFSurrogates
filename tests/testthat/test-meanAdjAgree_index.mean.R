@@ -10,7 +10,7 @@ test_that("mean.index always returns a numeric vector of length(index.variables)
       list(`5` = c(0.3, 0.0, 0.5, 0.6), `100` = c(0.7, 0.6, 0.0, 0.9))
     )
   )
-  index.variables = c(1, 5, 100, 10000)
+  index.variables <- c(1, 5, 100, 10000)
 
   # 1 would not go out of bounds, thus should always pass
   testthat::expect_length(mean.index(1, list.res, index.variables), length(index.variables))
@@ -23,6 +23,6 @@ test_that("mean.index always returns a numeric vector of length(index.variables)
 
 test_that("mean.index returns NA vector when i is out of bounds of index.variables", {
   list.res <- list()
-  index.variables = 1:4
+  index.variables <- 1:4
   testthat::expect_equal(mean.index(5, list.res, index.variables), rep(NA, length(index.variables)))
 })

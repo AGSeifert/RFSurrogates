@@ -43,14 +43,15 @@
 #'
 #' @export
 var.relations.mfi <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
-                              num.threads = NULL, status = NULL, save.ranger = FALSE, create.forest = TRUE, forest = NULL,
+                              num.threads = NULL, status = NULL, save.ranger = FALSE, create.forest = is.null(forest), forest = NULL,
                               save.memory = FALSE, case.weights = NULL,
                               variables, candidates, p.t = 0.01, select.rel = TRUE, method = "janitza") {
-  if (!is.data.frame(x)) {
-    stop("x has to be a data frame")
-  }
   if (create.forest) {
     ## check data
+    if (!is.data.frame(x)) {
+      stop("x has to be a data frame")
+    }
+
     if (length(y) != nrow(x)) {
       stop("length of y and number of rows in x are different")
     }
@@ -147,33 +148,31 @@ var.relations.mfi <- function(x = NULL, y = NULL, num.trees = 500, type = "regre
     forest_perm <- list(trees = trees.surr_perm, allvariables = colnames(data_perm[, -1]))
   }
 
-  if (!create.forest) {
-    if (is.null(forest)) {
-      stop("set create.forest to TRUE or analyze an existing random forest specified by parameter forest")
-    }
+  if (!create.forest && is.null(forest)) {
+    stop("set create.forest to TRUE or analyze an existing random forest specified by parameter forest")
   }
 
-  if (all(candidates %in% allvariables)) {
-    if (all(variables %in% allvariables)) {
-      # count surrogates
-      s <- count.surrogates(forest$trees)
-      rel <- meanAdjAgree(forest$trees,
-        variables = allvariables, allvariables = allvariables, candidates = allvariables,
-        t = t, s$s.a, select.var = FALSE, num.threads = num.threads
-      )
-
-      allvariables_perm <- colnames(x_perm)
-
-      rel_perm <- meanAdjAgree(forest_perm$trees,
-        variables = allvariables_perm, allvariables = allvariables_perm, candidates = allvariables_perm,
-        t = t, s$s.a, select.var = FALSE, num.threads = num.threads
-      )
-    } else {
-      stop("allvariables do not contain the chosen variables")
-    }
-  } else {
+  if (!all(candidates %in% allvariables)) {
     stop("allvariables do not contain the candidate variables")
   }
+
+  if (!all(variables %in% allvariables)) {
+    stop("allvariables do not contain the chosen variables")
+  }
+
+  # count surrogates
+  s <- count.surrogates(forest$trees)
+  rel <- meanAdjAgree(forest$trees,
+    variables = allvariables, allvariables = allvariables, candidates = allvariables,
+    t = t, s$s.a, select.var = FALSE, num.threads = num.threads
+  )
+
+  allvariables_perm <- colnames(x_perm)
+
+  rel_perm <- meanAdjAgree(forest_perm$trees,
+    variables = allvariables_perm, allvariables = allvariables_perm, candidates = allvariables_perm,
+    t = t, s$s.a, select.var = FALSE, num.threads = num.threads
+  )
 
   adj.agree <- rel$surr.res
   adj.agree.perm <- rel_perm$surr.res

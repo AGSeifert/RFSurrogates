@@ -5,9 +5,12 @@ Version: 0.3.3.9005
 Authors@R: c(
     person("Stephan", "Seifert", , "stephan.seifert@uni-hamburg.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2567-5728")),
-    person("Sven", "Gundlach", role = "aut"),
-    person("Silke", "Szymczak", role = "aut"),
-    person("Florian", "Gärber", , "florian.gaerber@uni-hamburg.de", role = "ctb",
+    person("Sven", "Gundlach", role = "aut",
+           comment = c(ORCID = "0000-0003-4060-2754")),
+    person("Silke", "Szymczak", role = "aut",
+           comment = c(ORCID = "0000-0002-8897-9035")),
+    person("Lukas C.", "Jarren", role = "aut"),
+    person("Florian", "Gärber", , "florian.gaerber@uni-hamburg.de", role = "aut",
            comment = c(ORCID = "0000-0003-3875-9736"))
   )
 Author: Stephan Seifert, Sven Gundlach, Silke Szymczak
