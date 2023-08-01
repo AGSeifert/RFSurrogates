@@ -2,35 +2,36 @@
 % Please edit documentation in R/addSurrogates.R
 \name{addSurrogates}
 \alias{addSurrogates}
-\title{Add surrogate information that was created by getTreeranger}
+\title{Add surrogate information to a tree list.}
 \usage{
-addSurrogates(RF, trees, s, Xdata, num.threads)
+addSurrogates(RF, trees, s, Xdata, num.threads = parallel::detectCores())
 }
 \arguments{
-\item{RF}{random forest object created by ranger (with keep.inbag=TRUE).}
+\item{RF}{A \link[ranger:ranger]{ranger::ranger} object which was created with \code{keep.inbag = TRUE}.}
 
-\item{trees}{list of trees created by getTreeranger.}
+\item{trees}{List of trees created by \link{getTreeranger}.}
 
-\item{s}{Predefined number of surrogate splits (it may happen that the actual number of surrogate splits differes in individual nodes). Default is 1 \% of no. of variables.}
+\item{s}{Predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes).}
 
 \item{Xdata}{data without the dependent variable.}
 
-\item{num.threads}{number of threads used for parallel execution. Default is number of CPUs available.}
+\item{num.threads}{(Default: \code{\link[parallel:detectCores]{parallel::detectCores()}}) Number of threads to spawn for parallelization.}
 }
 \value{
-a list with trees containing of lists of nodes with the elements:
+A list of trees.
+A list of trees containing of lists of nodes with the elements:
 \itemize{
-\item nodeID: ID of the respective node (important for left and right daughters in the next columns)
-\item leftdaughter: ID of the left daughter of this node
-\item rightdaughter: ID of the right daughter of this node
-\item splitvariable: ID of the split variable
-\item splitpoint: splitpoint of the split variable
-\item status: "0" for terminal and "1" for non-terminal
-\item layer: layer information (0 means root node, 1 means 1 layer below root, etc)
-\item surrogate_i: numbered surrogate variables (number depending on s)
-\item adj_i: adjusted agreement of variable i
+\item \code{nodeID}: ID of the respective node (important for left and right daughters in the next columns)
+\item \code{leftdaughter}: ID of the left daughter of this node
+\item \code{rightdaughter}: ID of the right daughter of this node
+\item \code{splitvariable}: ID of the split variable
+\item \code{splitpoint}: splitpoint of the split variable
+\item \code{status}: \code{0} for terminal and \code{1} for non-terminal
+\item \code{layer}: layer information (\code{0} means root node, \code{1} means 1 layer below root, etc)
+\item \code{surrogate_i}: numbered surrogate variables (number depending on s)
+\item \code{adj_i}: adjusted agreement of variable i
 }
 }
 \description{
-This function adds surrogate variables and adjusted agreement values to a forest that was created by getTreeranger.
+This function adds surrogate variables and adjusted agreement values to a forest that was created by \link{getTreeranger}.
 }
