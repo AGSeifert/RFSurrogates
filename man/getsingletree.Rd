@@ -4,12 +4,14 @@
 \alias{getsingletree}
 \title{getsingletree}
 \usage{
-getsingletree(RF, k = 1)
+getsingletree(RF, k = 1, add_layer = FALSE)
 }
 \arguments{
 \item{RF}{A \code{\link[ranger:ranger]{ranger::ranger}} object.}
 
 \item{k}{Tree index to convert.}
+
+\item{add_layer}{}
 }
 \value{
 A tree data frame for the \code{k}th tree in \code{RF}.

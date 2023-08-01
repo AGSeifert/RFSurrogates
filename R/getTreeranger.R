@@ -4,6 +4,8 @@
 #'
 #' @param RF A [`ranger::ranger`] object which was created with `keep.inbag = TRUE`.
 #' @param num.trees (Deprecated) Number of trees to convert (Default: `RF$num.trees`).
+#' @param add_layer (Default: `FALSE`) Whether to [addLayer()] in the same loop.
+#' @param num.threads (Default: 1) Number of threads to spawn for parallelization.
 #'
 #' @returns A list of tree data frames of length `RF$num.trees`.
 #' Each row of the tree data frames corresponds to a node of the respective tree and the columns correspond to:
@@ -14,10 +16,15 @@
 #' * `splitpoint`: Split point of the split variable.
 #'    For categorical variables this is a comma separated lists of values, representing the factor levels (in the original order) going to the right.
 #' * `status`: `0` for terminal (`splitpoint` is `NA`) and `1` for non-terminal.
+#' * `layer`: If `add_layer` is `TRUE`, see [addLayer()]
 #'
 #' @export
-getTreeranger <- function(RF, num.trees = RF$num.trees) {
-  lapply(1:num.trees, getsingletree, RF = RF)
+getTreeranger <- function(RF, num.trees = RF$num.trees, add_layer = FALSE, num.threads = 1) {
+  parallel::mclapply(1:num.trees, getsingletree,
+    mc.cores = num.threads,
+    RF = RF,
+    add_layer = add_layer
+  )
 }
 
 #' getsingletree
@@ -26,6 +33,7 @@ getTreeranger <- function(RF, num.trees = RF$num.trees) {
 #'
 #' @param RF A [`ranger::ranger`] object.
 #' @param k Tree index to convert.
+#' @param add_layer
 #'
 #' @returns A tree data frame for the `k`th tree in `RF`.
 #' Each row of the tree data frames corresponds to a node of the respective tree and the columns correspond to:
@@ -38,7 +46,7 @@ getTreeranger <- function(RF, num.trees = RF$num.trees) {
 #' * `status`: `0` for terminal (`splitpoint` is `NA`) and `1` for non-terminal.
 #'
 #' @keywords internal
-getsingletree <- function(RF, k = 1) {
+getsingletree <- function(RF, k = 1, add_layer = FALSE) {
   # here we use the treeInfo function of the ranger package to create extract the trees, in an earlier version this was done with a self implemented function
   tree.ranger <- ranger::treeInfo(RF, tree = k)
   ktree <- data.frame(
@@ -54,6 +62,10 @@ getsingletree <- function(RF, k = 1) {
   }
 
   ktree[, 2:4][is.na(ktree[, 2:4])] <- 0
+
+  if (add_layer) {
+    ktree <- add_layer_to_tree(ktree)
+  }
 
   return(ktree)
 }

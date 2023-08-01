@@ -4,12 +4,16 @@
 \alias{getTreeranger}
 \title{Get a list of structured trees from a ranger object.}
 \usage{
-getTreeranger(RF, num.trees = RF$num.trees)
+getTreeranger(RF, num.trees = RF$num.trees, add_layer = FALSE, num.threads = 1)
 }
 \arguments{
 \item{RF}{A \code{\link[ranger:ranger]{ranger::ranger}} object which was created with \code{keep.inbag = TRUE}.}
 
 \item{num.trees}{(Deprecated) Number of trees to convert (Default: \code{RF$num.trees}).}
+
+\item{add_layer}{(Default: \code{FALSE}) Whether to \code{\link[=addLayer]{addLayer()}} in the same loop.}
+
+\item{num.threads}{(Default: 1) Number of threads to spawn for parallelization.}
 }
 \value{
 A list of tree data frames of length \code{RF$num.trees}.
@@ -22,6 +26,7 @@ Each row of the tree data frames corresponds to a node of the respective tree an
 \item \code{splitpoint}: Split point of the split variable.
 For categorical variables this is a comma separated lists of values, representing the factor levels (in the original order) going to the right.
 \item \code{status}: \code{0} for terminal (\code{splitpoint} is \code{NA}) and \code{1} for non-terminal.
+\item \code{layer}: If \code{add_layer} is \code{TRUE}, see \code{\link[=addLayer]{addLayer()}}
 }
 }
 \description{
