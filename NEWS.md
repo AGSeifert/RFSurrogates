@@ -7,7 +7,6 @@
   * Returns a `RFSurrogates` object, which serves as the base object for later analysis.
   * Additional `...` params are passed directly to `ranger::ranger`.
   * `s.pct` is a helper for calculating the number of surrogates as a fraction of number of variables (Default: 0.01). `s` can be set to overwrite this default.
-
   * `mtry` supports the following values:
     * One of the documented `string` values, which will cause the `mtry` passed to `ranger::ranger()` to be a function accepting the number of variables, and returning the specific transformation after flooring the result.
     * A `function` which takes the number of variables as its first and only param, and returns the value of `mtry`.
