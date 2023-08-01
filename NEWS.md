@@ -1,5 +1,8 @@
 # RFSurrogates (development version)
 
+* [`addLayer`]: Refactor for-loop to lapply.
+  * Add `num.threads` param to enable parallelization using [`parallel::mclapply`]. It defaults to 1 for backward compatability.
+
 # RFSurrogates 0.3.3
 
 * Fixed `meanAdjAgree()` bug which caused mean adjusted agreement pairings to be set to NA incorrectly when `variables` was a subset or differently ordered than `candidates`.
