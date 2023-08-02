@@ -21,9 +21,7 @@ RandomForestSurrogates(
 )
 }
 \arguments{
-\item{x}{Predictor data (independent variables), alternative interface to data with formula or dependent.variable.name.}
-
-\item{y}{Response vector (dependent variable), alternative interface to data with formula or dependent.variable.name. For survival use a \code{Surv()} object or a matrix with time and status.}
+\item{x, y}{Predictor data and dependent variables.}
 
 \item{s.pct, s}{Number of surrogate splits.
 This can be defined either by setting \code{s.pct} to a number between
@@ -54,10 +52,36 @@ One of "regression" (Default), "classification" or "survival".}
 
 \item{seed}{RNG seed. It is strongly recommended that you set this value.}
 
-\item{...}{Other params passed on to \code{\link[ranger:ranger]{ranger::ranger()}}.}
+\item{...}{
+  Arguments passed on to \code{\link[ranger:ranger]{ranger::ranger}}
+  \describe{
+    \item{\code{importance}}{Variable importance mode, one of 'none', 'impurity', 'impurity_corrected', 'permutation'. The 'impurity' measure is the Gini index for classification, the variance of the responses for regression and the sum of test statistics (see \code{splitrule}) for survival.}
+    \item{\code{min.bucket}}{Minimal terminal node size. No nodes smaller than this value can occur. Default 3 for survival and 1 for all other tree types.}
+    \item{\code{max.depth}}{Maximal tree depth. A value of NULL or 0 (the default) corresponds to unlimited depth, 1 to tree stumps (1 split per tree).}
+    \item{\code{replace}}{Sample with replacement.}
+    \item{\code{sample.fraction}}{Fraction of observations to sample. Default is 1 for sampling with replacement and 0.632 for sampling without replacement. For classification, this can be a vector of class-specific values.}
+    \item{\code{case.weights}}{Weights for sampling of training observations. Observations with larger weights will be selected with higher probability in the bootstrap (or subsampled) samples for the trees.}
+    \item{\code{class.weights}}{Weights for the outcome classes (in order of the factor levels) in the splitting rule (cost sensitive learning). Classification and probability prediction only. For classification the weights are also applied in the majority vote in terminal nodes.}
+    \item{\code{splitrule}}{Splitting rule. For classification and probability estimation "gini", "extratrees" or "hellinger" with default "gini". For regression "variance", "extratrees", "maxstat" or "beta" with default "variance". For survival "logrank", "extratrees", "C" or "maxstat" with default "logrank".}
+    \item{\code{num.random.splits}}{For "extratrees" splitrule.: Number of random splits to consider for each candidate splitting variable.}
+    \item{\code{alpha}}{For "maxstat" splitrule: Significance threshold to allow splitting.}
+    \item{\code{minprop}}{For "maxstat" splitrule: Lower quantile of covariate distribution to be considered for splitting.}
+    \item{\code{split.select.weights}}{Numeric vector with weights between 0 and 1, used to calculate the probability to select variables for splitting. Alternatively, a list of size num.trees, containing split select weight vectors for each tree can be used.}
+    \item{\code{always.split.variables}}{Character vector with variable names to be always selected in addition to the \code{mtry} variables tried for splitting.}
+    \item{\code{scale.permutation.importance}}{Scale permutation importance by standard error as in (Breiman 2001). Only applicable if permutation variable importance mode selected.}
+    \item{\code{local.importance}}{Calculate and return local importance values as in (Breiman 2001). Only applicable if \code{importance} is set to 'permutation'.}
+    \item{\code{regularization.factor}}{Regularization factor (gain penalization), either a vector of length p or one value for all variables.}
+    \item{\code{regularization.usedepth}}{Consider the depth in regularization.}
+    \item{\code{inbag}}{Manually set observations per tree. List of size num.trees, containing inbag counts for each observation. Can be used for stratified sampling.}
+    \item{\code{holdout}}{Hold-out mode. Hold-out all samples with case weight 0 and use these for variable importance and prediction error.}
+    \item{\code{quantreg}}{Prepare quantile prediction as in quantile regression forests (Meinshausen 2006). Regression only. Set \code{keep.inbag = TRUE} to prepare out-of-bag quantile prediction.}
+    \item{\code{oob.error}}{Compute OOB prediction error. Set to \code{FALSE} to save computation time, e.g. for large survival forests.}
+    \item{\code{save.memory}}{Use memory saving (but slower) splitting mode. No effect for survival and GWAS data. Warning: This option slows down the tree growing, use only if you encounter memory problems.}
+    \item{\code{verbose}}{Show computation status and estimated runtime.}
+  }}
 }
 \value{
-A \code{RandomForestSurrogates} S3 object.
+A RandomForestSurrogates S3 object.
 \itemize{
 \item \code{trees}: List of all trees with surrogate analysis. (Class: \code{SurrogateTrees}, \code{LayerTrees}, \code{RangerTrees})
 \item \code{ranger}: \link[ranger:ranger]{ranger::ranger} model used to obtain the trees.

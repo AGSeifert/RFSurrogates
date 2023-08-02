@@ -1,6 +1,9 @@
 #' Create a random forest with surrogates.
 #'
 #' @inheritParams ranger::ranger
+#' @inheritDotParams ranger::ranger importance min.bucket max.depth replace sample.fraction case.weights class.weights splitrule num.random.splits alpha minprop split.select.weights always.split.variables scale.permutation.importance local.importance regularization.factor regularization.usedepth inbag holdout quantreg oob.error save.memory verbose
+#'
+#' @param x,y Predictor data and dependent variables.
 #'
 #' @param s.pct,s Number of surrogate splits.
 #'   This can be defined either by setting `s.pct` to a number between
@@ -24,8 +27,6 @@
 #' @param permutate Enable to permutate `x` for [`MutualForestImpact`] (Default: FALSE).
 #'
 #' @param seed RNG seed. It is strongly recommended that you set this value.
-#'
-#' @param ... Other params passed on to [ranger::ranger()].
 #'
 #' @returns A RandomForestSurrogates S3 object.
 #'   * `trees`: List of all trees with surrogate analysis. (Class: `SurrogateTrees`, `LayerTrees`, `RangerTrees`)
