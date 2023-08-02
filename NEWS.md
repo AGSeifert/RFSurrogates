@@ -39,6 +39,15 @@
   * `average`: Previously `s$s.a`.
   * `layer`: Previously `s$s.l`.
 
+**Added `MeanAdjustedAgreement()`** as a replacement for `var.relations()`. It takes a `RandomForestSurrogates` object as a param, and returns a `MeanAdjustedAgreement` list object.
+
+#### Value
+
+* `RFS`: The `RandomForestSurrogates` object used.
+* `relations`: The matrix of mean adjusted agreements for the investigated variables (rows) and the possible candidates (columns) (previously `surr.res`).
+* `threshold`: The threshold used to select related variables.
+* `related`: A list of vectors for each investigated variable containing the related candidate variables (previously `var`).
+
 ## Changes
 
 * `var.select.smd()`, `var.select.md()`, `var.relations()`, `var.relations.mfi()`: Made several improvements to developer experience:

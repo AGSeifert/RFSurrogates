@@ -110,18 +110,20 @@ We can see that variables `"X1"`, …, `"X6"` have SMD values smaller than the t
 ## Variable relations based on the mean adjusted agreement of surrogate variables
 
 Now we want to investigate the relations of variables. We would like to identify which of the first 100 predictor variables are related to `"X1"` and `"X7"`. We simulated 10 correlated predictor variables for each of these two basic variables.
-One possibility to investigate variable relations is to use the results from `var.select.smd()`. Hence, first SMD is conducted like in the [previous section](#surrogate-minimal-depth-smd).
 
-Subsequently, variable relations are analyzed with `var.relations()`. The parameter `t` can be adapted to either focus on strongly related variables only (high numbers) or to include also moderately related variables (low numbers):
+Variable relations are analyzed with `MeanAdjustedAgreement()`. The parameter `t` can be adapted to either focus on strongly related variables only (high numbers) or to include also moderately related variables (low numbers):
 
 ```r
-candidates <- colnames(SMD_example_data)[2:101]
-rel <- var.relations(
-  forest = res.smd$forest, 
-  variables = c("X1", "X7"), candidates = candidates, 
-  t = 5)
+rel <- MeanAdjustedAgreement(
+    RandomForestSurrogates(
+        x = SMD_example_data[, -1], y = SMD_example_data[, 1],
+        s = 10, num.trees = 1000, seed = 42
+    ),
+    variables = c("X7", "X1"), candidates = colnames(SMD_example_data)[2:101], 
+    t = 5
+)
 
-rel$var
+rel$related
 # $X1
 #  [1] "cp1_1"  "cp1_2"  "cp1_3"  "cp1_4"  "cp1_5"  "cp1_6" 
 #  [7] "cp1_7"  "cp1_8"  "cp1_9"  "cp1_10"
