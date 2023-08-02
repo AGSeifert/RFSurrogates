@@ -11,9 +11,9 @@
 #' \item threshold: the threshold that is used for the selection
 #' }
 #' @export
-surrmindep <- function(forest, s.l) {
-  variables <- forest[["allvariables"]]
-  trees <- forest[["trees"]]
+surrmindep <- function(forest, s.l = count.surrogates(forest$trees)$s.l) {
+  variables <- forest$allvariables
+  trees <- forest$trees
 
   num.trees <- length(trees)
   var.num <- length(variables)
@@ -107,16 +107,10 @@ surrmindep <- function(forest, s.l) {
     threshold <- sum(layers * probs.used)
   }
 
-  # Decide if variables are important or unimportant
-  Importances <- rep(NA, var.num)
-  for (p in 1:var.num) {
-    if (mean.depth[p] < threshold) {
-      Importances[p] <- 1
-    } else {
-      Importances[p] <- 0
-    }
-  }
-  names(Importances) <- variables
-  results <- list(depth = mean.depth, selected = Importances, threshold = threshold)
+  results <- list(
+    depth = mean.depth,
+    selected = sapply(mean.depth, function(x) x < threshold),
+    threshold = threshold
+  )
   return(results)
 }
