@@ -57,7 +57,7 @@ One of "regression" (Default), "classification" or "survival".}
 \item{...}{Other params passed on to \code{\link[ranger:ranger]{ranger::ranger()}}.}
 }
 \value{
-A RFSurrogates S3 object.
+A \code{RandomForestSurrogates} S3 object.
 \itemize{
 \item \code{trees}: List of all trees with surrogate analysis. (Class: \code{SurrogateTrees}, \code{LayerTrees}, \code{RangerTrees})
 \item \code{ranger}: \link[ranger:ranger]{ranger::ranger} model used to obtain the trees.

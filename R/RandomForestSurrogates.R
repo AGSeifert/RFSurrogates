@@ -27,7 +27,7 @@
 #'
 #' @param ... Other params passed on to [ranger::ranger()].
 #'
-#' @returns A RFSurrogates S3 object.
+#' @returns A RandomForestSurrogates S3 object.
 #'   * `trees`: List of all trees with surrogate analysis. (Class: `SurrogateTrees`, `LayerTrees`, `RangerTrees`)
 #'   * `ranger`: [ranger::ranger] model used to obtain the trees.
 #'   * `s` = s: The `s` parameter.
@@ -153,7 +153,7 @@ RandomForestSurrogates <- function(
     ranger = RF,
     s = s
   )
-  class(result) <- "RFSurrogates"
+  class(result) <- "RandomForestSurrogates"
 
   return(result)
 }
