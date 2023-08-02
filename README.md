@@ -180,33 +180,39 @@ p.rel <- j.result$p.values
 Now we would like to analyze the example data with MIR, which determines the variable importance by the actual impurity reduction combined with the relations determined by MFI. Different to MD and SMD, this approach calculates p-values for the selection of important variables. For this, the null distribution is obtained in a similar way as for MFI, either by negative importance scores called the Janitza approach or by permutation. Since this example data set is comparatively small, we use the permutation approach. As a threshold for selection a value of 0.01 is applied (`p.t.sel = 0.01`).
 
 ```r
-set.seed(42)
-res.mir <- var.select.mir(
-  x = SMD_example_data[, -1], y = SMD_example_data[, 1], 
-  s = 10, num.trees = 1000, method.sel = "permutation",
-  p.t.sel = 0.01, num.threads = 1)
+mfi <- MFI(
+    x = SMD_example_data[, -1], y = SMD_example_data[, 1], 
+    s = 10, num.trees = 1000, seed = 42, num.threads = 4,
+    importance = "impurity_corrected",
+    variables = colnames(SMD_example_data)[-1],
+    candidates = colnames(SMD_example_data)[-1]
+)
+mir <- MutualImpurityReduction(mfi)
+p.results <- MutualImpurityReductionVariableSelection(
+    MIR = mir, 
+    p.threshold = 0.01, 
+    method = "Permutation"
+)
 
-res.mir$var
+p.results$selected
 #  [1] "X1"     "X2"     "X3"     "X4"     "X5"     "X6"    
 #  [7] "cp1_1"  "cp1_2"  "cp1_3"  "cp1_4"  "cp1_5"  "cp1_6" 
 # [13] "cp1_7"  "cp1_8"  "cp1_9"  "cp1_10" "cp2_1"  "cp2_3" 
 # [19] "cp2_4"  "cp2_6"  "cp2_7"  "cp2_10" "cp3_1"  "cp3_4" 
-# [25] "cp3_5"  "cgn_72" "cgn_81"
+# [25] "cp3_5"  "cp3_6"  "cp3_10" "cp8_10" "cgn_72" "cgn_81"
 ```
-The selected variables are stored in `res.mir$var`. Here, the relevant variables `"cp1_1"` to `"cp1_10"`, `"cp2_1"`, `"cp2_3"`, `"cp2_4"`, `"cp2_6"`, `"cp2_7"`, `"cp2_10"`, `"cp3_1"`, `"cp3_4"`, `"cp3_5"`, as well as the non-relevant variables `"cgn_72"` and `"cgn_81"` are selected. 
+The selected variables are stored in `p.results$selected`. Here, the relevant variables `"cp1_1"` to `"cp1_10"`, `"cp2_1"`, `"cp2_3"`, `"cp2_4"`, `"cp2_6"`, `"cp2_7"`, `"cp2_10"`, `"cp3_1"`, `"cp3_4"` through `"cp3_6"`, `"cp3_10"`, `"cp8_10"`, as well as the non-relevant variables `"cgn_72"` and `"cgn_81"` are selected. 
 
 The MIR values and p-values can be extracted as follows:
 
 ```
-mir <- res.mir$info$MIR
-
-head(mir)
+head(mir$MIR)
 #       X1       X2       X3       X4       X5       X6 
-# 10.68243 15.95674 27.09036 20.50233 23.16293 21.15731
+# 14.16834 16.36517 29.01899 16.95252 19.28022 23.66910
 
 pvalues <- res.mir$info$pvalue
 
-head(pvalues)
+head(p.results$p.values)
 # X1 X2 X3 X4 X5 X6 
 #  0  0  0  0  0  0 
 ```
@@ -216,13 +222,7 @@ We can see that variables `"X1"`, …, `"X6"` have a p-value of 0 and are select
 Since this approach is based on the actual impurity reduction combined with the relations determined by MFI, both of these can also be extracted from the results:
 
 ```
-air <- res.mir$info$AIR
-
-head(air)
+head(mir$AIR)
 #        X1        X2        X3        X4        X5        X6 
-#  1.072849 13.133904 26.444900 19.155187 22.718355 20.782305 
- 
-res.mfi <- res.mir$info$relations
+#  1.971441 12.150354 28.164534 16.261127 18.685709 23.322117 
 ```
-
-`res.mfi` contains the results of `var.relations.mfi()` conducted in MIR. 
