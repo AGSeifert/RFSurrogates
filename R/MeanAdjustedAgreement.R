@@ -24,8 +24,8 @@
 #' \donttest{
 #' data("SMD_example_data")
 #' rfs <- RandomForestSurrogates(
-#'   x = SMD_example_data[, -1]
-#'   y = SMD_example_data[, 1]
+#'   x = SMD_example_data[, -1],
+#'   y = SMD_example_data[, 1],
 #'   s = 10,
 #'   seed = 42,
 #'   num.trees = 10,
