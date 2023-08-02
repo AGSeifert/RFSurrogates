@@ -51,6 +51,7 @@ MutualImpurityReduction <- function(REL) {
 #' @param MIR [`MutualImpurityReduction()`] object.
 #' @param p.threshold (Default = 0.01) P-value threshold
 #' @param method The method to use. One of: `"Janitza"` or `"Permutation"`.
+#' @param permutation.num (If method is `"Permutation"`) Number of AIR permutations to determine p-value. (Default: 100)
 #'
 #' @returns A list:
 #'  * `method`: The method used.

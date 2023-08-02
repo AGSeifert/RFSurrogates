@@ -17,6 +17,8 @@ MutualImpurityReductionVariableSelection(
 \item{p.threshold}{(Default = 0.01) P-value threshold}
 
 \item{method}{The method to use. One of: \code{"Janitza"} or \code{"Permutation"}.}
+
+\item{permutation.num}{(If method is \code{"Permutation"}) Number of AIR permutations to determine p-value. (Default: 100)}
 }
 \value{
 A list:
