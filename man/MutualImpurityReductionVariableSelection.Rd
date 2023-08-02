@@ -8,7 +8,8 @@ MutualImpurityReductionVariableSelection(
   MIR,
   p.threshold = 0.01,
   method = c("Janitza", "Permutation"),
-  permutation.num = 100
+  permutation.num = 100,
+  permutation.MeanAdjustedAgreement = NULL
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ MutualImpurityReductionVariableSelection(
 \item{method}{The method to use. One of: \code{"Janitza"} or \code{"Permutation"}.}
 
 \item{permutation.num}{(If method is \code{"Permutation"}) Number of AIR permutations to determine p-value. (Default: 100)}
+
+\item{permutation.MeanAdjustedAgreement}{If method is \code{"Permutation"} and \code{MIR} used \code{MeanAdjustedAgreement}.}
 }
 \value{
 A list:

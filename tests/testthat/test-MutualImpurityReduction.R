@@ -74,19 +74,19 @@ test_that("MAA-MIR", {
   p.mir <- MutualImpurityReductionVariableSelection(
     mir,
     method = "Permutation",
-    # perm = MeanAdjustedAgreement(
-    #   RandomForestSurrogates(
-    #     x = SMD_example_data[, -1],
-    #     y = SMD_example_data[, 1],
-    #     num.trees = 100,
-    #     importance = "impurity_corrected",
-    #     permutate = TRUE,
-    #     num.threads = 1,
-    #     seed = 1964531019, # set.seed(42);runif(1,0,.Machine$integer.max)
-    #     s = 10
-    #   ),
-    #   t = 5, num.threads = 1
-    # ),
+    permutation.MeanAdjustedAgreement = MeanAdjustedAgreement(
+      RandomForestSurrogates(
+        x = SMD_example_data[, -1],
+        y = SMD_example_data[, 1],
+        num.trees = 100,
+        importance = "impurity_corrected",
+        permutate = TRUE,
+        num.threads = 1,
+        seed = 1964531019, # set.seed(42);runif(1,0,.Machine$integer.max)
+        s = 10
+      ),
+      t = 5, num.threads = 1
+    ),
     permutation.num = 100,
     p.t = 0.01
   )

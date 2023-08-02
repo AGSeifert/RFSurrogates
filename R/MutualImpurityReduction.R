@@ -52,6 +52,7 @@ MutualImpurityReduction <- function(REL) {
 #' @param p.threshold (Default = 0.01) P-value threshold
 #' @param method The method to use. One of: `"Janitza"` or `"Permutation"`.
 #' @param permutation.num (If method is `"Permutation"`) Number of AIR permutations to determine p-value. (Default: 100)
+#' @param permutation.MeanAdjustedAgreement If method is `"Permutation"` and `MIR` used `MeanAdjustedAgreement`.
 #'
 #' @returns A list:
 #'  * `method`: The method used.
@@ -64,7 +65,8 @@ MutualImpurityReductionVariableSelection <- function(
     MIR,
     p.threshold = 0.01,
     method = c("Janitza", "Permutation"),
-    permutation.num = 100
+    permutation.num = 100,
+    permutation.MeanAdjustedAgreement = NULL
 ) {
   if (!inherits(MIR, "MutualImpurityReduction")) {
     stop("`MIR` must be a `MutualImpurityReduction` object.")
@@ -80,6 +82,7 @@ MutualImpurityReductionVariableSelection <- function(
     "Permutation" = MIR_VarSel_Permutation(
       MIR = MIR,
       p.threshold = 0.01,
+      perm = permutation.MeanAdjustedAgreement,
       num.permutations = permutation.num
     ),
   )
