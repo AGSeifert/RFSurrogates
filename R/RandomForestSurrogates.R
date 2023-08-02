@@ -42,7 +42,7 @@ RandomForestSurrogates <- function(
     type = c("regression", "classification", "survival"),
     status = NULL,
     num.trees = 500,
-    num.threads = parallel::detectCores(),
+    num.threads = 1,
     min.node.size = 1,
     permutate = FALSE,
     seed = NULL,
