@@ -141,14 +141,22 @@ MFI is a corrected relation parameter calculated by the mean adjusted agreement 
 We use the default parameters for the selection here, which is a p-values threshold of 0.01 and the Janitza approach. 
 
 ```r
-set.seed(42)
-rel.mfi <- var.relations.mfi(
+mfi <- MFI(
   x = SMD_example_data[, -1], y = SMD_example_data[, 1], 
-  s = 10, num.trees = 1000, variables = c("X1","X7"),
-  candidates = colnames(SMD_example_data)[2:101], 
-  p.t = 0.01, method = "janitza", num.threads = 1)
+  s = 10, num.trees = 1000, seed = 42,
+  variables = c("X1","X7"),
+  candidates = colnames(SMD_example_data)[2:101]
+)
 
-rel.mfi$var.rel
+j.result <- MutualForestImpactVariableSelection(
+  MFI = mfi,
+  variables = c("X1","X7"),
+  candidates = colnames(SMD_example_data)[2:101],
+  p.t = 0.01,
+  method = "Janitza"
+)
+
+j.result$selected
 # $X1
 #  [1] "cp1_1"  "cp1_2"  "cp1_3"  "cp1_4"  "cp1_5"  "cp1_6" 
 #  [7] "cp1_7"  "cp1_8"  "cp1_9"  "cp1_10"
@@ -162,9 +170,9 @@ Also by MFI, all of the variables that are correlated to `"X1"` are correctly id
 Also the matrix of determined relation (`surr.res`), permuted relations (`surr.perm`) and determined p-values (`p.rel`) can be extracted as follows: 
 
 ```r
-MFI <- rel.mfi$surr.res
-surr.perm <- rel.mfi$surr.perm
-p.rel <- rel.mfi$p.rel
+mfi <- rel.mfi$relations
+surr.perm <- rel.mfi$PERM$relations
+p.rel <- j.result$p.values
 ```
 
 ## Mutual Impurity Reduction (MIR)
