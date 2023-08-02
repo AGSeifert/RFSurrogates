@@ -13,5 +13,5 @@ test_that("MD", {
 
   res.md$var
 
-  expect_equal(res.md$var[[1]], "X2")
+  expect_equal(res.md$selected[[1]], "X2")
 })

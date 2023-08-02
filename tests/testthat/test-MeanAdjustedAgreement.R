@@ -16,5 +16,5 @@ test_that("MAA", {
     t = 5, num.threads = 1
   )
 
-  expect_equal(rel$var$X1[[1]], "cp1_1")
+  expect_equal(rel$related$X1[[1]], "cp1_1")
 })
