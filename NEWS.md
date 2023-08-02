@@ -27,6 +27,18 @@
 * In general, input parameters are more strictly validated.
 * The function uses `num.threads` to also parallelize creating the list of trees with layers.
 
+**Added `SurrogateMinimalDepth()`** as a replacement for `var.select.smd()`. It takes just a `RandomForestSurrogates` object as a param, and returns a `SurrogateMinimalDepth` list object.
+
+#### Value
+
+* `RFS`: The `RandomForestSurrogates` object used.
+* `selected`: The selected variables (previously `var`).
+* `depth`: The surrogate minimal depth of each variable (previously `info$depth`).
+* `threshold`: The threshold used to select variables (previously `info$threshold`).
+* `surrogates`: Details on the average number of surrogates in the forest, and per layer.
+  * `average`: Previously `s$s.a`.
+  * `layer`: Previously `s$s.l`.
+
 ## Changes
 
 * `var.select.smd()`, `var.select.md()`, `var.relations()`, `var.relations.mfi()`: Made several improvements to developer experience:

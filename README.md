@@ -45,65 +45,64 @@ The data set has 100 observations in the rows and the columns contain the contin
 First, we perform variable selection based on minimal depth using 1000 trees in the random forest. To make the analysis reproducible we set the seed first.
 
 ```r
-set.seed(42)
-res.md <- var.select.md(
-  x = SMD_example_data[, -1], y = SMD_example_data[, 1], 
-  num.trees = 1000)
+data("SMD_example_data")
+md <- MinimalDepth(RandomForestSurrogates(
+    x = SMD_example_data[, -1], y = SMD_example_data[, 1],
+    num.trees = 1000, s = 0, seed = 42
+))
 
-res.md$var
-# [1] "X2"     "X3"     "X4"     "X5"     "X6"     "cp1_8" 
-# [7] "cp2_1"  "cp2_6"  "cp2_7"  "cp3_4"  "cp3_6"  "cgn_20"
-# [13] "cgn_68" "cgn_72" "cgn_81"
+md$selected
+#  [1] "X2"     "X3"     "X4"     "X5"     "X6"     "cp1_2" 
+#  [7] "cp1_8"  "cp2_1"  "cp2_6"  "cp2_7"  "cp3_4"  "cp3_6" 
+# [13] "cp8_5"  "cgn_72" "cgn_81"
 ```
 
-The selected variables are stored in `res.md$var`. In this analysis the relevant basic variables `"X2"` to `"X6"`, as well as the relevant variables `"cp1_8"`, `"cp2_1"`, `"cp2_6"`, `"cp2_7"`, `"cp3_4"`, and `"cp3_6"`, and the non-relevant variables `"cgn_20"`, `"cgn_68"`, `"cgn_72"`, and `"cgn_81"` are selected.
+The selected variables are stored in `md$var`. In this analysis the relevant basic variables `"X2"` to `"X6"`, as well as the relevant variables `"cp1_2"`, `"cp1_8"`, `"cp2_1"`, `"cp2_6"`, `"cp2_7"`, `"cp3_4"`, `"cp3_6"`, `"cp8_5"`, and the non-relevant variables `"cgn_72"`, and `"cgn_81"` are selected.
 
 The MD values for each predictor variable and the threshold to select variables can be extracted as follows:
 
 ```r
-md <- res.md$info$depth
-head(md)
+head(md$depth)
 #    X1    X2    X3    X4    X5    X6 
-# 9.743 7.907 6.155 6.615 6.456 6.428 
+# 9.641 7.629 5.964 6.328 6.655 6.613
 
-res.md$info$threshold
-# [1] 9.230328
+md$threshold
+# [1] 9.229029
 ```
 
 We can see that variables `"X2"`, …, `"X6"` have MD values smaller than the threshold in contrast to `"X1"`.
 
 ## Surrogate Minimal Depth (SMD)
 
-Now we would like to analyze the example data with surrogate minimal depth which works similarly. However, we need to specify an additional parameter `s`, the number of surrogate variables that should be considered. In this analysis we use `s = 10`. Based on our simulation studies we recommend to set this parameter to approximately 1% of the predictor variables in larger datasets. 
+Now we would like to analyze the example data with surrogate minimal depth which works similarly. However, we need to specify an additional parameter `s`, the number of surrogate variables that should be considered. In this analysis we use `s = 10`. Based on our simulation studies we recommend to set this parameter to approximately 1% of the predictor variables in larger data sets.
 
-Variable selection with var.select.smd is conducted:
+Variable selection with `SurrogateMinimalDepth()` is conducted:
 
 ```r
-set.seed(42)
-res.smd <- var.select.smd(
-  x = SMD_example_data[, -1], y = SMD_example_data[, 1], 
-  s = 10, num.trees = 1000)
+smd <- SurrogateMinimalDepth(RandomForestSurrogates(
+    x = SMD_example_data[, -1], y = SMD_example_data[, 1],
+    num.trees = 1000, s = 10, seed = 42
+))
 
-res.smd$var
+smd$selected
 #  [1] "X1"     "X2"     "X3"     "X4"     "X5"     "X6"    
-#  [7] "X7"     "X8"     "cp1_1"  "cp1_2"  "cp1_3"  "cp1_4" 
-# [13] "cp1_5"  "cp1_6"  "cp1_7"  "cp1_8"  "cp1_9"  "cp1_10"
-# [19] "cp2_1"  "cp2_3"  "cp2_4"  "cp2_6"  "cp2_7"  "cp2_9" 
-# [25] "cp2_10" "cp3_4" 
+#  [7] "X8"     "cp1_1"  "cp1_2"  "cp1_3"  "cp1_4"  "cp1_5" 
+# [13] "cp1_6"  "cp1_7"  "cp1_8"  "cp1_9"  "cp1_10" "cp2_1" 
+# [19] "cp2_3"  "cp2_4"  "cp2_6"  "cp2_7"  "cp2_9"  "cp2_10"
+# [25] "cp3_4" 
 ```
 
-The selected variables are stored in `res.smd$var`. In this analysis the relevant basic variables `"X1"` to `"X6"`, as well as the relevant variables `"cp1_1"` to `"cp1_10"`, `"cp2_1"`, `"cp2_3"`, `"cp2_4"`, `"cp2_6"` through `"cp2_10"`, and `"cp3_4"` are selected. Compared to MD more of the relevant variables and none of the non-relevant variables are selected.
+The selected variables are stored in `smd$selected`. In this analysis the relevant basic variables `X1` to `X6`, `X8`, as well as the relevant variables related variables of `cp1`, `cp2`, and `cp3_4` are selected. Compared to MD more of the relevant variables and none of the non-relevant variables are selected.
 
 The SMD values for each predictor variable and the threshold to select variables can be extracted as follows:
 
 ```
-smd = res.smd$info$depth
-head(smd)
+head(smd$depth)
 #    X1    X2    X3    X4    X5    X6 
-# 2.112 2.085 1.806 2.208 2.148 2.014 
+# 2.050 2.035 1.922 2.118 2.109 2.042 
 
-res.smd$info$threshold
-# [1] 2.671644
+smd$threshold
+# [1] 2.666462
 ```
 
 We can see that variables `"X1"`, …, `"X6"` have SMD values smaller than the threshold.
