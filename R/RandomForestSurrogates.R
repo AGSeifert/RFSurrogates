@@ -134,6 +134,7 @@ RandomForestSurrogates <- function(
       num.trees = num.trees,
       num.threads = num.threads,
       min.node.size = min.node.size,
+      seed = seed,
       ...
     )
   } else if (type == "classification" || type == "regression") {
@@ -149,6 +150,7 @@ RandomForestSurrogates <- function(
       num.trees = num.trees,
       num.threads = num.threads,
       min.node.size = min.node.size,
+      seed = seed,
       ...
     )
   } else {
