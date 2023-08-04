@@ -19,7 +19,7 @@
 #' data("SMD_example_data")
 #' mfi <- MFI(
 #'   x = SMD_example_data[, -1], y = SMD_example_data[, 1],
-#'   s = 10, t = 5, num.trees = 50, num.threads = 1,
+#'   s = 10, num.trees = 50, num.threads = 1,
 #'   variables = c("X7", "X1"), candidates = colnames(SMD_example_data)[2:101]
 #' )
 #' }
