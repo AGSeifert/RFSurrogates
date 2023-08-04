@@ -1,4 +1,4 @@
-#' MutualForestImpact.
+#' Mutual Impurity Reduction (MIR)
 #'
 #' @param REL A [`MeanAdjustedAgreement`] or [`MutualForestImpract`] object.
 #'
@@ -7,7 +7,7 @@
 #'  * `MIR`: Mutual Impurity Reduction
 #'  * `AIR`: Actual Impurity Reduction
 #'
-#' @keywords varsel
+#' @keywords varrel mir
 #' @export
 MutualImpurityReduction <- function(REL) {
   # Combine getting RFS with checking object inheritance
@@ -44,7 +44,7 @@ MutualImpurityReduction <- function(REL) {
   return(result)
 }
 
-#' Variable selection for MutualImpurityReduction.
+#' Variable selection for Mutual Impurity Reduction.
 #'
 #' @param MIR [`MutualImpurityReduction()`] object.
 #' @param p.threshold (Default = 0.01) P-value threshold
@@ -57,7 +57,7 @@ MutualImpurityReduction <- function(REL) {
 #'  * `selected`: A list of vectors containing selected candidates for each investigated variable.
 #'  * `p.values`: A list of numeric vectors containing p-values for each candidate's relation to each investigated variable.
 #'
-#' @keywords varsel
+#' @keywords varsel mir
 #' @export
 MutualImpurityReductionVariableSelection <- function(
     MIR,
@@ -89,7 +89,7 @@ MutualImpurityReductionVariableSelection <- function(
   return(result)
 }
 
-#' @keywords varsel
+#' @keywords varsel mir janitza
 MIR_VarSel_Janitza <- function(
     MIR,
     p.threshold = 0.01) {
@@ -143,7 +143,7 @@ get_rfs_from_mir <- function(
   return(RFS)
 }
 
-#' @keywords varsel
+#' @keywords varsel mir permutation
 MIR_VarSel_Permutation <- function(
     MIR,
     perm = NULL,
