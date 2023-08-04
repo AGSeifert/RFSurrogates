@@ -27,8 +27,8 @@
 #' }
 #'
 #' @references
-#' - Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. [https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103]
-#' - Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. [http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf]
+#' - Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. <https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103>
+#' - Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. <http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf>
 #'
 #' @keywords varsel
 #' @export

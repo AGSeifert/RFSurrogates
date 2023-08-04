@@ -39,9 +39,9 @@ res.smd <- SurrogateMinimalDepth(RandomForestSurrogates(
 }
 \references{
 \itemize{
-\item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \link{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-\item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \link{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
-\item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \link{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
+\item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
+\item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
+\item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
 }
 }
 \keyword{varsel}

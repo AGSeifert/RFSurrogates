@@ -50,8 +50,8 @@
 #' }
 #'
 #' @references
-#' * Nembrini, S. et al. (2018) The revival of the Gini importance? Bioinformatics, 34, 3711–3718. \url{https://academic.oup.com/bioinformatics/article/34/21/3711/4994791}
-#' * Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
+#' * Nembrini, S. et al. (2018) The revival of the Gini importance? Bioinformatics, 34, 3711–3718. <https://academic.oup.com/bioinformatics/article/34/21/3711/4994791>
+#' * Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. <https://academic.oup.com/bioinformatics/article/35/19/3663/5368013>
 #'
 #' @export
 var.select.mir <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
