@@ -40,15 +40,15 @@ Alternatively, a single argument function returning an integer,
 given the number of independent variables.}
 
 \item{type}{The type of random forest to create with ranger.
-One of "regression" (Default), "classification" or "survival".}
+One of \code{"regression"} (Default), \code{"classification"} or \code{"survival"}.}
 
 \item{num.trees}{Number of trees.}
 
-\item{num.threads}{Number of threads. Default is number of CPUs available.}
+\item{num.threads}{Number of threads to parallelize with. (Default: 1)}
 
 \item{min.node.size}{Minimal node size to split at. (Default: 1)}
 
-\item{permutate}{Enable to permutate \code{x} for \code{\link{MutualForestImpact}} (Default: FALSE).}
+\item{permutate}{Enable to permutate \code{x} for \code{\link[=MutualForestImpact]{MutualForestImpact()}} (Default: FALSE).}
 
 \item{seed}{RNG seed. It is strongly recommended that you set this value.}
 
@@ -84,11 +84,12 @@ One of "regression" (Default), "classification" or "survival".}
 A RandomForestSurrogates S3 object.
 \itemize{
 \item \code{trees}: List of all trees with surrogate analysis. (Class: \code{SurrogateTrees}, \code{LayerTrees}, \code{RangerTrees})
-\item \code{ranger}: \link[ranger:ranger]{ranger::ranger} model used to obtain the trees.
-\item \code{s} = s: The \code{s} parameter.
+\item \code{ranger}: The \link[ranger:ranger]{ranger::ranger} model used to obtain the trees.
+\item \code{s}: The number of surrogates investigated.
 }
 }
 \description{
-Create a random forest with surrogates.
+The object created by this functions serves as the basis of most further analysis,
+such as \code{\link[=SurrogateMinimalDepth]{SurrogateMinimalDepth()}} and \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}}.
 }
 \keyword{prep}

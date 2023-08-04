@@ -2,7 +2,7 @@
 
 ## New Features
 
-**Added `RandomForestSurrogates()`**
+**Added `RandomForestSurrogates()`.**
 
 * This functions aims to replace the first section of the variable selection and relation functions by creating a single reusable object which contains the random forest `ranger::ranger()` model, as well as the `trees` list with layers and surrogates added.
 * Returns a `RandomForestSurrogates` object, which serves as the base object for later analysis.
@@ -29,7 +29,7 @@
 
 **Added `SurrogateMinimalDepth()`** as a replacement for `var.select.smd()`. It takes just a `RandomForestSurrogates` object as a param, and returns a `SurrogateMinimalDepth` list object.
 
-#### Value
+Value:
 
 * `RFS`: The `RandomForestSurrogates` object used.
 * `selected`: The selected variables (previously `var`).
@@ -41,12 +41,17 @@
 
 **Added `MeanAdjustedAgreement()`** as a replacement for `var.relations()`. It takes a `RandomForestSurrogates` object as a param, and returns a `MeanAdjustedAgreement` list object.
 
-#### Value
+Value:
 
 * `RFS`: The `RandomForestSurrogates` object used.
 * `relations`: The matrix of mean adjusted agreements for the investigated variables (rows) and the possible candidates (columns) (previously `surr.res`).
 * `threshold`: The threshold used to select related variables.
 * `related`: A list of vectors for each investigated variable containing the related candidate variables (previously `var`).
+
+**Added `MFI()`** as replacement for `var.relations.mfi()`.
+`MFI()` takes the same arguments as `RandomForestSurrogates()`, with the additional `variables` and `candidates` params. Perform variable selection using `MutualForestImpactVariableSelection()`.
+
+**Added `MutualImpurityReduction()`** as a replacement for `var.select.mir()`, where variable selection is performed with `MutualImpurityReductionVariableSelection()`.
 
 ## Changes
 

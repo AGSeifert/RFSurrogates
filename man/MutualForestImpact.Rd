@@ -2,29 +2,29 @@
 % Please edit documentation in R/MutualForestImpact.R
 \name{MutualForestImpact}
 \alias{MutualForestImpact}
-\title{MutualForestImpact.}
+\title{Mutual Forest Impact (Corrected Mean Adjusted Agreement).}
 \usage{
 MutualForestImpact(REL, PERM, variables, candidates)
 }
 \arguments{
-\item{REL}{A \code{\link{MeanAdjustedAgreement}} object.}
+\item{REL}{A \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.}
 
-\item{PERM}{A permutated \code{\link{MeanAdjustedAgreement}} object.}
+\item{PERM}{A permutated \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.}
 
 \item{variables}{Vector of variable names for \strong{which related variables should be searched}.}
 
 \item{candidates}{Vector of variable names that \strong{are candidates to be related to the variables}.}
 }
 \value{
-A \code{\link{MutualForestImpact}} list object.
+A \code{MutualForestImpact} list object.
 \itemize{
-\item \code{REL}: The \code{\link{MeanAdjustedAgreement}} object.
-\item \code{PERM}: The permutated \code{\link{MeanAdjustedAgreement}} object.
+\item \code{REL}: The \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.
+\item \code{PERM}: The permutated \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.
 \item \code{relations}: Matrix of determined relations (rows: investigated variables, columns: candidate variables).
 }
 }
 \description{
-MutualForestImpact.
+It is recommended to use the simpler \code{\link[=MFI]{MFI()}} method.
 }
 \seealso{
 \code{\link[=MFI]{MFI()}}

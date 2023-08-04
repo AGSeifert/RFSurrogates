@@ -14,22 +14,22 @@ MeanAdjustedAgreement(
 )
 }
 \arguments{
-\item{RFS}{A \code{RandomForestSurrogates} object.}
+\item{RFS}{A \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.}
 
-\item{t}{Used to calculate threshold. (Default: 5)}
+\item{t}{(Default: 5) Used to calculate threshold.}
 
 \item{variables}{Vector of variable names for \strong{which related variables should be searched}. (Default: All variables used to create the random forest.)}
 
 \item{candidates}{Vector of variable names that \strong{are candidates to be related to the variables}. (Default: All variables used to create the random forest.)}
 
-\item{related}{(Default: \code{TRUE}) Whether related variables should be identified.}
+\item{related}{(Default: TRUE) Whether related variables should be identified.}
 
 \item{num.threads}{(Default: 1) Number of threads used for determination of relations.}
 }
 \value{
 A \code{MeanAdjustedAgreement} list object:
 \itemize{
-\item \code{RFS}: The original \code{\link{RandomForestSurrogates}} object.
+\item \code{RFS}: The original \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.
 \item \code{relations}: Matrix with mean adjusted agreement values
 \itemize{
 \item Rows: \code{variables}.

@@ -1,9 +1,9 @@
 #' Variable selection with Surrogate Minimal Depth (SMD)
 #'
-#' @param RFS A [`RandomForestSurrogates`] object.
+#' @param RFS A [RandomForestSurrogates()] object.
 #'
 #' @returns A `SurrogateMinimalDepth` S3 list object:
-#' - `RFS`: The original [`RandomForestSurrogates`] object.
+#' - `RFS`: The original [RandomForestSurrogates()] object.
 #' - `selected`: A character vector of the selected variable names.
 #' - `depth`: A numeric vector of the surrogate minimal depth for each variable.
 #' - `threshold`: The depth threshold used to select variables.

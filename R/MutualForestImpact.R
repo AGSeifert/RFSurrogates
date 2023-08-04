@@ -1,4 +1,4 @@
-#' Mutual Forest Impact (Corrected Mean Adjusted Agreement).
+#' Mutual Forest Impact shortcut function (recommended).
 #'
 #' This method corrects the mean adjusted agreement by a permutation approach
 #' and generates the relation parameter mutual forest impact.
@@ -9,9 +9,9 @@
 #' @param variables Vector of variable names for **which related variables should be searched**.
 #' @param candidates Vector of variable names that **are candidates to be related to the variables**.
 #'
-#' @returns A [`MutualForestImpact`] list object.
-#'  * `REL`: The [`MeanAdjustedAgreement`] object.
-#'  * `PERM`: The permutated [`MeanAdjustedAgreement`] object.
+#' @returns A [MutualForestImpact()] list object.
+#'  * `REL`: The [MeanAdjustedAgreement()] object.
+#'  * `PERM`: The permutated [MeanAdjustedAgreement()] object.
 #'  * `relations`: Matrix of determined relations (rows: investigated variables, columns: candidate variables).
 #'
 #' @examples
@@ -54,16 +54,18 @@ MFI <- function(
   )
 }
 
-#' MutualForestImpact.
+#' Mutual Forest Impact (Corrected Mean Adjusted Agreement).
 #'
-#' @param REL A [`MeanAdjustedAgreement`] object.
-#' @param PERM A permutated [`MeanAdjustedAgreement`] object.
+#' It is recommended to use the simpler [MFI()] method.
+#'
+#' @param REL A [MeanAdjustedAgreement()] object.
+#' @param PERM A permutated [MeanAdjustedAgreement()] object.
 #' @param variables Vector of variable names for **which related variables should be searched**.
 #' @param candidates Vector of variable names that **are candidates to be related to the variables**.
 #'
-#' @returns A [`MutualForestImpact`] list object.
-#'  * `REL`: The [`MeanAdjustedAgreement`] object.
-#'  * `PERM`: The permutated [`MeanAdjustedAgreement`] object.
+#' @returns A `MutualForestImpact` list object.
+#'  * `REL`: The [MeanAdjustedAgreement()] object.
+#'  * `PERM`: The permutated [MeanAdjustedAgreement()] object.
 #'  * `relations`: Matrix of determined relations (rows: investigated variables, columns: candidate variables).
 #'
 #' @seealso [MFI()]
@@ -148,7 +150,7 @@ adj_agree_corr <- function(
 
 #' Variable selection for MutualForestImpact.
 #'
-#' @param MFI [`MutualForestImpact()`] object.
+#' @param MFI [MutualForestImpact()] object.
 #' @param variables Vector of variable names for **which related variables should be searched**.
 #' @param candidates Vector of variable names that **are candidates to be related to the variables**.
 #' @param p.threshold (Default = 0.01) P-value threshold

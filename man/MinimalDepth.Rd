@@ -7,24 +7,24 @@
 MinimalDepth(RFS)
 }
 \arguments{
-\item{RFS}{A \code{\link{RandomForestSurrogates}} object with \code{s} equal to 0.}
+\item{RFS}{A \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object with \code{s} equal to 0.}
 }
 \value{
 A \code{MinimalDepth} S3 list object:
 \itemize{
-\item \code{RFS}: The original \code{\link{RandomForestSurrogates}} object.
+\item \code{RFS}: The original \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.
 \item \code{selected}: A character vector of the selected variable names.
 \item \code{depth}: A numeric vector of the surrogate minimal depth for each variable.
 \item \code{threshold}: The depth threshold used to select variables.
 \item \code{surrogates}:
 \itemize{
 \item \code{average}: Total average number of surrogate variables.
-\item \code{layer}: Average number of surrogate variables by layer (\verb{Named num [1:1000]}).
+\item \code{layer}: Average number of surrogate variables by layer (Named numeric of length 1000).
 }
 }
 }
 \description{
-This is identical to \code{SurrogateMinimalDepth()}, except it requires \code{s} to be 0.
+This is identical to \code{\link[=SurrogateMinimalDepth]{SurrogateMinimalDepth()}}, except it requires \code{s} to be 0.
 }
 \examples{
 \donttest{

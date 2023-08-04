@@ -5,15 +5,15 @@
 #' as "important". t=2 means the probability has to be twice, etc.
 #' Based on the threshold a vector is created containing the related variables.
 #'
-#' @param RFS A `RandomForestSurrogates` object.
-#' @param t Used to calculate threshold. (Default: 5)
+#' @param RFS A [RandomForestSurrogates()] object.
+#' @param t (Default: 5) Used to calculate threshold.
 #' @param variables Vector of variable names for **which related variables should be searched**. (Default: All variables used to create the random forest.)
 #' @param candidates Vector of variable names that **are candidates to be related to the variables**. (Default: All variables used to create the random forest.)
-#' @param related (Default: `TRUE`) Whether related variables should be identified.
+#' @param related (Default: TRUE) Whether related variables should be identified.
 #' @param num.threads (Default: 1) Number of threads used for determination of relations.
 #'
 #' @return A `MeanAdjustedAgreement` list object:
-#'  * `RFS`: The original [`RandomForestSurrogates`] object.
+#'  * `RFS`: The original [RandomForestSurrogates()] object.
 #'  * `relations`: Matrix with mean adjusted agreement values
 #'    * Rows: `variables`.
 #'    * Columns: `candidates`.

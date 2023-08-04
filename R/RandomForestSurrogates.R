@@ -1,5 +1,8 @@
 #' Create a random forest with surrogates.
 #'
+#' The object created by this functions serves as the basis of most further analysis,
+#' such as [SurrogateMinimalDepth()] and [MeanAdjustedAgreement()].
+#'
 #' @inheritParams ranger::ranger
 #' @inheritDotParams ranger::ranger importance min.bucket max.depth replace sample.fraction case.weights class.weights splitrule num.random.splits alpha minprop split.select.weights always.split.variables scale.permutation.importance local.importance regularization.factor regularization.usedepth inbag holdout quantreg oob.error save.memory verbose
 #'
@@ -20,18 +23,20 @@
 #'   given the number of independent variables.
 #'
 #' @param type The type of random forest to create with ranger.
-#'   One of "regression" (Default), "classification" or "survival".
+#'   One of `"regression"` (Default), `"classification"` or `"survival"`.
 #'
 #' @param min.node.size Minimal node size to split at. (Default: 1)
 #'
-#' @param permutate Enable to permutate `x` for [`MutualForestImpact`] (Default: FALSE).
+#' @param permutate Enable to permutate `x` for [MutualForestImpact()] (Default: FALSE).
 #'
 #' @param seed RNG seed. It is strongly recommended that you set this value.
 #'
+#' @param num.threads Number of threads to parallelize with. (Default: 1)
+#'
 #' @returns A RandomForestSurrogates S3 object.
 #'   * `trees`: List of all trees with surrogate analysis. (Class: `SurrogateTrees`, `LayerTrees`, `RangerTrees`)
-#'   * `ranger`: [ranger::ranger] model used to obtain the trees.
-#'   * `s` = s: The `s` parameter.
+#'   * `ranger`: The [ranger::ranger] model used to obtain the trees.
+#'   * `s`: The number of surrogates investigated.
 #'
 #' @keywords prep
 #' @export

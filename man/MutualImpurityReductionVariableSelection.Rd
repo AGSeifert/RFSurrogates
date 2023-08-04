@@ -19,9 +19,9 @@ MutualImpurityReductionVariableSelection(
 
 \item{method}{The method to use. One of: \code{"Janitza"} or \code{"Permutation"}.}
 
-\item{permutation.num}{(If method is \code{"Permutation"}) Number of AIR permutations to determine p-value. (Default: 100)}
+\item{permutation.num}{If method is \code{"Permutation"}: Number of AIR permutations to determine p-value. (Default: 100)}
 
-\item{permutation.MeanAdjustedAgreement}{If method is \code{"Permutation"} and \code{MIR} used \code{MeanAdjustedAgreement}.}
+\item{permutation.MeanAdjustedAgreement}{If method is \code{"Permutation"} and \code{MIR} used a \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object: A \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} created with a \code{permutate = TRUE} \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.}
 }
 \value{
 A list:

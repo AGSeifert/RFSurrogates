@@ -2,7 +2,7 @@
 % Please edit documentation in R/MutualForestImpact.R
 \name{MFI}
 \alias{MFI}
-\title{Mutual Forest Impact (Corrected Mean Adjusted Agreement).}
+\title{Mutual Forest Impact shortcut function (recommended).}
 \usage{
 MFI(variables, candidates, num.threads = 1, ...)
 }
@@ -11,7 +11,7 @@ MFI(variables, candidates, num.threads = 1, ...)
 
 \item{candidates}{Vector of variable names that \strong{are candidates to be related to the variables}.}
 
-\item{num.threads}{Number of threads. Default is number of CPUs available.}
+\item{num.threads}{Number of threads to parallelize with. (Default: 1)}
 
 \item{...}{
   Arguments passed on to \code{\link[=RandomForestSurrogates]{RandomForestSurrogates}}
@@ -32,18 +32,18 @@ of three quarters (Ishwaran, 2011).
 Alternatively, a single argument function returning an integer,
 given the number of independent variables.}
     \item{\code{type}}{The type of random forest to create with ranger.
-One of "regression" (Default), "classification" or "survival".}
+One of \code{"regression"} (Default), \code{"classification"} or \code{"survival"}.}
     \item{\code{min.node.size}}{Minimal node size to split at. (Default: 1)}
-    \item{\code{permutate}}{Enable to permutate \code{x} for \code{\link{MutualForestImpact}} (Default: FALSE).}
+    \item{\code{permutate}}{Enable to permutate \code{x} for \code{\link[=MutualForestImpact]{MutualForestImpact()}} (Default: FALSE).}
     \item{\code{seed}}{RNG seed. It is strongly recommended that you set this value.}
     \item{\code{num.trees}}{Number of trees.}
   }}
 }
 \value{
-A \code{\link{MutualForestImpact}} list object.
+A \code{\link[=MutualForestImpact]{MutualForestImpact()}} list object.
 \itemize{
-\item \code{REL}: The \code{\link{MeanAdjustedAgreement}} object.
-\item \code{PERM}: The permutated \code{\link{MeanAdjustedAgreement}} object.
+\item \code{REL}: The \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.
+\item \code{PERM}: The permutated \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.
 \item \code{relations}: Matrix of determined relations (rows: investigated variables, columns: candidate variables).
 }
 }

@@ -1,9 +1,9 @@
 #' Mutual Impurity Reduction (MIR)
 #'
-#' @param REL A [`MeanAdjustedAgreement`] or [`MutualForestImpract`] object.
+#' @param REL A [MeanAdjustedAgreement()] or [MutualForestImpract()] object.
 #'
-#' @returns A [`MutualImpurityReduction`] list object.
-#'  * `REL`: The [`MeanAdjustedAgreement`] or [`MutualForestImpact`] object.
+#' @returns A `MutualImpurityReduction` list object.
+#'  * `REL`: The [MeanAdjustedAgreement()] or [MutualForestImpact()] object.
 #'  * `MIR`: Mutual Impurity Reduction
 #'  * `AIR`: Actual Impurity Reduction
 #'
@@ -46,11 +46,11 @@ MutualImpurityReduction <- function(REL) {
 
 #' Variable selection for Mutual Impurity Reduction.
 #'
-#' @param MIR [`MutualImpurityReduction()`] object.
+#' @param MIR [MutualImpurityReduction()] object.
 #' @param p.threshold (Default = 0.01) P-value threshold
 #' @param method The method to use. One of: `"Janitza"` or `"Permutation"`.
-#' @param permutation.num (If method is `"Permutation"`) Number of AIR permutations to determine p-value. (Default: 100)
-#' @param permutation.MeanAdjustedAgreement If method is `"Permutation"` and `MIR` used `MeanAdjustedAgreement`.
+#' @param permutation.num If method is `"Permutation"`: Number of AIR permutations to determine p-value. (Default: 100)
+#' @param permutation.MeanAdjustedAgreement If method is `"Permutation"` and `MIR` used a [MeanAdjustedAgreement()] object: A [MeanAdjustedAgreement()] created with a `permutate = TRUE` [RandomForestSurrogates()] object.
 #'
 #' @returns A list:
 #'  * `method`: The method used.

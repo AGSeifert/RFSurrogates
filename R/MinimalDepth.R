@@ -1,17 +1,17 @@
 #' Variable selection with Minimal Depth (MD).
 #'
-#' This is identical to `SurrogateMinimalDepth()`, except it requires `s` to be 0.
+#' This is identical to [SurrogateMinimalDepth()], except it requires `s` to be 0.
 #'
-#' @param RFS A [`RandomForestSurrogates`] object with `s` equal to 0.
+#' @param RFS A [RandomForestSurrogates()] object with `s` equal to 0.
 #'
 #' @returns A `MinimalDepth` S3 list object:
-#' - `RFS`: The original [`RandomForestSurrogates`] object.
+#' - `RFS`: The original [RandomForestSurrogates()] object.
 #' - `selected`: A character vector of the selected variable names.
 #' - `depth`: A numeric vector of the surrogate minimal depth for each variable.
 #' - `threshold`: The depth threshold used to select variables.
 #' - `surrogates`:
 #'   - `average`: Total average number of surrogate variables.
-#'   - `layer`: Average number of surrogate variables by layer (`Named num [1:1000]`).
+#'   - `layer`: Average number of surrogate variables by layer (Named numeric of length 1000).
 #'
 #' @examples
 #' \donttest{

@@ -2,16 +2,60 @@ url: https://agseifert.github.io/RFSurrogates
 template:
   bootstrap: 5
 reference:
-  - title: Variable Selection
+  - title: Random Forest Surrogates
+    desc: The basic object used in most further analysis functions.
     contents:
-    - starts_with("var.select")
-  - title: Variable Relations
+    - RandomForestSurrogates
+  - title: Surrogate Minimal Depth
+    desc: >
+      Surrogate Minimal Depth (SMD) enables the identification of multiple
+      features from the same metabolites and reveals meaningful biological
+      relations, proving its high potential for the comprehensive utilization
+      of high-dimensional metabolomics data.
+      Reference:
+      [10.3390/metabo12010005](https://doi.org/10.3390/metabo12010005)
     contents:
-    - starts_with("var.relations")
+    - SurrogateMinimalDepth
+    - MinimalDepth
+    - MeanAdjustedAgreement
+  - title: Mutual Impact of Features
+    desc: >
+      Mutual forest impact (MFI) is a relation parameter that evaluates the
+      mutual association of the featurs to the outcome and, hence, goes beyond
+      the analysis of correlation coefficients. Mutual impurity reduction (MIR)
+      is an importance measure that combines this relation parameter with the
+      importance of the individual features.
+      Reference:
+      [10.48550/ARXIV.2304.02490](https://doi.org/10.48550/ARXIV.2304.02490)
+    contents:
+    - MutualForestImpact
+    - MFI
+    - MutualImpurityReduction
+    - MutualForestImpactVariableSelection
+    - MutualImpurityReductionVariableSelection
   - title: Data
+    desc: Example data sets shipped with this package.
     contents:
     - has_keyword("datasets")
-  - title: Additional functions
+  - title: "Version 0.3.x functions"
+    desc: The original functions from prior versions remain available for backward compatability.
     contents:
-    - -has_keyword("datasets")
-    - -starts_with("var.")
+    - var.relations
+    - var.relations.mfi
+    - var.select.md
+    - var.select.smd
+    - var.select.mir
+  - title: Other functions
+    desc: >
+      Additional functions published as part of version 0.3.x and earlier versions.
+      These will remain available for backward compatability.
+    contents:
+    - addLayer
+    - addSurrogates
+    - build.clusters
+    - count.surrogates
+    - getTreeranger
+    - meanAdjAgree
+    - mindep
+    - reduce.surrogates
+    - surrmindep

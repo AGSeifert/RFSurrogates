@@ -7,12 +7,12 @@
 SurrogateMinimalDepth(RFS)
 }
 \arguments{
-\item{RFS}{A \code{\link{RandomForestSurrogates}} object.}
+\item{RFS}{A \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.}
 }
 \value{
 A \code{SurrogateMinimalDepth} S3 list object:
 \itemize{
-\item \code{RFS}: The original \code{\link{RandomForestSurrogates}} object.
+\item \code{RFS}: The original \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.
 \item \code{selected}: A character vector of the selected variable names.
 \item \code{depth}: A numeric vector of the surrogate minimal depth for each variable.
 \item \code{threshold}: The depth threshold used to select variables.
