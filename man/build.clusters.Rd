@@ -7,16 +7,16 @@
 build.clusters(rel, hcmethod = "ward.D")
 }
 \arguments{
-\item{rel}{a list containing variables, surr.res, threshold, and var. This is the output of \link[SurrogateMinimalDepth]{var.relations} function.}
+\item{rel}{a list containing variables, surr.res, threshold, and var. This is the output of \code{\link[=var.relations]{var.relations()}}.}
 
-\item{hcmethod}{the hierarchical clustering method that is used. (see \link[linkcomm]{getLinkCommunities})}
+\item{hcmethod}{the hierarchical clustering method that is used. (see \code{\link[linkcomm:getLinkCommunities]{linkcomm::getLinkCommunities()}})}
 }
 \value{
 a data frame containing the variable names and their associated clusters.
 }
 \description{
-This function generates variables groups of relation information that was obtained by \link[SurrogateMinimalDepth]{var.relations} function applying
-\link[linkcomm]{getLinkCommunities}.
+This function generates variables groups of relation information that was obtained by \link{var.relations} applying
+\code{\link[linkcomm:getLinkCommunities]{linkcomm::getLinkCommunities()}}.
 }
 \examples{
 # read data

@@ -1,10 +1,10 @@
 #' Apply cluster analysis to build variable groups
 #'
-#' This function generates variables groups of relation information that was obtained by \link[SurrogateMinimalDepth]{var.relations} function applying
-#' \link[linkcomm]{getLinkCommunities}.
+#' This function generates variables groups of relation information that was obtained by [var.relations] applying
+#' [linkcomm::getLinkCommunities()].
 #'
-#' @param rel a list containing variables, surr.res, threshold, and var. This is the output of \link[SurrogateMinimalDepth]{var.relations} function.
-#' @param hcmethod the hierarchical clustering method that is used. (see \link[linkcomm]{getLinkCommunities})
+#' @param rel a list containing variables, surr.res, threshold, and var. This is the output of [var.relations()].
+#' @param hcmethod the hierarchical clustering method that is used. (see [linkcomm::getLinkCommunities()])
 #'
 #' @return a data frame containing the variable names and their associated clusters.
 #'
