@@ -93,6 +93,11 @@ RandomForestSurrogates <- function(
     s <- nvar - 1
   }
 
+  if (!is.null(type) && !is.character(type)) {
+    warning(paste0("`type` must be NULL or a character vector."))
+    type <- NULL
+  }
+
   type_match_args <- c("regression", "classification", "survival")
   type <- match.arg(type, type_match_args)
 
