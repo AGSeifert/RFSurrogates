@@ -2,7 +2,7 @@
 % Please edit documentation in R/variable_selection_mir.R
 \name{var.select.mir}
 \alias{var.select.mir}
-\title{Variable selection with mutual impurity reduction (MIR)}
+\title{Variable selection with mutual impurity reduction (MIR).}
 \usage{
 var.select.mir(
   x = NULL,
@@ -40,7 +40,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{type}{mode of prediction ("regression", "classification" or "survival"). Default is regression.}
 
-\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \\% of no. of variables.}
+\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 percent of no. of variables.}
 
 \item{mtry}{number of variables to possibly split at in each node. Default is no. of variables^(3/4) ("^3/4") as recommended by (Ishwaran 2011). Also possible is "sqrt" and "0.5" to use the square root or half of the no. of variables.}
 
@@ -77,30 +77,26 @@ classification mode is used). For survival forests this is the time variable.}
 \item{save.rel}{set FALSE if relation information should not bet saved (default is TRUE)}
 }
 \value{
-list with the following components:
+List with the following components:
 \itemize{
-\item info: list with results containing:
+\item \code{info}: list with results containing:
 \itemize{
-\item MIR: the calculated variable importance for each variable based on mutual impurity reduction.
-\item pvalue: the obtained p-values for each variable.
-\item selected: variables has been selected (1) or not (0).
-\item relations: a list containing the results of variable relation analysis.
-\item parameters: a list that contains the parameters s, type, mtry, p.t.sel, p.t.rel and method.sel that were used.
+\item \code{MIR}: the calculated variable importance for each variable based on mutual impurity reduction.
+\item \code{pvalue}: the obtained p-values for each variable.
+\item \code{selected}: variables has been selected (1) or not (0).
+\item \code{relations}: a list containing the results of variable relation analysis.
+\item \code{parameters}: a list that contains the parameters s, type, mtry, p.t.sel, p.t.rel and method.sel that were used.
 }
-\item var: vector of selected variables.
-
-\item ranger: ranger object.
-
+\item \code{var}: vector of selected variables.
+\item \code{ranger}: ranger object.
 }
 }
 \description{
-This function executes MIR applying \link[ranger]{ranger} for random forests generation and actual impurity reduction and a modified version of \link[rpart]{rpart} to find surrogate variables.
+This function executes MIR applying \link{ranger} for random forests generation and actual impurity reduction and a modified version of \link{rpart} to find surrogate variables.
 }
 \examples{
-# read data
-data("SMD_example_data")
-
 \donttest{
+data("SMD_example_data")
 # select variables (usually more trees are needed)
 set.seed(42)
 res <- var.select.mir(
@@ -109,6 +105,7 @@ res <- var.select.mir(
 )
 res$var
 }
+
 }
 \references{
 \itemize{

@@ -7,7 +7,7 @@
 MutualImpurityReduction(REL)
 }
 \arguments{
-\item{REL}{A \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} or \code{\link[=MutualForestImpract]{MutualForestImpract()}} object.}
+\item{REL}{A \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} or \code{\link[=MutualForestImpact]{MutualForestImpact()}} object.}
 }
 \value{
 A \code{MutualImpurityReduction} list object.

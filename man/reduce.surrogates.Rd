@@ -12,16 +12,15 @@ reduce.surrogates(forest, s = 10)
 \item{s}{number of surrogate variables in the new forest (have to be less than in the RF in trees)}
 }
 \value{
-forest with s surrogate variables.
+A forest with \code{s} surrogate variables.
 }
 \description{
 This function can be applied to reduce the surrogate variables in a forest that is created by getTreeranger, addLayer
 and getSurrogates functions. Hence, it can be applied to the forests that were used for surrogate minimal depth variable importance.
 }
 \examples{
-# read data
-data("SMD_example_data")
 \donttest{
+data("SMD_example_data")
 ###### use result of SMD variable importance and reduce surrogate variables to 10
 # select variables with smd variable importance (usually more trees are needed)
 set.seed(42)

@@ -2,21 +2,21 @@
 #'
 #' This is the main function of var.relations function.
 #'
-#' @param trees list of trees created by getTreeranger, addLayer and addSurrogate.
+#' @param trees list of trees created by [getTreeranger()], [addLayer()] and [addSurrogates()].
 #' @param variables vector of variable names.
 #' @param allvariables vector of all variable names (strings)
 #' @param candidates vector of variable names (strings) that are candidates to be related to the variables (has to be contained in allvariables)
-#' @param t variable to calculate threshold. Default is 3. Used if `select.var = TRUE`.
+#' @param t variable to calculate threshold. Used if `select.var = TRUE`.
 #' @param s.a average number of surrogate variables (ideally calculated by count.surrogates function).
 #' @param select.var set False if only relations should be calculated and no related variables should be selected.
 #' @param num.threads number of threads used for parallel execution. Default is number of CPUs available.
-#' @return a list containing:
-#' \itemize{
-#' \item variables: the variables to which relations are investigated
-#' \item surr.res: matrix with mean adjusted agreement values and variables investigated in rows and candidate variables in columns
-#' \item threshold: the threshold used to create surr.var from surr.res
-#' \item surr.var: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.
-#' }
+#'
+#' @returns A list containing:
+#'  * `variables`: the variables to which relations are investigated
+#'  * `surr.res`: matrix with mean adjusted agreement values and variables investigated in rows and candidate variables in columns
+#'  * `threshold`: the threshold used to create surr.var from surr.res
+#'  * `surr.var`: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.
+#'
 #' @export
 meanAdjAgree <- function(trees, variables, allvariables, candidates, t, s.a, select.var, num.threads = NULL) {
   num.trees <- length(trees)

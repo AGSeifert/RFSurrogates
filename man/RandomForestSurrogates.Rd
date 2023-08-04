@@ -42,6 +42,9 @@ given the number of independent variables.}
 \item{type}{The type of random forest to create with ranger.
 One of \code{"regression"} (Default), \code{"classification"} or \code{"survival"}.}
 
+\item{status}{If \code{type = "regression"}: Survival forest status variable.
+Use 1 for event and 0 for censoring. Length must match \code{y}.}
+
 \item{num.trees}{Number of trees.}
 
 \item{num.threads}{Number of threads to parallelize with. (Default: 1)}

@@ -11,7 +11,7 @@
 #' @param type mode of prediction ("regression", "classification" or "survival"). Default is regression.
 #' @param min.node.size minimal node size. Default is 1.
 #' @param num.threads number of threads used for parallel execution. Default is number of CPUs available.
-#' @param s predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \% of no. of variables.
+#' @param s predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 percent of no. of variables.
 #' @param status status variable, only applicable to survival data. Use 1 for event and 0 for censoring.
 #' @param save.ranger set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).
 #' @param create.forest  Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.
@@ -20,33 +20,22 @@
 #' @param case.weights Weights for sampling of training observations. Observations with larger weights will be selected with higher probability in the bootstrap (or subsampled) samples for the trees.
 #'
 #' @return list with the following components:
-#' \itemize{
-#' \item info: list with results from surrmindep function:
-#' \itemize{
-#' \item depth: mean surrogate minimal depth for each variable.
-#' \item selected: variables has been selected (1) or not (0).
-#' \item threshold: the threshold that is used for the selection.
-#' }
-#' \item var: vector of selected variables.
+#'  * `info`: list with results from surrmindep function:
+#'    * `depth`: mean surrogate minimal depth for each variable.
+#'    * `selected`: variables has been selected (1) or not (0).
+#'    * `threshold`: the threshold that is used for the selection.
+#'  * `var`: vector of selected variables.
+#'  * `s`: list with the results of count.surrogate function:
+#'    * `s.a`: total average number of surrogate variables.
+#'    * `s.l`: average number of surrogate variables in the respective layers.
+#'  * `forest`: a list containing:
+#'    * `trees`: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.
+#'    * `allvariables`: all variable names of the predictor variables that are present in x
+#'  * `ranger`: ranger object.
 #'
-#' \item s: list with the results of count.surrogate function:
-#' \itemize{
-#' \item s.a: total average number of surrogate variables.
-#' \item s.l: average number of surrogate variables in the respective layers.
-#' }
-#' \item forest: a list containing:
-#' #'\itemize{
-#' \item trees: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.
-#' \item allvariables: all variable names of the predictor variables that are present in x.
-#' }
-#' \item ranger: ranger object.
-#'
-#' }
 #' @examples
-#' # read data
-#' data("SMD_example_data")
-#'
 #' \donttest{
+#' data("SMD_example_data")
 #' # select variables (usually more trees are needed)
 #' set.seed(42)
 #' res <- var.select.smd(
@@ -55,12 +44,12 @@
 #' )
 #' res$var
 #' }
+#'
 #' @references
-##' \itemize{
-##'   \item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-##'   \item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
-##'   \item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
-##' }
+#' * Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
+#' * Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
+#' * Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
+#'
 #' @export
 var.select.smd <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
                            num.threads = NULL, status = NULL, save.ranger = FALSE, create.forest = is.null(forest), forest = NULL,

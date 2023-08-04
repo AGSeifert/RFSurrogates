@@ -25,6 +25,9 @@
 #' @param type The type of random forest to create with ranger.
 #'   One of `"regression"` (Default), `"classification"` or `"survival"`.
 #'
+#' @param status If `type = "regression"`: Survival forest status variable.
+#'   Use 1 for event and 0 for censoring. Length must match `y`.
+#'
 #' @param min.node.size Minimal node size to split at. (Default: 1)
 #'
 #' @param permutate Enable to permutate `x` for [MutualForestImpact()] (Default: FALSE).

@@ -15,7 +15,7 @@
 #'  * `relations`: Matrix of determined relations (rows: investigated variables, columns: candidate variables).
 #'
 #' @examples
-#' \donttest {
+#' \donttest{
 #' data("SMD_example_data")
 #' mfi <- MFI(
 #'   x = SMD_example_data[, -1], y = SMD_example_data[, 1],

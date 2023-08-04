@@ -1,6 +1,6 @@
-#' Variable selection with mutual impurity reduction (MIR)
+#' Variable selection with mutual impurity reduction (MIR).
 #'
-#' This function executes MIR applying \link[ranger]{ranger} for random forests generation and actual impurity reduction and a modified version of \link[rpart]{rpart} to find surrogate variables.
+#' This function executes MIR applying [ranger] for random forests generation and actual impurity reduction and a modified version of [rpart] to find surrogate variables.
 #'
 #' @param x data.frame of predictor variables with variables in
 #'   columns and samples in rows (Note: missing values are not allowed)
@@ -11,7 +11,7 @@
 #' @param type mode of prediction ("regression", "classification" or "survival"). Default is regression.
 #' @param min.node.size minimal node size. Default is 1.
 #' @param num.threads number of threads used for parallel execution. Default is number of CPUs available.
-#' @param s predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \% of no. of variables.
+#' @param s predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 percent of no. of variables.
 #' @param p.t.sel p.value threshold for selection of important variables. Default is 0.01.
 #' @param p.t.rel p.value threshold for selection of related variables. Default is 0.01.
 #' @param num.permutations number of permutations to determine p-values. Default is 100. (the relations are determined once based on the permuted X data and the utilized AIR values are permuted again for each permutation )
@@ -27,27 +27,19 @@
 #' @param t variable to calculate threshold for non-corrected relation analysis. Default is 5.
 #' @param save.rel set FALSE if relation information should not bet saved (default is TRUE)
 #'
+#' @returns List with the following components:
+#'  * `info`: list with results containing:
+#'    * `MIR`: the calculated variable importance for each variable based on mutual impurity reduction.
+#'    * `pvalue`: the obtained p-values for each variable.
+#'    * `selected`: variables has been selected (1) or not (0).
+#'    * `relations`: a list containing the results of variable relation analysis.
+#'    * `parameters`: a list that contains the parameters s, type, mtry, p.t.sel, p.t.rel and method.sel that were used.
+#'  * `var`: vector of selected variables.
+#'  * `ranger`: ranger object.
 #'
-#' @return list with the following components:
-#' \itemize{
-#' \item info: list with results containing:
-#' \itemize{
-#' \item MIR: the calculated variable importance for each variable based on mutual impurity reduction.
-#' \item pvalue: the obtained p-values for each variable.
-#' \item selected: variables has been selected (1) or not (0).
-#' \item relations: a list containing the results of variable relation analysis.
-#' \item parameters: a list that contains the parameters s, type, mtry, p.t.sel, p.t.rel and method.sel that were used.
-#' }
-#' \item var: vector of selected variables.
-#'
-#' \item ranger: ranger object.
-#'
-#' }
 #' @examples
-#' # read data
-#' data("SMD_example_data")
-#'
 #' \donttest{
+#' data("SMD_example_data")
 #' # select variables (usually more trees are needed)
 #' set.seed(42)
 #' res <- var.select.mir(
@@ -56,11 +48,11 @@
 #' )
 #' res$var
 #' }
+#'
 #' @references
-##' \itemize{
-##'   \item Nembrini, S. et al. (2018) The revival of the Gini importance? Bioinformatics, 34, 3711–3718. \url{https://academic.oup.com/bioinformatics/article/34/21/3711/4994791}
-##'   \item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-##' }
+#' * Nembrini, S. et al. (2018) The revival of the Gini importance? Bioinformatics, 34, 3711–3718. \url{https://academic.oup.com/bioinformatics/article/34/21/3711/4994791}
+#' * Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
+#'
 #' @export
 var.select.mir <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", s = NULL, mtry = NULL, min.node.size = 1,
                            num.threads = NULL, status = NULL, save.ranger = FALSE,

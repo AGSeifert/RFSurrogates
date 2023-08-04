@@ -19,30 +19,20 @@
 #' @param case.weights Weights for sampling of training observations. Observations with larger weights will be selected with higher probability in the bootstrap (or subsampled) samples for the trees.
 #'
 #' @return List with the following components:
-#' \itemize{
-#' \item info: list with results from mindep function:
-#' \itemize{
-#' \item depth: mean minimal depth for each variable.
-#' \item selected: variables has been selected (1) or not (0).
-#' \item threshold: the threshold that is used for the selection. (deviates slightly from the original implimentation)
-#' }
-#' \item var: vector of selected variables.
+#'  * `info`: list with results from [mindep()] function:
+#'    * `depth`: mean minimal depth for each variable.
+#'    * `selected`: variables has been selected (1) or not (0).
+#'    * `threshold`: the threshold that is used for the selection. (deviates slightly from the original implementation)
+#'  * `var`: vector of selected variables.
+#'  * `forest`: a list containing:
+#'    * `trees`: list of trees that was created by [getTreeranger()], [addLayer()], and [addSurrogates()] functions and that was used for surrogate minimal depth variable importance.
+#'    * `allvariables`: all variable names of the predictor variables that are present in x.
+#'  * `ranger`: ranger object
 #'
-#' \item forest: a list containing:
-#' #'\itemize{
-#' \item trees: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.
-#' \item allvariables: all variable names of the predictor variables that are present in x.
-#' }
-#'
-#' \item ranger: ranger object
-#'
-#' }
 #' @examples
-#' # read data
-#' data("SMD_example_data")
 #'
 #' \donttest{
-#' # select variables (usually more trees are needed)
+#' data("SMD_example_data")
 #' set.seed(42)
 #' res <- var.select.md(
 #'   x = SMD_example_data[, 2:ncol(SMD_example_data)],
@@ -52,10 +42,8 @@
 #' }
 #'
 #' @references
-##' \itemize{
-##'   \item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
-##'   \item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
-##' }
+#' * Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
+#' * Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
 #'
 #' @export
 var.select.md <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", mtry = NULL, min.node.size = 1, num.threads = NULL,

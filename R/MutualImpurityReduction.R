@@ -1,6 +1,6 @@
 #' Mutual Impurity Reduction (MIR)
 #'
-#' @param REL A [MeanAdjustedAgreement()] or [MutualForestImpract()] object.
+#' @param REL A [MeanAdjustedAgreement()] or [MutualForestImpact()] object.
 #'
 #' @returns A `MutualImpurityReduction` list object.
 #'  * `REL`: The [MeanAdjustedAgreement()] or [MutualForestImpact()] object.

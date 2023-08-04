@@ -33,6 +33,8 @@ Alternatively, a single argument function returning an integer,
 given the number of independent variables.}
     \item{\code{type}}{The type of random forest to create with ranger.
 One of \code{"regression"} (Default), \code{"classification"} or \code{"survival"}.}
+    \item{\code{status}}{If \code{type = "regression"}: Survival forest status variable.
+Use 1 for event and 0 for censoring. Length must match \code{y}.}
     \item{\code{min.node.size}}{Minimal node size to split at. (Default: 1)}
     \item{\code{permutate}}{Enable to permutate \code{x} for \code{\link[=MutualForestImpact]{MutualForestImpact()}} (Default: FALSE).}
     \item{\code{seed}}{RNG seed. It is strongly recommended that you set this value.}
@@ -53,7 +55,7 @@ and generates the relation parameter mutual forest impact.
 Subsequently p-values are determined and related variables are selected.
 }
 \examples{
-\donttest {
+\donttest{
 data("SMD_example_data")
 mfi <- MFI(
   x = SMD_example_data[, -1], y = SMD_example_data[, 1],
