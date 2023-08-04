@@ -2,9 +2,9 @@
 % Please edit documentation in R/MutualForestImpact.R
 \name{MFI}
 \alias{MFI}
-\title{MFI Shortcut}
+\title{Mutual Forest Impact (Corrected Mean Adjusted Agreement).}
 \usage{
-MFI(variables, candidates, num.threads = 1, t = 5, ...)
+MFI(variables, candidates, num.threads = 1, ...)
 }
 \arguments{
 \item{variables}{Vector of variable names for \strong{which related variables should be searched}.}
@@ -12,8 +12,6 @@ MFI(variables, candidates, num.threads = 1, t = 5, ...)
 \item{candidates}{Vector of variable names that \strong{are candidates to be related to the variables}.}
 
 \item{num.threads}{Number of threads. Default is number of CPUs available.}
-
-\item{t}{Used to calculate threshold. (Default: 5)}
 
 \item{...}{
   Arguments passed on to \code{\link[=RandomForestSurrogates]{RandomForestSurrogates}}
@@ -50,7 +48,9 @@ A \code{\link{MutualForestImpact}} list object.
 }
 }
 \description{
-MFI Shortcut
+This method corrects the mean adjusted agreement by a permutation approach
+and generates the relation parameter mutual forest impact.
+Subsequently p-values are determined and related variables are selected.
 }
 \examples{
 \donttest {

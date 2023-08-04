@@ -24,7 +24,7 @@ meanAdjAgree(
 
 \item{candidates}{vector of variable names (strings) that are candidates to be related to the variables (has to be contained in allvariables)}
 
-\item{t}{variable to calculate threshold. Default is 3.}
+\item{t}{variable to calculate threshold. Default is 3. Used if \code{select.var = TRUE}.}
 
 \item{s.a}{average number of surrogate variables (ideally calculated by count.surrogates function).}
 

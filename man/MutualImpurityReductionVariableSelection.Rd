@@ -2,7 +2,7 @@
 % Please edit documentation in R/MutualImpurityReduction.R
 \name{MutualImpurityReductionVariableSelection}
 \alias{MutualImpurityReductionVariableSelection}
-\title{Variable selection for MutualImpurityReduction.}
+\title{Variable selection for Mutual Impurity Reduction.}
 \usage{
 MutualImpurityReductionVariableSelection(
   MIR,
@@ -32,6 +32,7 @@ A list:
 }
 }
 \description{
-Variable selection for MutualImpurityReduction.
+Variable selection for Mutual Impurity Reduction.
 }
+\keyword{mir}
 \keyword{varsel}

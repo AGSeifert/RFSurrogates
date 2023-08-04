@@ -2,7 +2,7 @@
 % Please edit documentation in R/MutualImpurityReduction.R
 \name{MutualImpurityReduction}
 \alias{MutualImpurityReduction}
-\title{MutualForestImpact.}
+\title{Mutual Impurity Reduction (MIR)}
 \usage{
 MutualImpurityReduction(REL)
 }
@@ -13,11 +13,12 @@ MutualImpurityReduction(REL)
 A \code{\link{MutualImpurityReduction}} list object.
 \itemize{
 \item \code{REL}: The \code{\link{MeanAdjustedAgreement}} or \code{\link{MutualForestImpact}} object.
-\item \code{MIR}: TODO
-\item \code{AIR}: TODO
+\item \code{MIR}: Mutual Impurity Reduction
+\item \code{AIR}: Actual Impurity Reduction
 }
 }
 \description{
-MutualForestImpact.
+Mutual Impurity Reduction (MIR)
 }
-\keyword{varsel}
+\keyword{mir}
+\keyword{varrel}
