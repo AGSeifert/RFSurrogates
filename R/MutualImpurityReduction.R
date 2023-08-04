@@ -4,8 +4,8 @@
 #'
 #' @returns A [`MutualImpurityReduction`] list object.
 #'  * `REL`: The [`MeanAdjustedAgreement`] or [`MutualForestImpact`] object.
-#'  * `MIR`: TODO
-#'  * `AIR`: TODO
+#'  * `MIR`: Mutual Impurity Reduction
+#'  * `AIR`: Actual Impurity Reduction
 #'
 #' @keywords varsel
 #' @export
@@ -26,8 +26,6 @@ MutualImpurityReduction <- function(REL) {
   if (RFS$ranger$importance.mode != "impurity_corrected") {
     stop(paste0("`RFS` must have been created with `importance = \"impurity_corrected\".` (Found: \"", RFS$ranger$importance.mode, "\")"))
   }
-
-  # TODO check allvars used as candidates/variables
 
   adj.agree <- REL$relations
   diag(adj.agree) <- 1
@@ -157,8 +155,6 @@ MIR_VarSel_Permutation <- function(
     if (!inherits(perm, "MeanAdjustedAgreement")) {
       stop("`perm` must be a `MeanAdjustedAgreement` object.")
     }
-
-    # TODO Check perm is permutated MAA
 
     adj.agree_perm <- perm$relations
   }
