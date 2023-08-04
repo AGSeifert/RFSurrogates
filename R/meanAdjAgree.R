@@ -6,7 +6,7 @@
 #' @param variables vector of variable names.
 #' @param allvariables vector of all variable names (strings)
 #' @param candidates vector of variable names (strings) that are candidates to be related to the variables (has to be contained in allvariables)
-#' @param t variable to calculate threshold. Default is 3.
+#' @param t variable to calculate threshold. Default is 3. Used if `select.var = TRUE`.
 #' @param s.a average number of surrogate variables (ideally calculated by count.surrogates function).
 #' @param select.var set False if only relations should be calculated and no related variables should be selected.
 #' @param num.threads number of threads used for parallel execution. Default is number of CPUs available.

@@ -1,10 +1,13 @@
-#' MFI Shortcut
+#' Mutual Forest Impact (Corrected Mean Adjusted Agreement).
+#'
+#' This method corrects the mean adjusted agreement by a permutation approach
+#' and generates the relation parameter mutual forest impact.
+#' Subsequently p-values are determined and related variables are selected.
 #'
 #' @inheritParams RandomForestSurrogates
 #' @inheritDotParams RandomForestSurrogates
 #' @param variables Vector of variable names for **which related variables should be searched**.
 #' @param candidates Vector of variable names that **are candidates to be related to the variables**.
-#' @param t Used to calculate threshold. (Default: 5)
 #'
 #' @returns A [`MutualForestImpact`] list object.
 #'  * `REL`: The [`MeanAdjustedAgreement`] object.
@@ -28,7 +31,6 @@ MFI <- function(
   variables,
   candidates,
   num.threads = 1,
-  t = 5,
   ...
 ) {
   rels <- lapply(list(norm = FALSE, perm = TRUE), function(permutate) {
@@ -38,7 +40,9 @@ MFI <- function(
         permutate = permutate,
         ...
       ),
-      related = FALSE, t = t, num.threads = num.threads
+      # Relations are not calculated, leaving `t` unused.
+      related = FALSE, t = NA_integer_,
+      num.threads = num.threads
     )
   })
 
