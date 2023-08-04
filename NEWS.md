@@ -1,4 +1,4 @@
-# RFSurrogates (development version)
+# RFSurrogates 0.3.4
 
 * `var.select.smd()`, `var.select.md()`, `var.relations()`, `var.relations.mfi()`: Made several improvements to developer experience:
   * `create.forest` now defaults to `is.null(forest)`, so it will automatically be `TRUE` if no forest is provided, and `FALSE` otherwise.
