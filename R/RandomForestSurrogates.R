@@ -36,6 +36,8 @@
 #'
 #' @param num.threads Number of threads to parallelize with. (Default: 1)
 #'
+#' @param preschedule.threads (Default: TRUE) Passed as `mc.preschedule` to [parallel::mclapply()] in [addSurrogates()].
+#'
 #' @returns A RandomForestSurrogates S3 object.
 #'   * `trees`: List of all trees with surrogate analysis. (Class: `SurrogateTrees`, `LayerTrees`, `RangerTrees`)
 #'   * `ranger`: The [ranger::ranger] model used to obtain the trees.
@@ -55,6 +57,7 @@ RandomForestSurrogates <- function(
     min.node.size = 1,
     permutate = FALSE,
     seed = NULL,
+    preschedule.threads = TRUE,
     ...) {
   if (length(y) != nrow(x)) {
     stop(paste0("Different numbers of response variables and observations.\nFound: nrow(x) = ", nrow(x), ", length(y) = ", length(y), ", expected them to be equal."))
@@ -161,7 +164,8 @@ RandomForestSurrogates <- function(
     RF = RF,
     s = s,
     x = x,
-    num.threads = num.threads
+    num.threads = num.threads,
+    preschedule.threads = preschedule.threads
   )
 
   result <- list(
@@ -177,7 +181,13 @@ RandomForestSurrogates <- function(
 #' @returns A `SurrogateTrees`, `LayerTrees`, `RangerTrees` object.
 #'
 #' @keywords internal
-getSurrogateTrees <- function(RF, s, x, num.threads = parallel::detectCores()) {
+getSurrogateTrees <- function(
+    RF,
+    s,
+    x,
+    num.threads = parallel::detectCores(),
+    preschedule.threads = TRUE
+) {
   if (!inherits(RF, "ranger")) {
     stop("`RF` must be a `ranger` object.")
   }
@@ -191,7 +201,8 @@ getSurrogateTrees <- function(RF, s, x, num.threads = parallel::detectCores()) {
     ),
     s = s,
     Xdata = x,
-    num.threads = num.threads
+    num.threads = num.threads,
+    preschedule.threads = preschedule.threads
   )
 }
 

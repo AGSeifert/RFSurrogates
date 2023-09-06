@@ -7,6 +7,7 @@
 #' @param s Predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes).
 #' @param Xdata data without the dependent variable.
 #' @param num.threads (Default: [parallel::detectCores()]) Number of threads to spawn for parallelization.
+#' @param preschedule.threads (Default: TRUE) Passed as `mc.preschedule` to [parallel::mclapply()].
 #'
 #' @returns A list of trees.
 #' A list of trees containing of lists of nodes with the elements:
@@ -21,7 +22,14 @@
 #' * `adj_i`: adjusted agreement of variable i
 #'
 #' @export
-addSurrogates <- function(RF, trees, s, Xdata, num.threads = parallel::detectCores()) {
+addSurrogates <- function(
+    RF,
+    trees,
+    s,
+    Xdata,
+    num.threads = parallel::detectCores(),
+    preschedule.threads = TRUE
+) {
   if (!inherits(RF, "ranger")) {
     stop("`RF` must be a ranger object.")
   }
@@ -46,22 +54,51 @@ addSurrogates <- function(RF, trees, s, Xdata, num.threads = parallel::detectCor
   # variables to find surrogates (control file similar as in rpart)
   controls <- list(maxsurrogate = as.integer(s), sur_agree = 0)
 
-  trees.surr <- parallel::mclapply(1:num.trees,
-    getSurrogate,
+  trees.surr <- parallel::mclapply(
+    X = mapply(list, .a = trees, .b = RF$inbag.counts, SIMPLIFY = FALSE),
+    FUN = getSurrgate2,
+
     mc.cores = num.threads,
-    maxsurr = s,
-    surr.par = list(
-      inbag.counts = RF$inbag.counts,
-      Xdata = Xdata,
-      controls = controls,
-      trees = trees,
-      ncat = ncat
-    )
+    mc.preschedule = preschedule.threads,
+
+    Xdata = Xdata,
+    controls = controls,
+    s = s,
+    ncat = ncat
   )
 
   class(trees.surr) <- c(class(trees), "SurrogateTrees")
 
   return(trees.surr)
+}
+
+#' getSurrogate2
+#'
+#' This is an internal function
+#'
+#' @param x List of length `num.trees`
+#'
+#' @keywords internal
+getSurrgate2 <- function(
+  x, # list of length num.trees with [1] tree and [2] inbag.counts
+  Xdata,
+  controls,
+  s,
+  ncat
+) {
+  tree <- x[[1]]
+  lapply(
+    X = seq_len(nrow(tree)),
+    FUN = SurrTree,
+
+    tree = tree,
+    wt = x[[2]],
+    Xdata = Xdata,
+    controls = controls,
+    column.names = colnames(tree),
+    maxsurr = s,
+    ncat = ncat
+  )
 }
 
 #' getSurrogate

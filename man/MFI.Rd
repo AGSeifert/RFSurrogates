@@ -38,6 +38,7 @@ Use 1 for event and 0 for censoring. Length must match \code{y}.}
     \item{\code{min.node.size}}{Minimal node size to split at. (Default: 1)}
     \item{\code{permutate}}{Enable to permutate \code{x} for \code{\link[=MutualForestImpact]{MutualForestImpact()}} (Default: FALSE).}
     \item{\code{seed}}{RNG seed. It is strongly recommended that you set this value.}
+    \item{\code{preschedule.threads}}{(Default: TRUE) Passed as \code{mc.preschedule} to \code{\link[parallel:mclapply]{parallel::mclapply()}} in \code{\link[=addSurrogates]{addSurrogates()}}.}
     \item{\code{num.trees}}{Number of trees.}
   }}
 }

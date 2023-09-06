@@ -17,6 +17,7 @@ RandomForestSurrogates(
   min.node.size = 1,
   permutate = FALSE,
   seed = NULL,
+  preschedule.threads = TRUE,
   ...
 )
 }
@@ -54,6 +55,8 @@ Use 1 for event and 0 for censoring. Length must match \code{y}.}
 \item{permutate}{Enable to permutate \code{x} for \code{\link[=MutualForestImpact]{MutualForestImpact()}} (Default: FALSE).}
 
 \item{seed}{RNG seed. It is strongly recommended that you set this value.}
+
+\item{preschedule.threads}{(Default: TRUE) Passed as \code{mc.preschedule} to \code{\link[parallel:mclapply]{parallel::mclapply()}} in \code{\link[=addSurrogates]{addSurrogates()}}.}
 
 \item{...}{
   Arguments passed on to \code{\link[ranger:ranger]{ranger::ranger}}
