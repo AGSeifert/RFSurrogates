@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,11 +51,39 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">getsingletree</span><span class="op">(</span><span class="va">RF</span>, k <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">getsingletree</span><span class="op">(</span><span class="va">RF</span>, k <span class="op">=</span> <span class="fl">1</span>, add_layer <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+    <dl><dt>RF</dt>
+<dd><p>A <code><a href="https://rdrr.io/pkg/ranger/man/ranger.html" class="external-link">ranger::ranger</a></code> object.</p></dd>
 
-  </main></div>
+
+<dt>k</dt>
+<dd><p>Tree index to convert.</p></dd>
+
+
+<dt>add_layer</dt>
+<dd></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A tree data frame for the <code>k</code>th tree in <code>RF</code>.
+Each row of the tree data frames corresponds to a node of the respective tree and the columns correspond to:</p><ul><li><p><code>nodeID</code>: ID of the respective node (important for left and right daughters in the next columns)</p></li>
+<li><p><code>leftdaughter</code>: ID of the left daughter of this node</p></li>
+<li><p><code>rightdaughter</code>: ID of the right daughter of this node</p></li>
+<li><p><code>splitvariable</code>: ID of the split variable</p></li>
+<li><p><code>splitpoint</code>: Split point of the split variable.
+For categorical variables this is a comma separated lists of values, representing the factor levels (in the original order) going to the right.</p></li>
+<li><p><code>status</code>: <code>0</code> for terminal (<code>splitpoint</code> is <code>NA</code>) and <code>1</code> for non-terminal.</p></li>
+</ul></div>
+
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

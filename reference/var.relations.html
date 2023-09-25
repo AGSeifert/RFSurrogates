@@ -16,7 +16,7 @@ Based on the threshold a vector is created containing the related variables.'><!
     
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@ Based on the threshold a vector is created containing the related variables.</p>
 <span>  num.threads <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  status <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  save.ranger <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  create.forest <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  create.forest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">forest</span><span class="op">)</span>,</span>
 <span>  forest <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  save.memory <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  case.weights <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -127,11 +127,11 @@ classification mode is used). For survival forests this is the time variable.</p
 
 
 <dt>create.forest</dt>
-<dd><p>set FALSE if you want to analyze an existing forest. Default is TRUE.</p></dd>
+<dd><p>Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.</p></dd>
 
 
 <dt>forest</dt>
-<dd><p>the random forest that should be analyzed if create.forest is set to FALSE. (x and y still have to be given to obtain variable names)</p></dd>
+<dd><p>the random forest that should be analyzed</p></dd>
 
 
 <dt>save.memory</dt>
