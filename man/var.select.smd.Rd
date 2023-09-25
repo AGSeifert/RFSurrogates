@@ -32,7 +32,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{type}{mode of prediction ("regression", "classification" or "survival"). Default is regression.}
 
-\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \\% of no. of variables.}
+\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \% of no. of variables.}
 
 \item{mtry}{number of variables to possibly split at in each node. Default is no. of variables^(3/4) ("^3/4") as recommended by (Ishwaran 2011). Also possible is "sqrt" and "0.5" to use the square root or half of the no. of variables.}
 
@@ -44,7 +44,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{save.ranger}{set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).}
 
-\item{create.forest}{Default: TRUE if \code{forest} is NULL, FALSE otherwise. Whether to create or use an existing forest.}
+\item{create.forest}{Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.}
 
 \item{forest}{the random forest that should be analyzed}
 
@@ -96,8 +96,8 @@ res$var
 }
 \references{
 \itemize{
-\item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-\item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
-\item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
+  \item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
+  \item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
+  \item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
 }
 }

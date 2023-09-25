@@ -19,6 +19,7 @@
 #' * `layer`: If `add_layer` is `TRUE`, see [addLayer()]
 #'
 #' @export
+#' @md
 getTreeranger <- function(RF, num.trees = RF$num.trees, add_layer = FALSE, num.threads = 1) {
   trees <- parallel::mclapply(1:num.trees, getsingletree,
     mc.cores = num.threads,
@@ -53,6 +54,7 @@ getTreeranger <- function(RF, num.trees = RF$num.trees, add_layer = FALSE, num.t
 #' * `status`: `0` for terminal (`splitpoint` is `NA`) and `1` for non-terminal.
 #'
 #' @keywords internal
+#' @md
 getsingletree <- function(RF, k = 1, add_layer = FALSE) {
   # here we use the treeInfo function of the ranger package to create extract the trees, in an earlier version this was done with a self implemented function
   tree.ranger <- ranger::treeInfo(RF, tree = k)

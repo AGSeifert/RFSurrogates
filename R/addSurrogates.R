@@ -21,6 +21,7 @@
 #' * `adj_i`: adjusted agreement of variable i
 #'
 #' @export
+#' @md
 addSurrogates <- function(RF, trees, s, Xdata, num.threads = parallel::detectCores()) {
   if (!inherits(RF, "ranger")) {
     stop("`RF` must be a ranger object.")
@@ -69,6 +70,7 @@ addSurrogates <- function(RF, trees, s, Xdata, num.threads = parallel::detectCor
 #' This is an internal function
 #'
 #' @keywords internal
+#' @md
 getSurrogate <- function(surr.par, k = 1, maxsurr) {
   # weights and trees are extracted
   tree <- surr.par$trees[[k]]
@@ -92,6 +94,7 @@ getSurrogate <- function(surr.par, k = 1, maxsurr) {
 #' @useDynLib RFSurrogates, .registration = TRUE
 #'
 #' @keywords internal
+#' @md
 SurrTree <- function(j, wt, Xdata, controls, column.names, tree, maxsurr, ncat) {
   node <- tree[j, ]
   # for non-terminal nodes get surrogates
@@ -145,6 +148,7 @@ SurrTree <- function(j, wt, Xdata, controls, column.names, tree, maxsurr, ncat) 
 #' This is an internal function
 #'
 #' @keywords internal
+#' @md
 name.surr <- function(i, surrogate.names) {
   surrogate.names <- c(surrogate.names, paste0("surrogate_", i))
   return(surrogate.names)
@@ -155,6 +159,7 @@ name.surr <- function(i, surrogate.names) {
 #' This is an internal function
 #'
 #' @keywords internal
+#' @md
 name.adj <- function(i, adj.names) {
   adj.names <- c(adj.names, paste0("adj_", i))
   return(adj.names)
