@@ -1,6 +1,4 @@
-# RFSurrogates (development version)
-
-## New Features
+# RFSurrogates 0.4.0
 
 **Added `RandomForestSurrogates()`.**
 
@@ -53,7 +51,7 @@ Value:
 
 **Added `MutualImpurityReduction()`** as a replacement for `var.select.mir()`, where variable selection is performed with `MutualImpurityReductionVariableSelection()`.
 
-## Changes
+# RFSurrogates 0.3.4
 
 * `var.select.smd()`, `var.select.md()`, `var.relations()`, `var.relations.mfi()`: Made several improvements to developer experience:
   * `create.forest` now defaults to `is.null(forest)`, so it will automatically be `TRUE` if no forest is provided, and `FALSE` otherwise.
