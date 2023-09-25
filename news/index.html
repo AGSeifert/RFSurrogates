@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,72 @@
       <small>Source: <a href="https://github.com/AGSeifert/RFSurrogates/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="rfsurrogates-040">RFSurrogates 0.4.0<a class="anchor" aria-label="anchor" href="#rfsurrogates-040"></a></h2>
+<p><strong>Added <code><a href="../reference/RandomForestSurrogates.html">RandomForestSurrogates()</a></code>.</strong></p>
+<ul><li>This functions aims to replace the first section of the variable selection and relation functions by creating a single reusable object which contains the random forest <code><a href="https://rdrr.io/pkg/ranger/man/ranger.html" class="external-link">ranger::ranger()</a></code> model, as well as the <code>trees</code> list with layers and surrogates added.</li>
+<li>Returns a <code>RandomForestSurrogates</code> object, which serves as the base object for later analysis.</li>
+<li>Additional <code>...</code> params are passed directly to <code><a href="https://rdrr.io/pkg/ranger/man/ranger.html" class="external-link">ranger::ranger</a></code>.</li>
+<li>
+<code>s.pct</code> is a helper for calculating the number of surrogates as a fraction of number of variables (Default: 0.01). <code>s</code> can be set to overwrite this default.</li>
+<li>
+<code>mtry</code> supports the following values:
+<ul><li>One of the documented <code>string</code> values, which will cause the <code>mtry</code> passed to <code><a href="https://rdrr.io/pkg/ranger/man/ranger.html" class="external-link">ranger::ranger()</a></code> to be a function accepting the number of variables, and returning the specific transformation after flooring the result.</li>
+<li>A <code>function</code> which takes the number of variables as its first and only param, and returns the value of <code>mtry</code>.</li>
+<li>A <code>numeric</code> value for <code>mtry</code>.</li>
+<li>The default is <code>"^3/4"</code>.</li>
+</ul></li>
+<li>
+<code>type</code> also uses <code><a href="https://rdrr.io/r/base/match.arg.html" class="external-link">match.arg()</a></code> and still defaults to <code>"regression"</code>.</li>
+<li>
+<code>num.threads</code> defaults to 1.</li>
+<li>
+<code>permutate</code> will, if set to <code>TRUE</code>, apply random permutation to the data in each feature. (This is used in permutation importance approaches.)</li>
+<li>
+<code>seed</code> is now a strongly recommended optional parameter (issuing a warning whenever it is not set).
+<ul><li>Setting <code>seed</code> will cause a call to <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed()</a></code> when permutating. It is also used as the <code>seed</code> param of the <code><a href="https://rdrr.io/pkg/ranger/man/ranger.html" class="external-link">ranger::ranger()</a></code> call.</li>
+<li>Requiring <code>seed</code> as a function parameter is preferred because it does not rely on global, non-reproducible state of the random number generator, if it was not seeded immediately before the function call.</li>
+</ul></li>
+<li>The inner call to <code><a href="https://rdrr.io/pkg/ranger/man/ranger.html" class="external-link">ranger::ranger()</a></code> includes the following defaults:
+<ul><li><code>keep.inbag = TRUE</code></li>
+<li><code>respect.unordered.factors = "partition"</code></li>
+<li>Data is passed as a data.frame with the special column <code>y</code>, and the optional special column <code>status</code> for survival forests.
+<ul><li>
+<code>x</code> must not contain the column names <code>y</code> or <code>status</code>, as this may lead to unexpected behavior.</li>
+</ul></li>
+</ul></li>
+<li>In general, input parameters are more strictly validated.</li>
+<li>The function uses <code>num.threads</code> to also parallelize creating the list of trees with layers.</li>
+</ul><p><strong>Added <code><a href="../reference/SurrogateMinimalDepth.html">SurrogateMinimalDepth()</a></code></strong> as a replacement for <code><a href="../reference/var.select.smd.html">var.select.smd()</a></code>. It takes just a <code>RandomForestSurrogates</code> object as a param, and returns a <code>SurrogateMinimalDepth</code> list object.</p>
+<p>Value:</p>
+<ul><li>
+<code>RFS</code>: The <code>RandomForestSurrogates</code> object used.</li>
+<li>
+<code>selected</code>: The selected variables (previously <code>var</code>).</li>
+<li>
+<code>depth</code>: The surrogate minimal depth of each variable (previously <code>info$depth</code>).</li>
+<li>
+<code>threshold</code>: The threshold used to select variables (previously <code>info$threshold</code>).</li>
+<li>
+<code>surrogates</code>: Details on the average number of surrogates in the forest, and per layer.
+<ul><li>
+<code>average</code>: Previously <code>s$s.a</code>.</li>
+<li>
+<code>layer</code>: Previously <code>s$s.l</code>.</li>
+</ul></li>
+</ul><p><strong>Added <code><a href="../reference/MeanAdjustedAgreement.html">MeanAdjustedAgreement()</a></code></strong> as a replacement for <code><a href="../reference/var.relations.html">var.relations()</a></code>. It takes a <code>RandomForestSurrogates</code> object as a param, and returns a <code>MeanAdjustedAgreement</code> list object.</p>
+<p>Value:</p>
+<ul><li>
+<code>RFS</code>: The <code>RandomForestSurrogates</code> object used.</li>
+<li>
+<code>relations</code>: The matrix of mean adjusted agreements for the investigated variables (rows) and the possible candidates (columns) (previously <code>surr.res</code>).</li>
+<li>
+<code>threshold</code>: The threshold used to select related variables.</li>
+<li>
+<code>related</code>: A list of vectors for each investigated variable containing the related candidate variables (previously <code>var</code>).</li>
+</ul><p><strong>Added <code><a href="../reference/MFI.html">MFI()</a></code></strong> as replacement for <code><a href="../reference/var.relations.mfi.html">var.relations.mfi()</a></code>. <code><a href="../reference/MFI.html">MFI()</a></code> takes the same arguments as <code><a href="../reference/RandomForestSurrogates.html">RandomForestSurrogates()</a></code>, with the additional <code>variables</code> and <code>candidates</code> params. Perform variable selection using <code><a href="../reference/MutualForestImpactVariableSelection.html">MutualForestImpactVariableSelection()</a></code>.</p>
+<p><strong>Added <code><a href="../reference/MutualImpurityReduction.html">MutualImpurityReduction()</a></code></strong> as a replacement for <code><a href="../reference/var.select.mir.html">var.select.mir()</a></code>, where variable selection is performed with <code><a href="../reference/MutualImpurityReductionVariableSelection.html">MutualImpurityReductionVariableSelection()</a></code>.</p>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.4" id="rfsurrogates-034">RFSurrogates 0.3.4<a class="anchor" aria-label="anchor" href="#rfsurrogates-034"></a></h2>
 <ul><li>

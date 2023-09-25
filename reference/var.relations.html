@@ -16,7 +16,7 @@ Based on the threshold a vector is created containing the related variables.'><!
     
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,7 +103,7 @@ classification mode is used). For survival forests this is the time variable.</p
 
 
 <dt>s</dt>
-<dd><p>predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 % of no. of variables.</p></dd>
+<dd><p>predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 percent of no. of variables.</p></dd>
 
 
 <dt>mtry</dt>
@@ -127,7 +127,7 @@ classification mode is used). For survival forests this is the time variable.</p
 
 
 <dt>create.forest</dt>
-<dd><p>Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.</p></dd>
+<dd><p>Default: TRUE if <code>forest</code> is NULL, FALSE otherwise. Whether to create or use an existing forest.</p></dd>
 
 
 <dt>forest</dt>
@@ -162,21 +162,19 @@ classification mode is used). For survival forests this is the time variable.</p
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>a list containing:</p><ul><li><p>variables: the variables to which relations are investigated.</p></li>
-<li><p>surr.res: a matrix with mean adjusted agreement values with variables in rows and candidates in columns.</p></li>
-<li><p>threshold: the threshold used to select related variables.</p></li>
-<li><p>var: a list with one vector for each variable containing related variables.</p></li>
-<li><p>ranger: ranger object.</p></li>
+<p>A list containing:</p><ul><li><p><code>variables</code>: the variables to which relations are investigated.</p></li>
+<li><p><code>surr.res</code>: a matrix with mean adjusted agreement values with variables in rows and candidates in columns.</p></li>
+<li><p><code>threshold</code>: the threshold used to select related variables.</p></li>
+<li><p><code>var</code>: a list with one vector for each variable containing related variables.</p></li>
+<li><p><code>ranger</code>: ranger object.</p></li>
 </ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># read data</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"SMD_example_data"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">SMD_example_data</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">SMD_example_data</span><span class="op">)</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">SMD_example_data</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span></span>
-<span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="co"># calculate variable relations</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">var.relations</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  x <span class="op">=</span> <span class="va">x</span>,</span></span>

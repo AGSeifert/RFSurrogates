@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +109,7 @@ classification mode is used). For survival forests this is the time variable.</p
 
 
 <dt>create.forest</dt>
-<dd><p>Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.</p></dd>
+<dd><p>Default: TRUE if <code>forest</code> is NULL, FALSE otherwise. Whether to create or use an existing forest.</p></dd>
 
 
 <dt>forest</dt>
@@ -128,16 +128,15 @@ classification mode is used). For survival forests this is the time variable.</p
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>List with the following components:</p><ul><li><p>info: list with results from mindep function:</p><ul><li><p>depth: mean minimal depth for each variable.</p></li>
-<li><p>selected: variables has been selected (1) or not (0).</p></li>
-<li><p>threshold: the threshold that is used for the selection. (deviates slightly from the original implimentation)</p></li>
+<p>List with the following components:</p><ul><li><p><code>info</code>: list with results from <code><a href="mindep.html">mindep()</a></code> function:</p><ul><li><p><code>depth</code>: mean minimal depth for each variable.</p></li>
+<li><p><code>selected</code>: variables has been selected (1) or not (0).</p></li>
+<li><p><code>threshold</code>: the threshold that is used for the selection. (deviates slightly from the original implementation)</p></li>
 </ul></li>
-<li><p>var: vector of selected variables.</p></li>
-<li><p>forest: a list containing:
-#'</p><ul><li><p>trees: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.</p></li>
-<li><p>allvariables: all variable names of the predictor variables that are present in x.</p></li>
+<li><p><code>var</code>: vector of selected variables.</p></li>
+<li><p><code>forest</code>: a list containing:</p><ul><li><p><code>trees</code>: list of trees that was created by <code><a href="getTreeranger.html">getTreeranger()</a></code>, <code><a href="addLayer.html">addLayer()</a></code>, and <code><a href="addSurrogates.html">addSurrogates()</a></code> functions and that was used for surrogate minimal depth variable importance.</p></li>
+<li><p><code>allvariables</code>: all variable names of the predictor variables that are present in x.</p></li>
 </ul></li>
-<li><p>ranger: ranger object</p></li>
+<li><p><code>ranger</code>: ranger object</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
@@ -148,11 +147,9 @@ classification mode is used). For survival forests this is the time variable.</p
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># read data</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"SMD_example_data"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span><span class="co"># select variables (usually more trees are needed)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"SMD_example_data"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">var.select.md</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  x <span class="op">=</span> <span class="va">SMD_example_data</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">SMD_example_data</span><span class="op">)</span><span class="op">]</span>,</span></span>

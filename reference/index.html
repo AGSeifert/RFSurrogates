@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,9 +44,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="variable-selection">Variable Selection<a class="anchor" aria-label="anchor" href="#variable-selection"></a></h2>
+      <h2 id="random-forest-surrogates">Random Forest Surrogates<a class="anchor" aria-label="anchor" href="#random-forest-surrogates"></a></h2>
       
-      
+      <p class="section-desc"></p><p>The basic object used in most further analysis functions.</p>
 
       
     </div><div id="" class="section level2">
@@ -56,23 +56,91 @@
 
       <dl><dt>
           
-          <code><a href="var.select.md.html">var.select.md()</a></code> 
+          <code><a href="RandomForestSurrogates.html">RandomForestSurrogates()</a></code> 
         </dt>
-        <dd>Variable selection with Minimal Depth (MD)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="var.select.mir.html">var.select.mir()</a></code> 
-        </dt>
-        <dd>Variable selection with mutual impurity reduction (MIR)</dd>
-      </dl><dl><dt>
-          
-          <code><a href="var.select.smd.html">var.select.smd()</a></code> 
-        </dt>
-        <dd>Variable selection with Surrogate Minimal Depth (SMD) (MAIN FUNCTION)</dd>
+        <dd>Create a random forest with surrogates.</dd>
       </dl></div><div class="section level2">
-      <h2 id="variable-relations">Variable Relations<a class="anchor" aria-label="anchor" href="#variable-relations"></a></h2>
+      <h2 id="surrogate-minimal-depth">Surrogate Minimal Depth<a class="anchor" aria-label="anchor" href="#surrogate-minimal-depth"></a></h2>
+      
+      <p class="section-desc"></p><p>Surrogate Minimal Depth (SMD) enables the identification of multiple features from the same metabolites and reveals meaningful biological relations, proving its high potential for the comprehensive utilization of high-dimensional metabolomics data. Reference: <a href="https://doi.org/10.3390/metabo12010005" class="external-link">10.3390/metabo12010005</a></p>
+
+      
+    </div><div id="" class="section level2">
       
       
+      
+
+      <dl><dt>
+          
+          <code><a href="SurrogateMinimalDepth.html">SurrogateMinimalDepth()</a></code> 
+        </dt>
+        <dd>Variable selection with Surrogate Minimal Depth (SMD)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="MinimalDepth.html">MinimalDepth()</a></code> 
+        </dt>
+        <dd>Variable selection with Minimal Depth (MD).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="MeanAdjustedAgreement.html">MeanAdjustedAgreement()</a></code> 
+        </dt>
+        <dd>Investigate variable relations of a specific variable with mean adjusted agreement</dd>
+      </dl></div><div class="section level2">
+      <h2 id="mutual-impact-of-features">Mutual Impact of Features<a class="anchor" aria-label="anchor" href="#mutual-impact-of-features"></a></h2>
+      
+      <p class="section-desc"></p><p>Mutual forest impact (MFI) is a relation parameter that evaluates the mutual association of the featurs to the outcome and, hence, goes beyond the analysis of correlation coefficients. Mutual impurity reduction (MIR) is an importance measure that combines this relation parameter with the importance of the individual features. Reference: <a href="https://doi.org/10.48550/ARXIV.2304.02490" class="external-link">10.48550/ARXIV.2304.02490</a></p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="MutualForestImpact.html">MutualForestImpact()</a></code> 
+        </dt>
+        <dd>Mutual Forest Impact (Corrected Mean Adjusted Agreement).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="MFI.html">MFI()</a></code> 
+        </dt>
+        <dd>Mutual Forest Impact shortcut function (recommended).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="MutualImpurityReduction.html">MutualImpurityReduction()</a></code> 
+        </dt>
+        <dd>Mutual Impurity Reduction (MIR)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="MutualForestImpactVariableSelection.html">MutualForestImpactVariableSelection()</a></code> 
+        </dt>
+        <dd>Variable selection for MutualForestImpact.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="MutualImpurityReductionVariableSelection.html">MutualImpurityReductionVariableSelection()</a></code> 
+        </dt>
+        <dd>Variable selection for Mutual Impurity Reduction.</dd>
+      </dl></div><div class="section level2">
+      <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
+      
+      <p class="section-desc"></p><p>Example data sets shipped with this package.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="SMD_example_data.html">SMD_example_data</a></code> 
+        </dt>
+        <dd>Example data set for the package SurrogateMinimalDepth</dd>
+      </dl></div><div class="section level2">
+      <h2 id="version-x-functions">Version 0.3.x functions<a class="anchor" aria-label="anchor" href="#version-x-functions"></a></h2>
+      
+      <p class="section-desc"></p><p>The original functions from prior versions remain available for backward compatability.</p>
 
       
     </div><div id="" class="section level2">
@@ -90,26 +158,25 @@
           <code><a href="var.relations.mfi.html">var.relations.mfi()</a></code> 
         </dt>
         <dd>Investigate variable relations of a specific variable with mutual forest impact (corrected mean adjusted agreement).</dd>
-      </dl></div><div class="section level2">
-      <h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
-      
-      
-
-      
-    </div><div id="" class="section level2">
-      
-      
-      
-
-      <dl><dt>
+      </dl><dl><dt>
           
-          <code><a href="SMD_example_data.html">SMD_example_data</a></code> 
+          <code><a href="var.select.md.html">var.select.md()</a></code> 
         </dt>
-        <dd>Example data set for the package SurrogateMinimalDepth</dd>
+        <dd>Variable selection with Minimal Depth (MD)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="var.select.smd.html">var.select.smd()</a></code> 
+        </dt>
+        <dd>Variable selection with Surrogate Minimal Depth (SMD) (MAIN FUNCTION)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="var.select.mir.html">var.select.mir()</a></code> 
+        </dt>
+        <dd>Variable selection with mutual impurity reduction (MIR).</dd>
       </dl></div><div class="section level2">
-      <h2 id="additional-functions">Additional functions<a class="anchor" aria-label="anchor" href="#additional-functions"></a></h2>
+      <h2 id="other-functions">Other functions<a class="anchor" aria-label="anchor" href="#other-functions"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Additional functions published as part of version 0.3.x and earlier versions. These will remain available for backward compatability.</p>
 
       
     </div><div id="" class="section level2">

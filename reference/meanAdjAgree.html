@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>trees</dt>
-<dd><p>list of trees created by getTreeranger, addLayer and addSurrogate.</p></dd>
+<dd><p>list of trees created by <code><a href="getTreeranger.html">getTreeranger()</a></code>, <code><a href="addLayer.html">addLayer()</a></code> and <code><a href="addSurrogates.html">addSurrogates()</a></code>.</p></dd>
 
 
 <dt>variables</dt>
@@ -82,7 +82,7 @@
 
 
 <dt>t</dt>
-<dd><p>variable to calculate threshold. Default is 3.</p></dd>
+<dd><p>variable to calculate threshold. Used if <code>select.var = TRUE</code>.</p></dd>
 
 
 <dt>s.a</dt>
@@ -101,10 +101,10 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>a list containing:</p><ul><li><p>variables: the variables to which relations are investigated</p></li>
-<li><p>surr.res: matrix with mean adjusted agreement values and variables investigated in rows and candidate variables in columns</p></li>
-<li><p>threshold: the threshold used to create surr.var from surr.res</p></li>
-<li><p>surr.var: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.</p></li>
+<p>A list containing:</p><ul><li><p><code>variables</code>: the variables to which relations are investigated</p></li>
+<li><p><code>surr.res</code>: matrix with mean adjusted agreement values and variables investigated in rows and candidate variables in columns</p></li>
+<li><p><code>threshold</code>: the threshold used to create surr.var from surr.res</p></li>
+<li><p><code>surr.var</code>: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.</p></li>
 </ul></div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

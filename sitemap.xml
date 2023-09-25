@@ -25,10 +25,43 @@
     <loc>https://agseifert.github.io/RFSurrogates/news/index.html</loc>
   </url>
   <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MFI.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MFI_VarSel_Janitza.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MFI_VarSel_Permutation.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MeanAdjustedAgreement.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MinimalDepth.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MutualForestImpact.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MutualForestImpactVariableSelection.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MutualImpurityReduction.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/MutualImpurityReductionVariableSelection.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/RandomForestSurrogates.html</loc>
+  </url>
+  <url>
     <loc>https://agseifert.github.io/RFSurrogates/reference/SMD_example_data.html</loc>
   </url>
   <url>
     <loc>https://agseifert.github.io/RFSurrogates/reference/SurrTree.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/SurrogateMinimalDepth.html</loc>
   </url>
   <url>
     <loc>https://agseifert.github.io/RFSurrogates/reference/addLayer.html</loc>
@@ -56,6 +89,9 @@
   </url>
   <url>
     <loc>https://agseifert.github.io/RFSurrogates/reference/count.surrogates.html</loc>
+  </url>
+  <url>
+    <loc>https://agseifert.github.io/RFSurrogates/reference/getSurrgate2.html</loc>
   </url>
   <url>
     <loc>https://agseifert.github.io/RFSurrogates/reference/getSurrogate.html</loc>
