@@ -37,7 +37,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{type}{mode of prediction ("regression", "classification" or "survival"). Default is regression.}
 
-\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \% of no. of variables.}
+\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 percent of no. of variables.}
 
 \item{mtry}{number of variables to possibly split at in each node. Default is no. of variables^(3/4) ("^3/4") as recommended by (Ishwaran 2011). Also possible is "sqrt" and "0.5" to use the square root or half of the no. of variables.}
 
@@ -49,7 +49,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{save.ranger}{set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).}
 
-\item{create.forest}{Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.}
+\item{create.forest}{Default: TRUE if \code{forest} is NULL, FALSE otherwise. Whether to create or use an existing forest.}
 
 \item{forest}{the random forest that should be analyzed}
 
@@ -68,27 +68,26 @@ classification mode is used). For survival forests this is the time variable.}
 \item{method}{Method  to  compute  p-values.   Use  "janitza"  for  the  method  by  Janitza  et  al. (2016) or "permutation" to utilize permuted relations.}
 }
 \value{
-a list containing:
+A list containing:
 \itemize{
-\item variables: the variables to which relations are investigated.
-\item surr.res: a matrix with the mutual forest impact values with variables in rows and candidates in columns.
-\item surr.perm: a matrix with the mutual forest impact values of the permuted variables with variables in rows and candidates in columns.
-\item p.rel: a list with the obtained p-values for the relation analysis of each variable.
-\item var.rel: a list with vectors of related variables for each variable.
-\item ranger: ranger objects.
-\item method: Method  to  compute  p-values: "janitza" or "permutation".
-\item p.t: p.value threshold for selection of related variables
+\item \code{variables}: the variables to which relations are investigated.
+\item \code{surr.res}: a matrix with the mutual forest impact values with variables in rows and candidates in columns.
+\item \code{surr.perm}: a matrix with the mutual forest impact values of the permuted variables with variables in rows and candidates in columns.
+\item \code{p.rel}: a list with the obtained p-values for the relation analysis of each variable.
+\item \code{var.rel}: a list with vectors of related variables for each variable.
+\item \code{ranger}: ranger objects.
+\item \code{method}: Method  to  compute  p-values: "janitza" or "permutation".
+\item \code{p.t}: p.value threshold for selection of related variables
 }
 }
 \description{
 This function corrects the mean adjusted agreement by a permutation approach and generates the relation parameter mutual forest impact. Subsequently p-values are determined and related variables are selected.
 }
 \examples{
-# read data
+\donttest{
 data("SMD_example_data")
 x <- SMD_example_data[, 2:ncol(SMD_example_data)]
 y <- SMD_example_data[, 1]
-\donttest{
 # calculate variable relations
 set.seed(42)
 res <- var.relations.mfi(

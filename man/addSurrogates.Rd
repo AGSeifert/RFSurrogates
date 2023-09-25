@@ -4,7 +4,14 @@
 \alias{addSurrogates}
 \title{Add surrogate information to a tree list.}
 \usage{
-addSurrogates(RF, trees, s, Xdata, num.threads = parallel::detectCores())
+addSurrogates(
+  RF,
+  trees,
+  s,
+  Xdata,
+  num.threads = parallel::detectCores(),
+  preschedule.threads = TRUE
+)
 }
 \arguments{
 \item{RF}{A \link[ranger:ranger]{ranger::ranger} object which was created with \code{keep.inbag = TRUE}.}
@@ -16,6 +23,8 @@ addSurrogates(RF, trees, s, Xdata, num.threads = parallel::detectCores())
 \item{Xdata}{data without the dependent variable.}
 
 \item{num.threads}{(Default: \code{\link[parallel:detectCores]{parallel::detectCores()}}) Number of threads to spawn for parallelization.}
+
+\item{preschedule.threads}{(Default: TRUE) Passed as \code{mc.preschedule} to \code{\link[parallel:mclapply]{parallel::mclapply()}}.}
 }
 \value{
 A list of trees.

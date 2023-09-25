@@ -36,7 +36,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{type}{mode of prediction ("regression", "classification" or "survival"). Default is regression.}
 
-\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \% of no. of variables.}
+\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 percent of no. of variables.}
 
 \item{mtry}{number of variables to possibly split at in each node. Default is no. of variables^(3/4) ("^3/4") as recommended by (Ishwaran 2011). Also possible is "sqrt" and "0.5" to use the square root or half of the no. of variables.}
 
@@ -48,7 +48,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{save.ranger}{set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).}
 
-\item{create.forest}{Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.}
+\item{create.forest}{Default: TRUE if \code{forest} is NULL, FALSE otherwise. Whether to create or use an existing forest.}
 
 \item{forest}{the random forest that should be analyzed}
 
@@ -65,13 +65,13 @@ classification mode is used). For survival forests this is the time variable.}
 \item{select.rel}{set False if only relations should be calculated and no related variables should be selected.}
 }
 \value{
-a list containing:
+A list containing:
 \itemize{
-\item variables: the variables to which relations are investigated.
-\item surr.res: a matrix with mean adjusted agreement values with variables in rows and candidates in columns.
-\item threshold: the threshold used to select related variables.
-\item var: a list with one vector for each variable containing related variables.
-\item ranger: ranger object.
+\item \code{variables}: the variables to which relations are investigated.
+\item \code{surr.res}: a matrix with mean adjusted agreement values with variables in rows and candidates in columns.
+\item \code{threshold}: the threshold used to select related variables.
+\item \code{var}: a list with one vector for each variable containing related variables.
+\item \code{ranger}: ranger object.
 }
 }
 \description{
@@ -81,12 +81,10 @@ as "important". t=2 means the probability has to be twice, etc.
 Based on the threshold a vector is created containing the related variables.
 }
 \examples{
-# read data
+\donttest{
 data("SMD_example_data")
 x <- SMD_example_data[, 2:ncol(SMD_example_data)]
 y <- SMD_example_data[, 1]
-\donttest{
-# calculate variable relations
 set.seed(42)
 res <- var.relations(
   x = x,

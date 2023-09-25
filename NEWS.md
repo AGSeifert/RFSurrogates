@@ -1,3 +1,56 @@
+# RFSurrogates 0.4.0
+
+**Added `RandomForestSurrogates()`.**
+
+* This functions aims to replace the first section of the variable selection and relation functions by creating a single reusable object which contains the random forest `ranger::ranger()` model, as well as the `trees` list with layers and surrogates added.
+* Returns a `RandomForestSurrogates` object, which serves as the base object for later analysis.
+* Additional `...` params are passed directly to `ranger::ranger`.
+* `s.pct` is a helper for calculating the number of surrogates as a fraction of number of variables (Default: 0.01). `s` can be set to overwrite this default.
+* `mtry` supports the following values:
+  * One of the documented `string` values, which will cause the `mtry` passed to `ranger::ranger()` to be a function accepting the number of variables, and returning the specific transformation after flooring the result.
+  * A `function` which takes the number of variables as its first and only param, and returns the value of `mtry`.
+  * A `numeric` value for `mtry`.
+  * The default is `"^3/4"`.
+* `type` also uses `match.arg()` and still defaults to `"regression"`.
+* `num.threads` defaults to 1.
+* `permutate` will, if set to `TRUE`, apply random permutation to the data in each feature. (This is used in permutation importance approaches.)
+* `seed` is now a strongly recommended optional parameter (issuing a warning whenever it is not set).
+  * Setting `seed` will cause a call to `set.seed()` when permutating. It is also used as the `seed` param of the `ranger::ranger()` call.
+  * Requiring `seed` as a function parameter is preferred because it does not rely on global, non-reproducible state of the random number generator, if it was not seeded immediately before the function call.
+* The inner call to `ranger::ranger()` includes the following defaults:
+  * `keep.inbag = TRUE`
+  * `respect.unordered.factors = "partition"`
+  * Data is passed as a data.frame with the special column `y`, and the optional special column `status` for survival forests.
+    * `x` must not contain the column names `y` or `status`, as this may lead to unexpected behavior.
+* In general, input parameters are more strictly validated.
+* The function uses `num.threads` to also parallelize creating the list of trees with layers.
+
+**Added `SurrogateMinimalDepth()`** as a replacement for `var.select.smd()`. It takes just a `RandomForestSurrogates` object as a param, and returns a `SurrogateMinimalDepth` list object.
+
+Value:
+
+* `RFS`: The `RandomForestSurrogates` object used.
+* `selected`: The selected variables (previously `var`).
+* `depth`: The surrogate minimal depth of each variable (previously `info$depth`).
+* `threshold`: The threshold used to select variables (previously `info$threshold`).
+* `surrogates`: Details on the average number of surrogates in the forest, and per layer.
+  * `average`: Previously `s$s.a`.
+  * `layer`: Previously `s$s.l`.
+
+**Added `MeanAdjustedAgreement()`** as a replacement for `var.relations()`. It takes a `RandomForestSurrogates` object as a param, and returns a `MeanAdjustedAgreement` list object.
+
+Value:
+
+* `RFS`: The `RandomForestSurrogates` object used.
+* `relations`: The matrix of mean adjusted agreements for the investigated variables (rows) and the possible candidates (columns) (previously `surr.res`).
+* `threshold`: The threshold used to select related variables.
+* `related`: A list of vectors for each investigated variable containing the related candidate variables (previously `var`).
+
+**Added `MFI()`** as replacement for `var.relations.mfi()`.
+`MFI()` takes the same arguments as `RandomForestSurrogates()`, with the additional `variables` and `candidates` params. Perform variable selection using `MutualForestImpactVariableSelection()`.
+
+**Added `MutualImpurityReduction()`** as a replacement for `var.select.mir()`, where variable selection is performed with `MutualImpurityReductionVariableSelection()`.
+
 # RFSurrogates 0.3.4
 
 * `var.select.smd()`, `var.select.md()`, `var.relations()`, `var.relations.mfi()`: Made several improvements to developer experience:

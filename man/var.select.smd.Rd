@@ -32,7 +32,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{type}{mode of prediction ("regression", "classification" or "survival"). Default is regression.}
 
-\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 \% of no. of variables.}
+\item{s}{predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes). Default is 1 percent of no. of variables.}
 
 \item{mtry}{number of variables to possibly split at in each node. Default is no. of variables^(3/4) ("^3/4") as recommended by (Ishwaran 2011). Also possible is "sqrt" and "0.5" to use the square root or half of the no. of variables.}
 
@@ -44,7 +44,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{save.ranger}{set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).}
 
-\item{create.forest}{Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.}
+\item{create.forest}{Default: TRUE if \code{forest} is NULL, FALSE otherwise. Whether to create or use an existing forest.}
 
 \item{forest}{the random forest that should be analyzed}
 
@@ -55,36 +55,32 @@ classification mode is used). For survival forests this is the time variable.}
 \value{
 list with the following components:
 \itemize{
-\item info: list with results from surrmindep function:
+\item \code{info}: list with results from surrmindep function:
 \itemize{
-\item depth: mean surrogate minimal depth for each variable.
-\item selected: variables has been selected (1) or not (0).
-\item threshold: the threshold that is used for the selection.
+\item \code{depth}: mean surrogate minimal depth for each variable.
+\item \code{selected}: variables has been selected (1) or not (0).
+\item \code{threshold}: the threshold that is used for the selection.
 }
-\item var: vector of selected variables.
-
-\item s: list with the results of count.surrogate function:
+\item \code{var}: vector of selected variables.
+\item \code{s}: list with the results of count.surrogate function:
 \itemize{
-\item s.a: total average number of surrogate variables.
-\item s.l: average number of surrogate variables in the respective layers.
+\item \code{s.a}: total average number of surrogate variables.
+\item \code{s.l}: average number of surrogate variables in the respective layers.
 }
-\item forest: a list containing:
-#'\itemize{
-\item trees: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.
-\item allvariables: all variable names of the predictor variables that are present in x.
+\item \code{forest}: a list containing:
+\itemize{
+\item \code{trees}: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.
+\item \code{allvariables}: all variable names of the predictor variables that are present in x
 }
-\item ranger: ranger object.
-
+\item \code{ranger}: ranger object.
 }
 }
 \description{
 This function executes SMD applying \link[ranger]{ranger} for random forests generation and a modified version of \link[rpart]{rpart} to find surrogate variables.
 }
 \examples{
-# read data
-data("SMD_example_data")
-
 \donttest{
+data("SMD_example_data")
 # select variables (usually more trees are needed)
 set.seed(42)
 res <- var.select.smd(
@@ -93,11 +89,12 @@ res <- var.select.smd(
 )
 res$var
 }
+
 }
 \references{
 \itemize{
-  \item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-  \item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
-  \item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
+\item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
+\item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
+\item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
 }
 }

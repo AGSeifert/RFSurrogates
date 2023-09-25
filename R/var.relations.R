@@ -12,21 +12,18 @@
 #' @param num.threads number of threads used for determination of relations. Default is number of CPUs available.
 #' @inheritParams var.select.smd
 #'
-#' @return a list containing:
-#' \itemize{
-#' \item variables: the variables to which relations are investigated.
-#' \item surr.res: a matrix with mean adjusted agreement values with variables in rows and candidates in columns.
-#' \item threshold: the threshold used to select related variables.
-#' \item var: a list with one vector for each variable containing related variables.
-#' \item ranger: ranger object.
-#' }
+#' @returns A list containing:
+#'  * `variables`: the variables to which relations are investigated.
+#'  * `surr.res`: a matrix with mean adjusted agreement values with variables in rows and candidates in columns.
+#'  * `threshold`: the threshold used to select related variables.
+#'  * `var`: a list with one vector for each variable containing related variables.
+#'  * `ranger`: ranger object.
+#'
 #' @examples
-#' # read data
+#' \donttest{
 #' data("SMD_example_data")
 #' x <- SMD_example_data[, 2:ncol(SMD_example_data)]
 #' y <- SMD_example_data[, 1]
-#' \donttest{
-#' # calculate variable relations
 #' set.seed(42)
 #' res <- var.relations(
 #'   x = x,
