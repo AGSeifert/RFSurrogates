@@ -1,6 +1,23 @@
-# RFSurrogates (development version)
+# RFSurrogates 0.3.4
 
-<!-- News Style-guide: https://style.tidyverse.org/news.html -->
+* `var.select.smd()`, `var.select.md()`, `var.relations()`, `var.relations.mfi()`: Made several improvements to developer experience:
+  * `create.forest` now defaults to `is.null(forest)`, so it will automatically be `TRUE` if no forest is provided, and `FALSE` otherwise.
+  * `x` is no longer required if `create.forest` is `FALSE`.
+  * (Internal) Inverted some nested guard clauses for readability.
+* `addLayer()`: Refactor for-loop to lapply.
+  * Add `num.threads` param to enable parallelization using `parallel::mclapply()`. It defaults to 1 for backward compatability.
+* `getTreeranger()`: Refactor `lapply()` to `parallel::mclapply()`.
+  * Add `num.threads` param (passed to `mc.cores` in `parallel::mclapply()`). It defaults to 1 for backward compatability.
+  * Add `add_layer` param to include the effect of `addLayer` within the same loop. Defaults to `FALSE` for backward compatability.
+  * (Internal) `getsingletree()`: Add `add_layer` param to enable adding layers within the same loop.
+* `addSurrogates()`: 
+  * Clarified default value for `num.threads` to be `parallel::detectCores()` by adding it as a default to the parameter 
+  * Added assertion that `RF` is a `ranger` object.
+  * Added assertion that `RF$num.trees` and `length(trees)` are equal. This is not considered a breaking change since these values should always be equal when the function is used correctly.
+* Added S3 classes to the `trees` list objects.
+  * `getTreeranger()` now returns a `RangerTrees` list.
+  * `addLayer()` and `getTreeranger(add_layer = TRUE)` add the `LayerTrees` class to the list (indicating presence of the `layer` list item). It now requires that its `trees` param inherits `RangerTrees`.
+  * `addSurrogates()` now adds the `SurrogateTrees` class. It now requires that its `trees` param inherits `RangerTrees`.
 
 # RFSurrogates 0.3.3
 

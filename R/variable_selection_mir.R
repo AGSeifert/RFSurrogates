@@ -167,25 +167,25 @@ var.select.mir <- function(x = NULL, y = NULL, num.trees = 500, type = "regressi
 
   if (select.var) {
     if (method.sel == "janitza") {
-      if (corr.rel) {
-        ## Mirrored VIMP (# This part is taken from ranger function)
-        m1 <- mir[mir < 0]
-        m2 <- mir[mir == 0]
-        null.rel <- c(m1, -m1, m2)
-
-        pval <- 1 - ranger:::numSmaller(mir, null.rel) / length(null.rel)
-        names(pval) <- allvariables
-        selected <- as.numeric(pval <= p.t.sel)
-        names(selected) <- names(pval)
-
-        if (length(m1) == 0) {
-          stop("No negative importance values found for selection of important variables. Consider the 'permutation' approach.")
-        }
-        if (length(m1) < 100) {
-          warning("Only few negative importance values found for selection of important variables, inaccurate p-values. Consider the 'permutation' approach.")
-        }
-      } else {
+      if (!corr.rel) {
         stop("Janitza approach should only be conducted with corrected relations")
+      }
+
+      ## Mirrored VIMP (# This part is taken from ranger function)
+      m1 <- mir[mir < 0]
+      m2 <- mir[mir == 0]
+      null.rel <- c(m1, -m1, m2)
+
+      pval <- 1 - ranger:::numSmaller(mir, null.rel) / length(null.rel)
+      names(pval) <- allvariables
+      selected <- as.numeric(pval <= p.t.sel)
+      names(selected) <- names(pval)
+
+      if (length(m1) == 0) {
+        stop("No negative importance values found for selection of important variables. Consider the 'permutation' approach.")
+      }
+      if (length(m1) < 100) {
+        warning("Only few negative importance values found for selection of important variables, inaccurate p-values. Consider the 'permutation' approach.")
       }
     }
 

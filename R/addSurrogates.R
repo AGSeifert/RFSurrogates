@@ -1,33 +1,44 @@
-#' Add surrogate information that was created by getTreeranger
+#' Add surrogate information to a tree list.
 #'
-#' This function adds surrogate variables and adjusted agreement values to a forest that was created by getTreeranger.
+#' This function adds surrogate variables and adjusted agreement values to a forest that was created by [getTreeranger].
 #'
-#' @param RF random forest object created by ranger (with keep.inbag=TRUE).
-#' @param trees list of trees created by getTreeranger.
-#' @param s Predefined number of surrogate splits (it may happen that the actual number of surrogate splits differes in individual nodes). Default is 1 \% of no. of variables.
+#' @param RF A [ranger::ranger] object which was created with `keep.inbag = TRUE`.
+#' @param trees List of trees created by [getTreeranger].
+#' @param s Predefined number of surrogate splits (it may happen that the actual number of surrogate splits differs in individual nodes).
 #' @param Xdata data without the dependent variable.
-#' @param num.threads number of threads used for parallel execution. Default is number of CPUs available.
-#' @return a list with trees containing of lists of nodes with the elements:
-#' \itemize{
-#' \item nodeID: ID of the respective node (important for left and right daughters in the next columns)
-#' \item leftdaughter: ID of the left daughter of this node
-#' \item rightdaughter: ID of the right daughter of this node
-#' \item splitvariable: ID of the split variable
-#' \item splitpoint: splitpoint of the split variable
-#' \item status: "0" for terminal and "1" for non-terminal
-#' \item layer: layer information (0 means root node, 1 means 1 layer below root, etc)
-#' \item surrogate_i: numbered surrogate variables (number depending on s)
-#' \item adj_i: adjusted agreement of variable i
-#' }
+#' @param num.threads (Default: [parallel::detectCores()]) Number of threads to spawn for parallelization.
+#'
+#' @returns A list of trees.
+#' A list of trees containing of lists of nodes with the elements:
+#' * `nodeID`: ID of the respective node (important for left and right daughters in the next columns)
+#' * `leftdaughter`: ID of the left daughter of this node
+#' * `rightdaughter`: ID of the right daughter of this node
+#' * `splitvariable`: ID of the split variable
+#' * `splitpoint`: splitpoint of the split variable
+#' * `status`: `0` for terminal and `1` for non-terminal
+#' * `layer`: layer information (`0` means root node, `1` means 1 layer below root, etc)
+#' * `surrogate_i`: numbered surrogate variables (number depending on s)
+#' * `adj_i`: adjusted agreement of variable i
+#'
 #' @export
-addSurrogates <- function(RF, trees, s, Xdata, num.threads) {
-  num.trees <- length(trees)
+#' @md
+addSurrogates <- function(RF, trees, s, Xdata, num.threads = parallel::detectCores()) {
+  if (!inherits(RF, "ranger")) {
+    stop("`RF` must be a ranger object.")
+  }
+
+  if (!inherits(trees, "RangerTrees")) {
+    stop("`trees` must be a `getTreeranger` `RangerTrees` object.")
+  }
+
+  num.trees <- RF$num.trees
+
+  if (num.trees != length(trees)) {
+    stop("Number of trees in ranger model `RF` does not match number of extracted trees in `trees`.")
+  }
+
   ncat <- sapply(sapply(Xdata, levels), length) # determine number of categories (o for continuous variables)
   names(ncat) <- colnames(Xdata)
-
-  if (is.null(num.threads)) {
-    num.threads <- parallel::detectCores()
-  }
 
   if (any(ncat) > 0) {
     Xdata[, which(ncat > 0)] <- sapply(Xdata[, which(ncat > 0)], unclass)
@@ -48,6 +59,9 @@ addSurrogates <- function(RF, trees, s, Xdata, num.threads) {
       ncat = ncat
     )
   )
+
+  class(trees.surr) <- c(class(trees), "SurrogateTrees")
+
   return(trees.surr)
 }
 
@@ -56,6 +70,7 @@ addSurrogates <- function(RF, trees, s, Xdata, num.threads) {
 #' This is an internal function
 #'
 #' @keywords internal
+#' @md
 getSurrogate <- function(surr.par, k = 1, maxsurr) {
   # weights and trees are extracted
   tree <- surr.par$trees[[k]]
@@ -79,6 +94,7 @@ getSurrogate <- function(surr.par, k = 1, maxsurr) {
 #' @useDynLib RFSurrogates, .registration = TRUE
 #'
 #' @keywords internal
+#' @md
 SurrTree <- function(j, wt, Xdata, controls, column.names, tree, maxsurr, ncat) {
   node <- tree[j, ]
   # for non-terminal nodes get surrogates
@@ -132,6 +148,7 @@ SurrTree <- function(j, wt, Xdata, controls, column.names, tree, maxsurr, ncat) 
 #' This is an internal function
 #'
 #' @keywords internal
+#' @md
 name.surr <- function(i, surrogate.names) {
   surrogate.names <- c(surrogate.names, paste0("surrogate_", i))
   return(surrogate.names)
@@ -142,6 +159,7 @@ name.surr <- function(i, surrogate.names) {
 #' This is an internal function
 #'
 #' @keywords internal
+#' @md
 name.adj <- function(i, adj.names) {
   adj.names <- c(adj.names, paste0("adj_", i))
   return(adj.names)

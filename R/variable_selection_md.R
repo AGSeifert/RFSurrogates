@@ -13,8 +13,8 @@
 #' @param num.threads number of threads used for parallel execution. Default is number of CPUs available.
 #' @param status status variable, only applicable to survival data. Use 1 for event and 0 for censoring.
 #' @param save.ranger Set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).
-#' @param create.forest set FALSE if you want to analyze an existing forest. Default is TRUE.
-#' @param forest the random forest that should be analyzed if create.forest is set to FALSE. (x and y still have to be given to obtain variable names)
+#' @param create.forest Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.
+#' @param forest the random forest that should be analyzed.
 #' @param save.memory Use memory saving (but slower) splitting mode. No effect for survival and GWAS data. Warning: This option slows down the tree growing, use only if you encounter memory problems. (This parameter is transfered to ranger)
 #' @param case.weights Weights for sampling of training observations. Observations with larger weights will be selected with higher probability in the bootstrap (or subsampled) samples for the trees.
 #'
@@ -59,7 +59,7 @@
 #'
 #' @export
 var.select.md <- function(x = NULL, y = NULL, num.trees = 500, type = "regression", mtry = NULL, min.node.size = 1, num.threads = NULL,
-                          status = NULL, save.ranger = FALSE, create.forest = TRUE, forest = NULL, save.memory = FALSE, case.weights = NULL) {
+                          status = NULL, save.ranger = FALSE, create.forest = is.null(forest), forest = NULL, save.memory = FALSE, case.weights = NULL) {
   results.smd <- var.select.smd(
     x = x, y = y, num.trees = num.trees, type = type, mtry = mtry, min.node.size = min.node.size, num.threads = num.threads,
     status = status, save.ranger = save.ranger, s = 0, create.forest = create.forest, forest = forest,

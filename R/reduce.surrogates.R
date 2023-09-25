@@ -27,8 +27,6 @@
 #'
 #' # execute SMD on tree with reduced number of surrogates
 #' res.new <- var.select.smd(
-#'   x = data.frame(),
-#'   create.forest = FALSE,
 #'   forest = forest.new,
 #'   num.threads = 1
 #' )
@@ -36,8 +34,6 @@
 #'
 #' #' # investigate variable relations
 #' rel <- var.relations(
-#'   x = data.frame(),
-#'   create.forest = FALSE,
 #'   forest = forest.new,
 #'   variables = c("X1", "X7"),
 #'   candidates = res$forest[["allvariables"]][1:100],
