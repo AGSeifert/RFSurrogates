@@ -18,6 +18,7 @@
 #' * `layer`: Tree layer depth information, starting at 0 (root node) and incremented for each layer.
 #'
 #' @export
+#' @md
 addLayer <- function(trees, num.threads = 1) {
   if (!inherits(trees, "RangerTrees")) {
     stop("`trees` must be a `getTreeranger` `RangerTrees` object.")
@@ -42,6 +43,7 @@ addLayer <- function(trees, num.threads = 1) {
 #' @seealso [addLayer()]
 #'
 #' @keywords internal
+#' @md
 add_layer_to_tree <- function(tree) {
   layer <- rep(NA, nrow(tree))
   layer[1] <- 0
