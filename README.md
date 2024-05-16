@@ -6,7 +6,7 @@ Please cite the following manuscripts if you use the package:
 
 [1] S. Seifert, S. Gundlach, S. Szymczak, Surrogate minimal depth as an importance measure for variables in random forests, Bioinformatics 2019, 35, 3663-3671. [[doi:10.1093/bioinformatics/btz149](https://doi.org/10.1093/bioinformatics/btz149)]
 
-[2] publication about MFI/MIR under preparation [[arXiv Preprint](https://doi.org/10.48550/ARXIV.2304.02490)]
+[2] S. Seifert, S. Gundlach, S. Szymczak, Exploitation of surrogate variables in random forests for unbiased analysis of mutual impact and importance of features, Bioinformatics 2023, 39, 8. [[doi:10.1093/bioinformatics/btad471](https://doi.org/10.1093/bioinformatics/btad471)] 
 
 # Installation
 
