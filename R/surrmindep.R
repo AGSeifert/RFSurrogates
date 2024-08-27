@@ -86,6 +86,7 @@ surrmindep <- function(forest, s.l = count.surrogates(forest$trees)$s.l) {
     p.1 <- 1 - p.root
     threshold <- p.root * 0 + p.1 * 1
     warning("Trees are very small! Threshold is defined based on trees with only root nodes.")
+    threshold <- unname(threshold)
   }
 
   if ((avgTreeHeight) >= 2) {
