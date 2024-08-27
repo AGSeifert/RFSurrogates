@@ -1,162 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/404.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/TROUBLESHOOTING.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MFI.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MFI_VarSel_Janitza.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MFI_VarSel_Permutation.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MeanAdjustedAgreement.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MinimalDepth.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MutualForestImpact.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MutualForestImpactVariableSelection.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MutualImpurityReduction.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/MutualImpurityReductionVariableSelection.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/RandomForestSurrogates.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/SMD_example_data.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/SurrTree.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/SurrogateMinimalDepth.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/addLayer.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/addSurrogates.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/add_layer_to_tree.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/adj.mean.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/adj.mean.trees.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/adj.node.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/build.clusters.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/calculate.mir.perm.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/count.surrogates.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/getSurrgate2.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/getSurrogate.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/getTreeranger.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/getsingletree.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/mean.adj.node.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/mean.index.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/meanAdjAgree.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/mindep.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/name.adj.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/name.surr.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/p.relation.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/permute.variable.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/reduce.surrogates.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/scount.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/select.related.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/surr.tree.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/surrmindep.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/var.relations.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/var.relations.mfi.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/var.select.md.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/var.select.mir.html</loc>
-  </url>
-  <url>
-    <loc>https://agseifert.github.io/RFSurrogates/reference/var.select.smd.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://agseifert.github.io/RFSurrogates/404.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/CONTRIBUTING.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/LICENSE-text.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/LICENSE.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/TROUBLESHOOTING.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/authors.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/index.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/news/index.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MFI.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MFI_VarSel_Janitza.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MFI_VarSel_Permutation.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MeanAdjustedAgreement.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MinimalDepth.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MutualForestImpact.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MutualForestImpactVariableSelection.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MutualImpurityReduction.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/MutualImpurityReductionVariableSelection.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/RandomForestSurrogates.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/SMD_example_data.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/SurrTree.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/SurrogateMinimalDepth.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/addLayer.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/addSurrogates.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/add_layer_to_tree.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/adj.mean.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/adj.mean.trees.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/adj.node.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/build.clusters.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/calculate.mir.perm.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/count.surrogates.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/getSurrgate2.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/getSurrogate.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/getTreeranger.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/getsingletree.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/index.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/mean.adj.node.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/mean.index.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/meanAdjAgree.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/mindep.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/name.adj.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/name.surr.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/p.relation.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/permute.variable.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/reduce.surrogates.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/scount.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/select.related.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/surr.tree.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/surrmindep.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/var.relations.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/var.relations.mfi.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/var.select.md.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/var.select.mir.html</loc></url>
+<url><loc>https://agseifert.github.io/RFSurrogates/reference/var.select.smd.html</loc></url>
 </urlset>
+
