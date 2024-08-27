@@ -1,3 +1,7 @@
+# RFSurrogates 0.4.2
+
+- Added new optional parameter to `MeanAdjustedAgreement` and `meanAdjAgree`: `round_digits` defaulting to 2. This offers the same behaviour as before, but allows rounding to different amounts of decimal places if desired.
+
 # RFSurrogates 0.4.1
 
 - Fix `SurrogateMinimalDepth`'s result `$selected` returning modified names (#13)

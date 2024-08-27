@@ -12,11 +12,12 @@ meanAdjAgree(
   t,
   s.a,
   select.var,
-  num.threads = NULL
+  num.threads = NULL,
+  round_digits = 2
 )
 }
 \arguments{
-\item{trees}{list of trees created by \code{\link[=getTreeranger]{getTreeranger()}}, \code{\link[=addLayer]{addLayer()}} and \code{\link[=addSurrogates]{addSurrogates()}}.}
+\item{trees}{list of trees created by [getTreeranger()], [addLayer()] and [addSurrogates()].}
 
 \item{variables}{vector of variable names.}
 
@@ -24,22 +25,22 @@ meanAdjAgree(
 
 \item{candidates}{vector of variable names (strings) that are candidates to be related to the variables (has to be contained in allvariables)}
 
-\item{t}{variable to calculate threshold. Used if \code{select.var = TRUE}.}
+\item{t}{variable to calculate threshold. Used if `select.var = TRUE`.}
 
 \item{s.a}{average number of surrogate variables (ideally calculated by count.surrogates function).}
 
 \item{select.var}{set False if only relations should be calculated and no related variables should be selected.}
 
 \item{num.threads}{number of threads used for parallel execution. Default is number of CPUs available.}
+
+\item{round_digits}{(Default: 2) Round mean adjusted agreement to this many digits in [mean.index].}
 }
 \value{
 A list containing:
-\itemize{
-\item \code{variables}: the variables to which relations are investigated
-\item \code{surr.res}: matrix with mean adjusted agreement values and variables investigated in rows and candidate variables in columns
-\item \code{threshold}: the threshold used to create surr.var from surr.res
-\item \code{surr.var}: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.
-}
+ * `variables`: the variables to which relations are investigated
+ * `surr.res`: matrix with mean adjusted agreement values and variables investigated in rows and candidate variables in columns
+ * `threshold`: the threshold used to create surr.var from surr.res
+ * `surr.var`: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.
 }
 \description{
 This is the main function of var.relations function.

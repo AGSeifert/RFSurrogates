@@ -4,7 +4,7 @@
 \alias{mean.index}
 \title{mean.index}
 \usage{
-\method{mean}{index}(i, list.res, index.variables)
+\method{mean}{index}(i, list.res, index.variables, round_digits = 2)
 }
 \description{
 This is an internal function

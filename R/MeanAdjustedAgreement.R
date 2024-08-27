@@ -11,6 +11,7 @@
 #' @param candidates Vector of variable names that **are candidates to be related to the variables**. (Default: All variables used to create the random forest.)
 #' @param related (Default: TRUE) Whether related variables should be identified.
 #' @param num.threads (Default: 1) Number of threads used for determination of relations.
+#' @param round_digits (Default: 2) Round mean adjusted agreement to this many digits.
 #'
 #' @return A `MeanAdjustedAgreement` list object:
 #'  * `RFS`: The original [RandomForestSurrogates()] object.
@@ -43,13 +44,13 @@
 #' @keywords varrel
 #' @export
 MeanAdjustedAgreement <- function(
-  RFS,
-  t = 5,
-  variables = RFS$ranger$forest$independent.variable.names,
-  candidates = RFS$ranger$forest$independent.variable.names,
-  related = TRUE,
-  num.threads = 1
-) {
+    RFS,
+    t = 5,
+    variables = RFS$ranger$forest$independent.variable.names,
+    candidates = RFS$ranger$forest$independent.variable.names,
+    related = TRUE,
+    num.threads = 1,
+    round_digits = 2) {
   if (!inherits(RFS, "RandomForestSurrogates")) {
     stop("`RFS` must be a `RandomForestSurrogates` object.")
   }
@@ -73,10 +74,11 @@ MeanAdjustedAgreement <- function(
     t = t,
     s.a = s$s.a,
     select.var = related,
-    num.threads = num.threads
+    num.threads = num.threads,
+    round_digits = round_digits
   )
 
-  results = list(
+  results <- list(
     RFS = RFS,
     relations = maa$surr.res,
     threshold = maa$threshold
