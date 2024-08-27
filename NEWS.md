@@ -1,3 +1,7 @@
+# RFSurrogates 0.4.1
+
+- Fix `SurrogateMinimalDepth`'s result `$selected` returning modified names (#13)
+
 # RFSurrogates 0.4.0
 
 **Added `RandomForestSurrogates()`.**
