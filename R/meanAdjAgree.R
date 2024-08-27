@@ -10,6 +10,7 @@
 #' @param s.a average number of surrogate variables (ideally calculated by count.surrogates function).
 #' @param select.var set False if only relations should be calculated and no related variables should be selected.
 #' @param num.threads number of threads used for parallel execution. Default is number of CPUs available.
+#' @param round_digits (Default: 2) Round mean adjusted agreement to this many digits in [mean.index].
 #'
 #' @returns A list containing:
 #'  * `variables`: the variables to which relations are investigated
@@ -18,7 +19,7 @@
 #'  * `surr.var`: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.
 #'
 #' @export
-meanAdjAgree <- function(trees, variables, allvariables, candidates, t, s.a, select.var, num.threads = NULL) {
+meanAdjAgree <- function(trees, variables, allvariables, candidates, t, s.a, select.var, num.threads = NULL, round_digits = 2) {
   num.trees <- length(trees)
   index.variables <- match(variables, allvariables)
   index.candidates <- match(candidates, allvariables)
@@ -39,7 +40,8 @@ meanAdjAgree <- function(trees, variables, allvariables, candidates, t, s.a, sel
       1:length(index.variables),
       mean.index,
       list.res,
-      index.variables
+      index.variables,
+      round_digits = round_digits
     )),
     ncol = length(candidates), nrow = length(variables), byrow = TRUE
   )
@@ -64,9 +66,9 @@ meanAdjAgree <- function(trees, variables, allvariables, candidates, t, s.a, sel
 #' This is an internal function
 #'
 #' @keywords internal
-mean.index <- function(i, list.res, index.variables) {
+mean.index <- function(i, list.res, index.variables, round_digits = 2) {
   list <- list.res[which(names(list.res) == index.variables[i])]
-  mean.list <- round(Reduce("+", list) / length(list), 2)
+  mean.list <- round(Reduce("+", list) / length(list), digits = round_digits)
   if (length(mean.list) > 0) {
     return(mean.list)
   } else {

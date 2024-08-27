@@ -10,34 +10,33 @@ MeanAdjustedAgreement(
   variables = RFS$ranger$forest$independent.variable.names,
   candidates = RFS$ranger$forest$independent.variable.names,
   related = TRUE,
-  num.threads = 1
+  num.threads = 1,
+  round_digits = 2
 )
 }
 \arguments{
-\item{RFS}{A \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.}
+\item{RFS}{A [RandomForestSurrogates()] object.}
 
 \item{t}{(Default: 5) Used to calculate threshold.}
 
-\item{variables}{Vector of variable names for \strong{which related variables should be searched}. (Default: All variables used to create the random forest.)}
+\item{variables}{Vector of variable names for **which related variables should be searched**. (Default: All variables used to create the random forest.)}
 
-\item{candidates}{Vector of variable names that \strong{are candidates to be related to the variables}. (Default: All variables used to create the random forest.)}
+\item{candidates}{Vector of variable names that **are candidates to be related to the variables**. (Default: All variables used to create the random forest.)}
 
 \item{related}{(Default: TRUE) Whether related variables should be identified.}
 
 \item{num.threads}{(Default: 1) Number of threads used for determination of relations.}
+
+\item{round_digits}{(Default: 2) Round mean adjusted agreement to this many digits.}
 }
 \value{
-A \code{MeanAdjustedAgreement} list object:
-\itemize{
-\item \code{RFS}: The original \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.
-\item \code{relations}: Matrix with mean adjusted agreement values
-\itemize{
-\item Rows: \code{variables}.
-\item Columns: \code{candidates}.
-}
-\item \code{threshold}: the threshold used to select related variables.
-\item \code{related}: A list of vectors for each \code{variable} containing related \code{candidates}. Only present if \code{related = TRUE} (Default).
-}
+A `MeanAdjustedAgreement` list object:
+ * `RFS`: The original [RandomForestSurrogates()] object.
+ * `relations`: Matrix with mean adjusted agreement values
+   * Rows: `variables`.
+   * Columns: `candidates`.
+ * `threshold`: the threshold used to select related variables.
+ * `related`: A list of vectors for each `variable` containing related `candidates`. Only present if `related = TRUE` (Default).
 }
 \description{
 This function uses the mean adjusted agreement to select variables that are related to a defined variable using a threshold T.
