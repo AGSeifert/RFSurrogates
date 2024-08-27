@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Calculate mean adjusted agreement to investigate variables relations</h1>
-      <small class="dont-index">Source: <a href="https://github.com/AGSeifert/RFSurrogates/blob/v0.4.1/R/meanAdjAgree.R" class="external-link"><code>R/meanAdjAgree.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AGSeifert/RFSurrogates/blob/main/R/meanAdjAgree.R" class="external-link"><code>R/meanAdjAgree.R</code></a></small>
       <div class="d-none name"><code>meanAdjAgree.Rd</code></div>
     </div>
 
@@ -47,7 +47,8 @@
 <span>  <span class="va">t</span>,</span>
 <span>  <span class="va">s.a</span>,</span>
 <span>  <span class="va">select.var</span>,</span>
-<span>  num.threads <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  num.threads <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  round_digits <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -56,7 +57,7 @@
 
 
 <dl><dt id="arg-trees">trees<a class="anchor" aria-label="anchor" href="#arg-trees"></a></dt>
-<dd><p>list of trees created by <code><a href="getTreeranger.html">getTreeranger()</a></code>, <code><a href="addLayer.html">addLayer()</a></code> and <code><a href="addSurrogates.html">addSurrogates()</a></code>.</p></dd>
+<dd><p>list of trees created by [getTreeranger()], [addLayer()] and [addSurrogates()].</p></dd>
 
 
 <dt id="arg-variables">variables<a class="anchor" aria-label="anchor" href="#arg-variables"></a></dt>
@@ -72,7 +73,7 @@
 
 
 <dt id="arg-t">t<a class="anchor" aria-label="anchor" href="#arg-t"></a></dt>
-<dd><p>variable to calculate threshold. Used if <code>select.var = TRUE</code>.</p></dd>
+<dd><p>variable to calculate threshold. Used if `select.var = TRUE`.</p></dd>
 
 
 <dt id="arg-s-a">s.a<a class="anchor" aria-label="anchor" href="#arg-s-a"></a></dt>
@@ -86,14 +87,19 @@
 <dt id="arg-num-threads">num.threads<a class="anchor" aria-label="anchor" href="#arg-num-threads"></a></dt>
 <dd><p>number of threads used for parallel execution. Default is number of CPUs available.</p></dd>
 
+
+<dt id="arg-round-digits">round_digits<a class="anchor" aria-label="anchor" href="#arg-round-digits"></a></dt>
+<dd><p>(Default: 2) Round mean adjusted agreement to this many digits in [mean.index].</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list containing:</p><ul><li><p><code>variables</code>: the variables to which relations are investigated</p></li>
-<li><p><code>surr.res</code>: matrix with mean adjusted agreement values and variables investigated in rows and candidate variables in columns</p></li>
-<li><p><code>threshold</code>: the threshold used to create surr.var from surr.res</p></li>
-<li><p><code>surr.var</code>: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.</p></li>
-</ul></div>
+    <p>A list containing:
+ * `variables`: the variables to which relations are investigated
+ * `surr.res`: matrix with mean adjusted agreement values and variables investigated in rows and candidate variables in columns
+ * `threshold`: the threshold used to create surr.var from surr.res
+ * `surr.var`: binary matrix showing if the variables are related (1) or non-related (0) with variables in rows and candidates in columns.</p>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>

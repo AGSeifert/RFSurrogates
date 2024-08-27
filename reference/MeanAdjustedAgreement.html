@@ -13,7 +13,7 @@ Based on the threshold a vector is created containing the related variables.'></
 
     <a class="navbar-brand me-2" href="../index.html">RFSurrogates</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,7 @@ Based on the threshold a vector is created containing the related variables.'></
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Investigate variable relations of a specific variable with mean adjusted agreement</h1>
-      <small class="dont-index">Source: <a href="https://github.com/AGSeifert/RFSurrogates/blob/v0.4.1/R/MeanAdjustedAgreement.R" class="external-link"><code>R/MeanAdjustedAgreement.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AGSeifert/RFSurrogates/blob/main/R/MeanAdjustedAgreement.R" class="external-link"><code>R/MeanAdjustedAgreement.R</code></a></small>
       <div class="d-none name"><code>MeanAdjustedAgreement.Rd</code></div>
     </div>
 
@@ -54,7 +54,8 @@ Based on the threshold a vector is created containing the related variables.</p>
 <span>  variables <span class="op">=</span> <span class="va">RFS</span><span class="op">$</span><span class="va">ranger</span><span class="op">$</span><span class="va">forest</span><span class="op">$</span><span class="va">independent.variable.names</span>,</span>
 <span>  candidates <span class="op">=</span> <span class="va">RFS</span><span class="op">$</span><span class="va">ranger</span><span class="op">$</span><span class="va">forest</span><span class="op">$</span><span class="va">independent.variable.names</span>,</span>
 <span>  related <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  num.threads <span class="op">=</span> <span class="fl">1</span></span>
+<span>  num.threads <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  round_digits <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -63,7 +64,7 @@ Based on the threshold a vector is created containing the related variables.</p>
 
 
 <dl><dt id="arg-rfs">RFS<a class="anchor" aria-label="anchor" href="#arg-rfs"></a></dt>
-<dd><p>A <code><a href="RandomForestSurrogates.html">RandomForestSurrogates()</a></code> object.</p></dd>
+<dd><p>A [RandomForestSurrogates()] object.</p></dd>
 
 
 <dt id="arg-t">t<a class="anchor" aria-label="anchor" href="#arg-t"></a></dt>
@@ -71,11 +72,11 @@ Based on the threshold a vector is created containing the related variables.</p>
 
 
 <dt id="arg-variables">variables<a class="anchor" aria-label="anchor" href="#arg-variables"></a></dt>
-<dd><p>Vector of variable names for <strong>which related variables should be searched</strong>. (Default: All variables used to create the random forest.)</p></dd>
+<dd><p>Vector of variable names for **which related variables should be searched**. (Default: All variables used to create the random forest.)</p></dd>
 
 
 <dt id="arg-candidates">candidates<a class="anchor" aria-label="anchor" href="#arg-candidates"></a></dt>
-<dd><p>Vector of variable names that <strong>are candidates to be related to the variables</strong>. (Default: All variables used to create the random forest.)</p></dd>
+<dd><p>Vector of variable names that **are candidates to be related to the variables**. (Default: All variables used to create the random forest.)</p></dd>
 
 
 <dt id="arg-related">related<a class="anchor" aria-label="anchor" href="#arg-related"></a></dt>
@@ -85,16 +86,21 @@ Based on the threshold a vector is created containing the related variables.</p>
 <dt id="arg-num-threads">num.threads<a class="anchor" aria-label="anchor" href="#arg-num-threads"></a></dt>
 <dd><p>(Default: 1) Number of threads used for determination of relations.</p></dd>
 
+
+<dt id="arg-round-digits">round_digits<a class="anchor" aria-label="anchor" href="#arg-round-digits"></a></dt>
+<dd><p>(Default: 2) Round mean adjusted agreement to this many digits.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>MeanAdjustedAgreement</code> list object:</p><ul><li><p><code>RFS</code>: The original <code><a href="RandomForestSurrogates.html">RandomForestSurrogates()</a></code> object.</p></li>
-<li><p><code>relations</code>: Matrix with mean adjusted agreement values</p><ul><li><p>Rows: <code>variables</code>.</p></li>
-<li><p>Columns: <code>candidates</code>.</p></li>
-</ul></li>
-<li><p><code>threshold</code>: the threshold used to select related variables.</p></li>
-<li><p><code>related</code>: A list of vectors for each <code>variable</code> containing related <code>candidates</code>. Only present if <code>related = TRUE</code> (Default).</p></li>
-</ul></div>
+    <p>A `MeanAdjustedAgreement` list object:
+ * `RFS`: The original [RandomForestSurrogates()] object.
+ * `relations`: Matrix with mean adjusted agreement values
+   * Rows: `variables`.
+   * Columns: `candidates`.
+ * `threshold`: the threshold used to select related variables.
+ * `related`: A list of vectors for each `variable` containing related `candidates`. Only present if `related = TRUE` (Default).</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
