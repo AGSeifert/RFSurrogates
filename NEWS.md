@@ -1,3 +1,7 @@
+# RFSurrogates 0.4.3
+
+- Fixed an issue preventing the installation of the package with a system that uses gcc 14+. ([#17](https://github.com/AGSeifert/RFSurrogates/issues/17))
+
 # RFSurrogates 0.4.2
 
 - Added new optional parameter to `MeanAdjustedAgreement` and `meanAdjAgree`: `round_digits` defaulting to 2. This offers the same behaviour as before, but allows rounding to different amounts of decimal places if desired.

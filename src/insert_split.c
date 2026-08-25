@@ -35,7 +35,6 @@ pSplit insert_split(pSplit *listhead, int ncat, double improve, int max) {
 		if (improve <= s3->improve)
 			return NULL;
 		if (ncat > 1) {
-			Free(s3);
 			s3 = (pSplit) CALLOC(1, splitsize);
 			s3->nextsplit = NULL;
 			*listhead = s3;
@@ -61,7 +60,6 @@ pSplit insert_split(pSplit *listhead, int ncat, double improve, int max) {
 			// not good enough
 			return NULL;
 		if (ncat > 1) {
-			Free(s4);
 			s4 = (pSplit) CALLOC(1, splitsize);
 		}
 
