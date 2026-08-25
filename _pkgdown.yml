@@ -52,7 +52,6 @@ reference:
     contents:
     - addLayer
     - addSurrogates
-    - build.clusters
     - count.surrogates
     - getTreeranger
     - meanAdjAgree

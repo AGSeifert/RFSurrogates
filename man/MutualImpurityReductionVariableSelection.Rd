@@ -13,23 +13,21 @@ MutualImpurityReductionVariableSelection(
 )
 }
 \arguments{
-\item{MIR}{\code{\link[=MutualImpurityReduction]{MutualImpurityReduction()}} object.}
+\item{MIR}{[MutualImpurityReduction()] object.}
 
 \item{p.threshold}{(Default = 0.01) P-value threshold}
 
-\item{method}{The method to use. One of: \code{"Janitza"} or \code{"Permutation"}.}
+\item{method}{The method to use. One of: `"Janitza"` or `"Permutation"`.}
 
-\item{permutation.num}{If method is \code{"Permutation"}: Number of AIR permutations to determine p-value. (Default: 100)}
+\item{permutation.num}{If method is `"Permutation"`: Number of AIR permutations to determine p-value. (Default: 100)}
 
-\item{permutation.MeanAdjustedAgreement}{If method is \code{"Permutation"} and \code{MIR} used a \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object: A \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} created with a \code{permutate = TRUE} \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.}
+\item{permutation.MeanAdjustedAgreement}{If method is `"Permutation"` and `MIR` used a [MeanAdjustedAgreement()] object: A [MeanAdjustedAgreement()] created with a `permutate = TRUE` [RandomForestSurrogates()] object.}
 }
 \value{
 A list:
-\itemize{
-\item \code{method}: The method used.
-\item \code{selected}: A list of vectors containing selected candidates for each investigated variable.
-\item \code{p.values}: A list of numeric vectors containing p-values for each candidate's relation to each investigated variable.
-}
+ * `method`: The method used.
+ * `selected`: A list of vectors containing selected candidates for each investigated variable.
+ * `p.values`: A list of numeric vectors containing p-values for each candidate's relation to each investigated variable.
 }
 \description{
 Variable selection for Mutual Impurity Reduction.

@@ -44,7 +44,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{save.ranger}{set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).}
 
-\item{create.forest}{Default: TRUE if \code{forest} is NULL, FALSE otherwise. Whether to create or use an existing forest.}
+\item{create.forest}{Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.}
 
 \item{forest}{the random forest that should be analyzed}
 
@@ -54,26 +54,18 @@ classification mode is used). For survival forests this is the time variable.}
 }
 \value{
 list with the following components:
-\itemize{
-\item \code{info}: list with results from surrmindep function:
-\itemize{
-\item \code{depth}: mean surrogate minimal depth for each variable.
-\item \code{selected}: variables has been selected (1) or not (0).
-\item \code{threshold}: the threshold that is used for the selection.
-}
-\item \code{var}: vector of selected variables.
-\item \code{s}: list with the results of count.surrogate function:
-\itemize{
-\item \code{s.a}: total average number of surrogate variables.
-\item \code{s.l}: average number of surrogate variables in the respective layers.
-}
-\item \code{forest}: a list containing:
-\itemize{
-\item \code{trees}: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.
-\item \code{allvariables}: all variable names of the predictor variables that are present in x
-}
-\item \code{ranger}: ranger object.
-}
+ * `info`: list with results from surrmindep function:
+   * `depth`: mean surrogate minimal depth for each variable.
+   * `selected`: variables has been selected (1) or not (0).
+   * `threshold`: the threshold that is used for the selection.
+ * `var`: vector of selected variables.
+ * `s`: list with the results of count.surrogate function:
+   * `s.a`: total average number of surrogate variables.
+   * `s.l`: average number of surrogate variables in the respective layers.
+ * `forest`: a list containing:
+   * `trees`: list of trees that was created by getTreeranger, addLayer, and addSurrogates functions and that was used for surrogate minimal depth variable importance.
+   * `allvariables`: all variable names of the predictor variables that are present in x
+ * `ranger`: ranger object.
 }
 \description{
 This function executes SMD applying \link[ranger]{ranger} for random forests generation and a modified version of \link[rpart]{rpart} to find surrogate variables.
@@ -92,9 +84,7 @@ res$var
 
 }
 \references{
-\itemize{
-\item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-\item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
-\item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
-}
+* Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. <https://academic.oup.com/bioinformatics/article/35/19/3663/5368013>
+* Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. <https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103>
+* Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. <http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf>
 }

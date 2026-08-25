@@ -7,21 +7,17 @@
 SurrogateMinimalDepth(RFS)
 }
 \arguments{
-\item{RFS}{A \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.}
+\item{RFS}{A [RandomForestSurrogates()] object.}
 }
 \value{
-A \code{SurrogateMinimalDepth} S3 list object:
-\itemize{
-\item \code{RFS}: The original \code{\link[=RandomForestSurrogates]{RandomForestSurrogates()}} object.
-\item \code{selected}: A character vector of the selected variable names.
-\item \code{depth}: A numeric vector of the surrogate minimal depth for each variable.
-\item \code{threshold}: The depth threshold used to select variables.
-\item \code{surrogates}:
-\itemize{
-\item \code{average}: Total average number of surrogate variables.
-\item \code{layer}: Average number of surrogate variables by layer (\verb{Named num [1:1000]}).
-}
-}
+A `SurrogateMinimalDepth` S3 list object:
+- `RFS`: The original [RandomForestSurrogates()] object.
+- `selected`: A character vector of the selected variable names.
+- `depth`: A numeric vector of the surrogate minimal depth for each variable.
+- `threshold`: The depth threshold used to select variables.
+- `surrogates`:
+  - `average`: Total average number of surrogate variables.
+  - `layer`: Average number of surrogate variables by layer (`Named num [1:1000]`).
 }
 \description{
 Variable selection with Surrogate Minimal Depth (SMD)
@@ -38,10 +34,8 @@ res.smd <- SurrogateMinimalDepth(RandomForestSurrogates(
 
 }
 \references{
-\itemize{
-\item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-\item Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. \url{https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103}
-\item Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. \url{http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf}
-}
+- Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. <https://academic.oup.com/bioinformatics/article/35/19/3663/5368013>
+- Ishwaran, H. et al. (2011) Random survival forests for high-dimensional data. Stat Anal Data Min, 4, 115–132. <https://onlinelibrary.wiley.com/doi/abs/10.1002/sam.10103>
+- Ishwaran, H. et al. (2010) High-Dimensional Variable Selection for Survival Data. J. Am. Stat. Assoc., 105, 205–217. <http://www.ccs.miami.edu/~hishwaran/papers/IKGML.JASA.2010.pdf>
 }
 \keyword{varsel}

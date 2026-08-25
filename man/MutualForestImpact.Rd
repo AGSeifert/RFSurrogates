@@ -7,26 +7,24 @@
 MutualForestImpact(REL, PERM, variables, candidates)
 }
 \arguments{
-\item{REL}{A \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.}
+\item{REL}{A [MeanAdjustedAgreement()] object.}
 
-\item{PERM}{A permutated \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.}
+\item{PERM}{A permutated [MeanAdjustedAgreement()] object.}
 
-\item{variables}{Vector of variable names for \strong{which related variables should be searched}.}
+\item{variables}{Vector of variable names for **which related variables should be searched**.}
 
-\item{candidates}{Vector of variable names that \strong{are candidates to be related to the variables}.}
+\item{candidates}{Vector of variable names that **are candidates to be related to the variables**.}
 }
 \value{
-A \code{MutualForestImpact} list object.
-\itemize{
-\item \code{REL}: The \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.
-\item \code{PERM}: The permutated \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} object.
-\item \code{relations}: Matrix of determined relations (rows: investigated variables, columns: candidate variables).
-}
+A `MutualForestImpact` list object.
+ * `REL`: The [MeanAdjustedAgreement()] object.
+ * `PERM`: The permutated [MeanAdjustedAgreement()] object.
+ * `relations`: Matrix of determined relations (rows: investigated variables, columns: candidate variables).
 }
 \description{
-It is recommended to use the simpler \code{\link[=MFI]{MFI()}} method.
+It is recommended to use the simpler [MFI()] method.
 }
 \seealso{
-\code{\link[=MFI]{MFI()}}
+[MFI()]
 }
 \keyword{varrel}

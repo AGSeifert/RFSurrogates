@@ -25,14 +25,12 @@ RandomForestSurrogates(
 \item{x, y}{Predictor data and dependent variables.}
 
 \item{s.pct, s}{Number of surrogate splits.
-This can be defined either by setting \code{s.pct} to a number between
-0 and 1, or providing an exact value for \code{s}.
-\itemize{
-\item \code{s.pct}: Percentage of variables to use for \code{s}. (Default: 0.01)
-\item \code{s}:  Number of surrogate splits. (Default: Number of variables
-multiplied by \code{s.pct}, which defaults to 0.01; If \code{s.pct} is
-less than or equal to zero, or greater than 1: 0.01 is used instead.)
-}}
+This can be defined either by setting `s.pct` to a number between
+0 and 1, or providing an exact value for `s`.
+- `s.pct`: Percentage of variables to use for `s`. (Default: 0.01)
+- `s`:  Number of surrogate splits. (Default: Number of variables
+  multiplied by `s.pct`, which defaults to 0.01; If `s.pct` is
+  less than or equal to zero, or greater than 1: 0.01 is used instead.)}
 
 \item{mtry}{Number of variables to possibly split at in each node.
 Default is the (rounded down) number of variables to the power
@@ -41,10 +39,10 @@ Alternatively, a single argument function returning an integer,
 given the number of independent variables.}
 
 \item{type}{The type of random forest to create with ranger.
-One of \code{"regression"} (Default), \code{"classification"} or \code{"survival"}.}
+One of `"regression"` (Default), `"classification"` or `"survival"`.}
 
-\item{status}{If \code{type = "regression"}: Survival forest status variable.
-Use 1 for event and 0 for censoring. Length must match \code{y}.}
+\item{status}{If `type = "regression"`: Survival forest status variable.
+Use 1 for event and 0 for censoring. Length must match `y`.}
 
 \item{num.trees}{Number of trees.}
 
@@ -52,23 +50,25 @@ Use 1 for event and 0 for censoring. Length must match \code{y}.}
 
 \item{min.node.size}{Minimal node size to split at. (Default: 1)}
 
-\item{permutate}{Enable to permutate \code{x} for \code{\link[=MutualForestImpact]{MutualForestImpact()}} (Default: FALSE).}
+\item{permutate}{Enable to permutate `x` for [MutualForestImpact()] (Default: FALSE).}
 
 \item{seed}{RNG seed. It is strongly recommended that you set this value.}
 
-\item{preschedule.threads}{(Default: TRUE) Passed as \code{mc.preschedule} to \code{\link[parallel:mclapply]{parallel::mclapply()}} in \code{\link[=addSurrogates]{addSurrogates()}}.}
+\item{preschedule.threads}{(Default: TRUE) Passed as `mc.preschedule` to [parallel::mclapply()] in [addSurrogates()].}
 
 \item{...}{
   Arguments passed on to \code{\link[ranger:ranger]{ranger::ranger}}
   \describe{
     \item{\code{importance}}{Variable importance mode, one of 'none', 'impurity', 'impurity_corrected', 'permutation'. The 'impurity' measure is the Gini index for classification, the variance of the responses for regression and the sum of test statistics (see \code{splitrule}) for survival.}
-    \item{\code{min.bucket}}{Minimal terminal node size. No nodes smaller than this value can occur. Default 3 for survival and 1 for all other tree types.}
+    \item{\code{min.bucket}}{Minimal terminal node size. No nodes smaller than this value can occur. Default 3 for survival and 1 for all other tree types. For classification, this can be a vector of class-specific values.}
     \item{\code{max.depth}}{Maximal tree depth. A value of NULL or 0 (the default) corresponds to unlimited depth, 1 to tree stumps (1 split per tree).}
     \item{\code{replace}}{Sample with replacement.}
     \item{\code{sample.fraction}}{Fraction of observations to sample. Default is 1 for sampling with replacement and 0.632 for sampling without replacement. For classification, this can be a vector of class-specific values.}
     \item{\code{case.weights}}{Weights for sampling of training observations. Observations with larger weights will be selected with higher probability in the bootstrap (or subsampled) samples for the trees.}
     \item{\code{class.weights}}{Weights for the outcome classes (in order of the factor levels) in the splitting rule (cost sensitive learning). Classification and probability prediction only. For classification the weights are also applied in the majority vote in terminal nodes.}
-    \item{\code{splitrule}}{Splitting rule. For classification and probability estimation "gini", "extratrees" or "hellinger" with default "gini". For regression "variance", "extratrees", "maxstat" or "beta" with default "variance". For survival "logrank", "extratrees", "C" or "maxstat" with default "logrank".}
+    \item{\code{splitrule}}{Splitting rule. For classification and probability estimation "gini", "extratrees" or "hellinger" with default "gini".
+For regression "variance", "extratrees", "maxstat", "beta" or "poisson" with default "variance".
+For survival "logrank", "extratrees", "C" or "maxstat" with default "logrank".}
     \item{\code{num.random.splits}}{For "extratrees" splitrule.: Number of random splits to consider for each candidate splitting variable.}
     \item{\code{alpha}}{For "maxstat" splitrule: Significance threshold to allow splitting.}
     \item{\code{minprop}}{For "maxstat" splitrule: Lower quantile of covariate distribution to be considered for splitting.}
@@ -88,14 +88,12 @@ Use 1 for event and 0 for censoring. Length must match \code{y}.}
 }
 \value{
 A RandomForestSurrogates S3 object.
-\itemize{
-\item \code{trees}: List of all trees with surrogate analysis. (Class: \code{SurrogateTrees}, \code{LayerTrees}, \code{RangerTrees})
-\item \code{ranger}: The \link[ranger:ranger]{ranger::ranger} model used to obtain the trees.
-\item \code{s}: The number of surrogates investigated.
-}
+  * `trees`: List of all trees with surrogate analysis. (Class: `SurrogateTrees`, `LayerTrees`, `RangerTrees`)
+  * `ranger`: The [ranger::ranger] model used to obtain the trees.
+  * `s`: The number of surrogates investigated.
 }
 \description{
 The object created by this functions serves as the basis of most further analysis,
-such as \code{\link[=SurrogateMinimalDepth]{SurrogateMinimalDepth()}} and \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}}.
+such as [SurrogateMinimalDepth()] and [MeanAdjustedAgreement()].
 }
 \keyword{prep}

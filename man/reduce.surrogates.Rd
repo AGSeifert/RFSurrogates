@@ -12,7 +12,7 @@ reduce.surrogates(forest, s = 10)
 \item{s}{number of surrogate variables in the new forest (have to be less than in the RF in trees)}
 }
 \value{
-A forest with \code{s} surrogate variables.
+A forest with `s` surrogate variables.
 }
 \description{
 This function can be applied to reduce the surrogate variables in a forest that is created by getTreeranger, addLayer

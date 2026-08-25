@@ -7,20 +7,18 @@
 MFI_VarSel_Janitza(MFI, variables, candidates, p.threshold = 0.01)
 }
 \arguments{
-\item{MFI}{\code{\link[=MutualForestImpact]{MutualForestImpact()}} object.}
+\item{MFI}{[`MutualForestImpact()`] object.}
 
-\item{variables}{Vector of variable names for \strong{which related variables should be searched}.}
+\item{variables}{Vector of variable names for **which related variables should be searched**.}
 
-\item{candidates}{Vector of variable names that \strong{are candidates to be related to the variables}.}
+\item{candidates}{Vector of variable names that **are candidates to be related to the variables**.}
 
 \item{p.threshold}{(Default = 0.01) P-value threshold}
 }
 \value{
 A list:
-\itemize{
-\item \code{selected}: A list of vectors containing selected candidates for each investigated variable.
-\item \code{p.values}: A list of numeric vectors containing p-values for each candidate's relation to each investigated variable.
-}
+ * `selected`: A list of vectors containing selected candidates for each investigated variable.
+ * `p.values`: A list of numeric vectors containing p-values for each candidate's relation to each investigated variable.
 }
 \description{
 Janitza method for MFI.

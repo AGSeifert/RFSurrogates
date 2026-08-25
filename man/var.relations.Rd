@@ -48,7 +48,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{save.ranger}{set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).}
 
-\item{create.forest}{Default: TRUE if \code{forest} is NULL, FALSE otherwise. Whether to create or use an existing forest.}
+\item{create.forest}{Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.}
 
 \item{forest}{the random forest that should be analyzed}
 
@@ -66,13 +66,11 @@ classification mode is used). For survival forests this is the time variable.}
 }
 \value{
 A list containing:
-\itemize{
-\item \code{variables}: the variables to which relations are investigated.
-\item \code{surr.res}: a matrix with mean adjusted agreement values with variables in rows and candidates in columns.
-\item \code{threshold}: the threshold used to select related variables.
-\item \code{var}: a list with one vector for each variable containing related variables.
-\item \code{ranger}: ranger object.
-}
+ * `variables`: the variables to which relations are investigated.
+ * `surr.res`: a matrix with mean adjusted agreement values with variables in rows and candidates in columns.
+ * `threshold`: the threshold used to select related variables.
+ * `var`: a list with one vector for each variable containing related variables.
+ * `ranger`: ranger object.
 }
 \description{
 This function uses the mean adjusted agreement to select variables that are related to a defined variable using a threshold T.

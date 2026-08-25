@@ -1,6 +1,6 @@
 #' Variable selection with Minimal Depth (MD)
 #'
-#' This function executes MD applying \link[ranger]{ranger} for random forests generation and is a reimplementation of \link[randomForestSRC]{var.select} from randomForestSRC package.
+#' This function executes MD applying \link[ranger]{ranger} for random forests generation and is a reimplementation of var.select from randomForestSRC package.
 #'
 #' @param x data.frame of predictor variables with variables in
 #'   columns and samples in rows. (Note: missing values are not allowed)

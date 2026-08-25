@@ -23,7 +23,7 @@ test_that("MFI", {
     method = "Janitza"
   )
 
-  expect_equal(j.mfi$selected$X1[[1]], "cp1_1")
+  expect_snapshot(j.mfi$selected)
 
   p.mfi <- MutualForestImpactVariableSelection(
     mfi,
@@ -33,5 +33,5 @@ test_that("MFI", {
     method = "Permutation"
   )
 
-  expect_equal(p.mfi$selected$X1[[1]], "cp1_1")
+  expect_snapshot(p.mfi$selected)
 })
