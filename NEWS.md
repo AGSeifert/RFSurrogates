@@ -1,3 +1,7 @@
+# RFSurrogates 0.5.0
+
+- **Breaking Change**: `MeanAdjustedAgreement` argument `rounding_digits` raised from `2` to `Inf` (no rounding).
+
 # RFSurrogates 0.4.4
 
 - Remove unused `linkcomm` dependency and associated `build.clusters` function.

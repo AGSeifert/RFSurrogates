@@ -11,7 +11,7 @@
 #' @param candidates Vector of variable names that **are candidates to be related to the variables**. (Default: All variables used to create the random forest.)
 #' @param related (Default: TRUE) Whether related variables should be identified.
 #' @param num.threads (Default: 1) Number of threads used for determination of relations.
-#' @param round_digits (Default: 2) Round mean adjusted agreement to this many digits.
+#' @param round_digits (Default: No rounding) Round mean adjusted agreement to this many digits.
 #'
 #' @return A `MeanAdjustedAgreement` list object:
 #'  * `RFS`: The original [RandomForestSurrogates()] object.
@@ -50,7 +50,7 @@ MeanAdjustedAgreement <- function(
     candidates = RFS$ranger$forest$independent.variable.names,
     related = TRUE,
     num.threads = 1,
-    round_digits = 2) {
+    round_digits = Inf) {
   if (!inherits(RFS, "RandomForestSurrogates")) {
     stop("`RFS` must be a `RandomForestSurrogates` object.")
   }
