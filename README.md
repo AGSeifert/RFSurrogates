@@ -18,6 +18,11 @@ devtools::install_github("AGSeifert/RFSurrogates")
 
 The package contains an example data set which consists of a single replicate of the simulation study 1 in publication [1]. Please refer to the paper and the documentation of the SMD_example_data for further details on the simulation scenario. The R script for the simulation is published [here](https://doi.org/10.25592/uhhfdm.12620).
 
+# Support statement
+
+This package is supported and maintained by [Florian Gärber](https://github.com/floriangaerber) through 2026,
+and the [Seifert research group](https://uhh.de/chem-rgsei) beyond that.
+
 # Usage
 
 First the package and the example data are loaded:
