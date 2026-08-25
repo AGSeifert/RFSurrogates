@@ -11,7 +11,7 @@ getsingletree(RF, k = 1, add_layer = FALSE)
 
 \item{k}{Tree index to convert.}
 
-\item{add_layer}{}
+\item{add_layer}{Boolean.}
 }
 \value{
 A tree data frame for the \code{k}th tree in \code{RF}.

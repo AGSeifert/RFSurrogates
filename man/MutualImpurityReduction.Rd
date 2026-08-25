@@ -7,15 +7,13 @@
 MutualImpurityReduction(REL)
 }
 \arguments{
-\item{REL}{A \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} or \code{\link[=MutualForestImpact]{MutualForestImpact()}} object.}
+\item{REL}{A [MeanAdjustedAgreement()] or [MutualForestImpact()] object.}
 }
 \value{
-A \code{MutualImpurityReduction} list object.
-\itemize{
-\item \code{REL}: The \code{\link[=MeanAdjustedAgreement]{MeanAdjustedAgreement()}} or \code{\link[=MutualForestImpact]{MutualForestImpact()}} object.
-\item \code{MIR}: Mutual Impurity Reduction
-\item \code{AIR}: Actual Impurity Reduction
-}
+A `MutualImpurityReduction` list object.
+ * `REL`: The [MeanAdjustedAgreement()] or [MutualForestImpact()] object.
+ * `MIR`: Mutual Impurity Reduction
+ * `AIR`: Actual Impurity Reduction
 }
 \description{
 Mutual Impurity Reduction (MIR)

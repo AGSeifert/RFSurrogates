@@ -78,21 +78,17 @@ classification mode is used). For survival forests this is the time variable.}
 }
 \value{
 List with the following components:
-\itemize{
-\item \code{info}: list with results containing:
-\itemize{
-\item \code{MIR}: the calculated variable importance for each variable based on mutual impurity reduction.
-\item \code{pvalue}: the obtained p-values for each variable.
-\item \code{selected}: variables has been selected (1) or not (0).
-\item \code{relations}: a list containing the results of variable relation analysis.
-\item \code{parameters}: a list that contains the parameters s, type, mtry, p.t.sel, p.t.rel and method.sel that were used.
-}
-\item \code{var}: vector of selected variables.
-\item \code{ranger}: ranger object.
-}
+ * `info`: list with results containing:
+   * `MIR`: the calculated variable importance for each variable based on mutual impurity reduction.
+   * `pvalue`: the obtained p-values for each variable.
+   * `selected`: variables has been selected (1) or not (0).
+   * `relations`: a list containing the results of variable relation analysis.
+   * `parameters`: a list that contains the parameters s, type, mtry, p.t.sel, p.t.rel and method.sel that were used.
+ * `var`: vector of selected variables.
+ * `ranger`: ranger object.
 }
 \description{
-This function executes MIR applying \link{ranger} for random forests generation and actual impurity reduction and a modified version of \link{rpart} to find surrogate variables.
+This function executes MIR applying [ranger] for random forests generation and actual impurity reduction and a modified version of [rpart] to find surrogate variables.
 }
 \examples{
 \donttest{
@@ -108,8 +104,6 @@ res$var
 
 }
 \references{
-\itemize{
-\item Nembrini, S. et al. (2018) The revival of the Gini importance? Bioinformatics, 34, 3711–3718. \url{https://academic.oup.com/bioinformatics/article/34/21/3711/4994791}
-\item Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. \url{https://academic.oup.com/bioinformatics/article/35/19/3663/5368013}
-}
+* Nembrini, S. et al. (2018) The revival of the Gini importance? Bioinformatics, 34, 3711–3718. <https://academic.oup.com/bioinformatics/article/34/21/3711/4994791>
+* Seifert, S. et al. (2019) Surrogate minimal depth as an importance measure for variables in random forests. Bioinformatics, 35, 3663–3671. <https://academic.oup.com/bioinformatics/article/35/19/3663/5368013>
 }

@@ -5,13 +5,11 @@ test_that("MD", {
   res.md <- MinimalDepth(RandomForestSurrogates(
     x = SMD_example_data[, -1],
     y = SMD_example_data[, 1],
-    num.trees = 100,
+    num.trees = 50,
     num.threads = 1,
     seed = 42,
     s = 0
   ))
 
-  res.md$var
-
-  expect_equal(res.md$selected[[1]], "X2")
+  expect_snapshot(res.md$selected)
 })

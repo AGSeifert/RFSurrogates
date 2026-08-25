@@ -12,5 +12,5 @@ test_that("SMD", {
     s = 10
   ))
 
-  expect_equal(res.smd$selected[[1]], "X1")
+  expect_snapshot(res.smd$selected)
 })

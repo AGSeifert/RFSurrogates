@@ -1,3 +1,9 @@
+# RFSurrogates 0.4.4
+
+- Remove unused `linkcomm` dependency and associated `build.clusters` function.
+- *Internal*: Change to snapshot tests.
+- Minor changes to documentation.
+
 # RFSurrogates 0.4.3
 
 - Fixed an issue preventing the installation of the package with a system that uses gcc 14+. ([#17](https://github.com/AGSeifert/RFSurrogates/issues/17))

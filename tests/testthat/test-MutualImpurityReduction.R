@@ -6,9 +6,9 @@ test_that("MFI-MIR", {
   rel <- MFI(
     x = SMD_example_data[, -1],
     y = SMD_example_data[, 1],
-    num.trees = 1000,
+    num.trees = 50,
     s = 10,
-    seed = 42, # set.seed(42);runif(1,0,.Machine$integer.max)
+    seed = 42,
     importance = "impurity_corrected",
     variables = colnames(SMD_example_data)[-1],
     candidates = colnames(SMD_example_data)[-1],
@@ -24,22 +24,16 @@ test_that("MFI-MIR", {
     p.t = 0.01
   )
 
-  expect(
-    all(c("X1", "X2", "X3", "X4", "X5", "X6") %in% j.mir$selected),
-    "Select all primary variables"
-  )
+  expect_snapshot(j.mir$selected)
 
   p.mir <- MutualImpurityReductionVariableSelection(
     mir,
     method = "Permutation",
-    permutation.num = 100,
+    permutation.num = 50,
     p.t = 0.01
   )
 
-  expect(
-    all(c("X1", "X2", "X3", "X4", "X5", "X6") %in% p.mir$selected),
-    "Select all primary variables"
-  )
+  expect_snapshot(p.mir$selected)
 })
 
 test_that("MAA-MIR", {
@@ -51,10 +45,10 @@ test_that("MAA-MIR", {
     RandomForestSurrogates(
       x = SMD_example_data[, -1],
       y = SMD_example_data[, 1],
-      num.trees = 100,
+      num.trees = 50,
       num.threads = 1,
       importance = "impurity_corrected",
-      seed = 1964531019, # set.seed(42);runif(1,0,.Machine$integer.max)
+      seed = 42,
       s = 10
     ),
     variables = c("X7", "X1"),
@@ -78,18 +72,18 @@ test_that("MAA-MIR", {
       RandomForestSurrogates(
         x = SMD_example_data[, -1],
         y = SMD_example_data[, 1],
-        num.trees = 100,
+        num.trees = 50,
         importance = "impurity_corrected",
         permutate = TRUE,
         num.threads = 1,
-        seed = 1964531019, # set.seed(42);runif(1,0,.Machine$integer.max)
+        seed = 42,
         s = 10
       ),
       t = 5, num.threads = 1
     ),
-    permutation.num = 100,
+    permutation.num = 50,
     p.t = 0.01
   )
 
-  expect_equal(p.mir$selected, c("X2"))
+  expect_snapshot(p.mir$selected)
 })

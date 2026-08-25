@@ -7,7 +7,7 @@
 getSurrgate2(x, Xdata, controls, s, ncat)
 }
 \arguments{
-\item{x}{List of length \code{num.trees}}
+\item{x}{List of length `num.trees`}
 }
 \description{
 This is an internal function

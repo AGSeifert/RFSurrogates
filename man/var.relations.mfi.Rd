@@ -49,7 +49,7 @@ classification mode is used). For survival forests this is the time variable.}
 
 \item{save.ranger}{set TRUE if ranger object should be saved. Default is that ranger object is not saved (FALSE).}
 
-\item{create.forest}{Default: TRUE if \code{forest} is NULL, FALSE otherwise. Whether to create or use an existing forest.}
+\item{create.forest}{Default: TRUE if `forest` is NULL, FALSE otherwise. Whether to create or use an existing forest.}
 
 \item{forest}{the random forest that should be analyzed}
 
@@ -69,16 +69,14 @@ classification mode is used). For survival forests this is the time variable.}
 }
 \value{
 A list containing:
-\itemize{
-\item \code{variables}: the variables to which relations are investigated.
-\item \code{surr.res}: a matrix with the mutual forest impact values with variables in rows and candidates in columns.
-\item \code{surr.perm}: a matrix with the mutual forest impact values of the permuted variables with variables in rows and candidates in columns.
-\item \code{p.rel}: a list with the obtained p-values for the relation analysis of each variable.
-\item \code{var.rel}: a list with vectors of related variables for each variable.
-\item \code{ranger}: ranger objects.
-\item \code{method}: Method  to  compute  p-values: "janitza" or "permutation".
-\item \code{p.t}: p.value threshold for selection of related variables
-}
+ * `variables`: the variables to which relations are investigated.
+ * `surr.res`: a matrix with the mutual forest impact values with variables in rows and candidates in columns.
+ * `surr.perm`: a matrix with the mutual forest impact values of the permuted variables with variables in rows and candidates in columns.
+ * `p.rel`: a list with the obtained p-values for the relation analysis of each variable.
+ * `var.rel`: a list with vectors of related variables for each variable.
+ * `ranger`: ranger objects.
+ * `method`: Method  to  compute  p-values: "janitza" or "permutation".
+ * `p.t`: p.value threshold for selection of related variables
 }
 \description{
 This function corrects the mean adjusted agreement by a permutation approach and generates the relation parameter mutual forest impact. Subsequently p-values are determined and related variables are selected.

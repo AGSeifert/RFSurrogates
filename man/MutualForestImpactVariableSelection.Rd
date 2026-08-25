@@ -13,23 +13,21 @@ MutualForestImpactVariableSelection(
 )
 }
 \arguments{
-\item{MFI}{\code{\link[=MutualForestImpact]{MutualForestImpact()}} object.}
+\item{MFI}{[MutualForestImpact()] object.}
 
-\item{variables}{Vector of variable names for \strong{which related variables should be searched}.}
+\item{variables}{Vector of variable names for **which related variables should be searched**.}
 
-\item{candidates}{Vector of variable names that \strong{are candidates to be related to the variables}.}
+\item{candidates}{Vector of variable names that **are candidates to be related to the variables**.}
 
 \item{p.threshold}{(Default = 0.01) P-value threshold}
 
-\item{method}{The method to use. One of: \code{"Janitza"} or \code{"Permutation"}.}
+\item{method}{The method to use. One of: `"Janitza"` or `"Permutation"`.}
 }
 \value{
 A list:
-\itemize{
-\item \code{method}: The method used.
-\item \code{selected}: A list of vectors containing selected candidates for each investigated variable.
-\item \code{p.values}: A list of numeric vectors containing p-values for each candidate's relation to each investigated variable.
-}
+ * `method`: The method used.
+ * `selected`: A list of vectors containing selected candidates for each investigated variable.
+ * `p.values`: A list of numeric vectors containing p-values for each candidate's relation to each investigated variable.
 }
 \description{
 Variable selection for MutualForestImpact.

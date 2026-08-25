@@ -41,7 +41,7 @@ getTreeranger <- function(RF, num.trees = RF$num.trees, add_layer = FALSE, num.t
 #'
 #' @param RF A [`ranger::ranger`] object.
 #' @param k Tree index to convert.
-#' @param add_layer
+#' @param add_layer Boolean.
 #'
 #' @returns A tree data frame for the `k`th tree in `RF`.
 #' Each row of the tree data frames corresponds to a node of the respective tree and the columns correspond to:

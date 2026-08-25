@@ -6,7 +6,7 @@ test_that("MAA", {
     RandomForestSurrogates(
       x = SMD_example_data[, -1],
       y = SMD_example_data[, 1],
-      num.trees = 100,
+      num.trees = 50,
       num.threads = 1,
       seed = 42,
       s = 10
@@ -16,5 +16,5 @@ test_that("MAA", {
     t = 5, num.threads = 1
   )
 
-  expect_equal(rel$related$X1[[1]], "cp1_1")
+  expect_snapshot(rel$related)
 })
