@@ -1,0 +1,197 @@
+# Variable selection with mutual impurity reduction (MIR).
+
+This function executes MIR applying \[ranger\] for random forests
+generation and actual impurity reduction and a modified version of
+\[rpart\] to find surrogate variables.
+
+## Usage
+
+``` r
+var.select.mir(
+  x = NULL,
+  y = NULL,
+  num.trees = 500,
+  type = "regression",
+  s = NULL,
+  mtry = NULL,
+  min.node.size = 1,
+  num.threads = NULL,
+  status = NULL,
+  save.ranger = FALSE,
+  save.memory = FALSE,
+  num.permutations = 100,
+  p.t.sel = 0.01,
+  p.t.rel = 0.01,
+  select.var = TRUE,
+  select.rel = FALSE,
+  case.weights = NULL,
+  corr.rel = TRUE,
+  t = 5,
+  method.rel = "permutation",
+  method.sel = "janitza",
+  save.rel = TRUE
+)
+```
+
+## Arguments
+
+- x:
+
+  data.frame of predictor variables with variables in columns and
+  samples in rows (Note: missing values are not allowed)
+
+- y:
+
+  vector with values of phenotype variable (Note: will be converted to
+  factor if classification mode is used). For survival forests this is
+  the time variable.
+
+- num.trees:
+
+  number of trees. Default is 500.
+
+- type:
+
+  mode of prediction ("regression", "classification" or "survival").
+  Default is regression.
+
+- s:
+
+  predefined number of surrogate splits (it may happen that the actual
+  number of surrogate splits differs in individual nodes). Default is 1
+  percent of no. of variables.
+
+- mtry:
+
+  number of variables to possibly split at in each node. Default is no.
+  of variables^(3/4) ("^3/4") as recommended by (Ishwaran 2011). Also
+  possible is "sqrt" and "0.5" to use the square root or half of the no.
+  of variables.
+
+- min.node.size:
+
+  minimal node size. Default is 1.
+
+- num.threads:
+
+  number of threads used for parallel execution. Default is number of
+  CPUs available.
+
+- status:
+
+  status variable, only applicable to survival data. Use 1 for event and
+  0 for censoring.
+
+- save.ranger:
+
+  set TRUE if ranger object should be saved. Default is that ranger
+  object is not saved (FALSE).
+
+- save.memory:
+
+  Use memory saving (but slower) splitting mode. No effect for survival
+  and GWAS data. Warning: This option slows down the tree growing, use
+  only if you encounter memory problems. (This parameter is transfered
+  to ranger)
+
+- num.permutations:
+
+  number of permutations to determine p-values. Default is 100. (the
+  relations are determined once based on the permuted X data and the
+  utilized AIR values are permuted again for each permutation )
+
+- p.t.sel:
+
+  p.value threshold for selection of important variables. Default is
+  0.01.
+
+- p.t.rel:
+
+  p.value threshold for selection of related variables. Default is 0.01.
+
+- select.var:
+
+  set False if only importance should be calculated and no variables
+  should be selected.
+
+- select.rel:
+
+  set False if only relations should be calculated and no variables
+  should be selected.
+
+- case.weights:
+
+  Weights for sampling of training observations. Observations with
+  larger weights will be selected with higher probability in the
+  bootstrap (or subsampled) samples for the trees.
+
+- corr.rel:
+
+  set FALSE if non-corrected variable relations should be used for
+  calculation of MIR. In this case the method "janitza" should not be
+  used for selection of important variables
+
+- t:
+
+  variable to calculate threshold for non-corrected relation analysis.
+  Default is 5.
+
+- method.rel:
+
+  Method to compute p-values for selection of related variables with
+  var.relations.corr. Use "janitza" for the method by Janitza et
+  al. (2016) or "permutation" to utilize permuted variables.
+
+- method.sel:
+
+  Method to compute p-values for selection of important variables. Use
+  "janitza" for the method by Janitza et al. (2016) (can only be used
+  when corrected variable relations are utilized) or "permutation" to
+  utilize permuted variables.
+
+- save.rel:
+
+  set FALSE if relation information should not bet saved (default is
+  TRUE)
+
+## Value
+
+List with the following components: \* \`info\`: list with results
+containing: \* \`MIR\`: the calculated variable importance for each
+variable based on mutual impurity reduction. \* \`pvalue\`: the obtained
+p-values for each variable. \* \`selected\`: variables has been selected
+(1) or not (0). \* \`relations\`: a list containing the results of
+variable relation analysis. \* \`parameters\`: a list that contains the
+parameters s, type, mtry, p.t.sel, p.t.rel and method.sel that were
+used. \* \`var\`: vector of selected variables. \* \`ranger\`: ranger
+object.
+
+## References
+
+\* Nembrini, S. et al. (2018) The revival of the Gini importance?
+Bioinformatics, 34, 3711–3718.
+\<https://academic.oup.com/bioinformatics/article/34/21/3711/4994791\>
+\* Seifert, S. et al. (2019) Surrogate minimal depth as an importance
+measure for variables in random forests. Bioinformatics, 35, 3663–3671.
+\<https://academic.oup.com/bioinformatics/article/35/19/3663/5368013\>
+
+## Examples
+
+``` r
+# \donttest{
+data("SMD_example_data")
+# select variables (usually more trees are needed)
+set.seed(42)
+res <- var.select.mir(
+  x = SMD_example_data[, 2:ncol(SMD_example_data)],
+  y = SMD_example_data[, 1], s = 10, num.trees = 10, num.threads = 1
+)
+#> Warning: Relations for 10 original variables were not calculated because they were never used as a primary split.
+#>             Affected relations are set to 0. 
+#> Warning: Relations for 10 permuted variables were not calculated because they were not used as a primary split.
+#>             Affected relations are set to 0. 
+#> Warning: Only few negative importance values found for selection of important variables, inaccurate p-values. Consider the 'permutation' approach.
+res$var
+#> [1] "X2"     "X3"     "X4"     "cp1_3"  "cp1_5"  "cp2_1"  "cgn_66"
+# }
+```

@@ -1,0 +1,60 @@
+# Add surrogate information to a tree list.
+
+This function adds surrogate variables and adjusted agreement values to
+a forest that was created by \[getTreeranger\].
+
+## Usage
+
+``` r
+addSurrogates(
+  RF,
+  trees,
+  s,
+  Xdata,
+  num.threads = parallel::detectCores(),
+  preschedule.threads = TRUE
+)
+```
+
+## Arguments
+
+- RF:
+
+  A \[ranger::ranger\] object which was created with \`keep.inbag =
+  TRUE\`.
+
+- trees:
+
+  List of trees created by \[getTreeranger\].
+
+- s:
+
+  Predefined number of surrogate splits (it may happen that the actual
+  number of surrogate splits differs in individual nodes).
+
+- Xdata:
+
+  data without the dependent variable.
+
+- num.threads:
+
+  (Default: \[parallel::detectCores()\]) Number of threads to spawn for
+  parallelization.
+
+- preschedule.threads:
+
+  (Default: TRUE) Passed as \`mc.preschedule\` to
+  \[parallel::mclapply()\].
+
+## Value
+
+A list of trees. A list of trees containing of lists of nodes with the
+elements: \* \`nodeID\`: ID of the respective node (important for left
+and right daughters in the next columns) \* \`leftdaughter\`: ID of the
+left daughter of this node \* \`rightdaughter\`: ID of the right
+daughter of this node \* \`splitvariable\`: ID of the split variable \*
+\`splitpoint\`: splitpoint of the split variable \* \`status\`: \`0\`
+for terminal and \`1\` for non-terminal \* \`layer\`: layer information
+(\`0\` means root node, \`1\` means 1 layer below root, etc) \*
+\`surrogate_i\`: numbered surrogate variables (number depending on s) \*
+\`adj_i\`: adjusted agreement of variable i

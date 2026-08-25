@@ -1,0 +1,89 @@
+# Investigate variable relations of a specific variable with mean adjusted agreement
+
+This function uses the mean adjusted agreement to select variables that
+are related to a defined variable using a threshold T. The parameter t
+is used to calculate T: t=1 means that every variable with higher
+probability than "by chance" is identified as "important". t=2 means the
+probability has to be twice, etc. Based on the threshold a vector is
+created containing the related variables.
+
+## Usage
+
+``` r
+MeanAdjustedAgreement(
+  RFS,
+  t = 5,
+  variables = RFS$ranger$forest$independent.variable.names,
+  candidates = RFS$ranger$forest$independent.variable.names,
+  related = TRUE,
+  num.threads = 1,
+  round_digits = 2
+)
+```
+
+## Arguments
+
+- RFS:
+
+  A \[RandomForestSurrogates()\] object.
+
+- t:
+
+  (Default: 5) Used to calculate threshold.
+
+- variables:
+
+  Vector of variable names for \*\*which related variables should be
+  searched\*\*. (Default: All variables used to create the random
+  forest.)
+
+- candidates:
+
+  Vector of variable names that \*\*are candidates to be related to the
+  variables\*\*. (Default: All variables used to create the random
+  forest.)
+
+- related:
+
+  (Default: TRUE) Whether related variables should be identified.
+
+- num.threads:
+
+  (Default: 1) Number of threads used for determination of relations.
+
+- round_digits:
+
+  (Default: 2) Round mean adjusted agreement to this many digits.
+
+## Value
+
+A \`MeanAdjustedAgreement\` list object: \* \`RFS\`: The original
+\[RandomForestSurrogates()\] object. \* \`relations\`: Matrix with mean
+adjusted agreement values \* Rows: \`variables\`. \* Columns:
+\`candidates\`. \* \`threshold\`: the threshold used to select related
+variables. \* \`related\`: A list of vectors for each \`variable\`
+containing related \`candidates\`. Only present if \`related = TRUE\`
+(Default).
+
+## Examples
+
+``` r
+# \donttest{
+data("SMD_example_data")
+rfs <- RandomForestSurrogates(
+  x = SMD_example_data[, -1],
+  y = SMD_example_data[, 1],
+  s = 10,
+  seed = 42,
+  num.trees = 10,
+  num.threads = 1
+)
+maa <- MeanAdjustedAgreement(
+  rfs,
+  variables = c("X7", "X1"),
+  candidates = colnames(SMD_example_data)[2:101],
+  t = 5,
+  num.threads = 1
+)
+# }
+```
