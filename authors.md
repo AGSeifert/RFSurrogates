@@ -16,7 +16,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/AGSeifert/RFSurrogates/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/AGSeifert/RFSurrogates/blob/v0.4.4/DESCRIPTION)
 
 Seifert S, Gundlach S, Szymczak S, Jarren L, Gärber F (2026).
 *RFSurrogates: Surrogate Minimal Depth Variable Importance*. R package
