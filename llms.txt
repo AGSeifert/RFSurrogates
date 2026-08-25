@@ -23,9 +23,18 @@ importance of features, Bioinformatics 2023, 39, 8.
 
 # Installation
 
+## Using pak
+
 ``` r
 
-devtools::install_github("AGSeifert/RFSurrogates")
+pak::pak("AGSeifert/RFSurrogates")
+```
+
+## Using renv
+
+``` r
+
+renv::install("AGSeifert/RFSurrogates")
 ```
 
 # Example Data [![DOI](https://www.fdr.uni-hamburg.de/badge/DOI/10.25592/uhhfdm.12620.svg)](https://doi.org/10.25592/uhhfdm.12620)
